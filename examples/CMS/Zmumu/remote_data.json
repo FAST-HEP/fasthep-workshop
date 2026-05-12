@@ -1,0 +1,12 @@
+{
+    "CMS/Zmumu/data.root": "https://cernbox.cern.ch/remote.php/dav/public-files/9QU53dsR2AQPxz8/data.root",
+    "CMS/Zmumu/dy.root": "https://cernbox.cern.ch/remote.php/dav/public-files/qV2jmnuTRmaiZeF/dy.root",
+    "CMS/Zmumu/qcd.root": "https://cernbox.cern.ch/remote.php/dav/public-files/qV2jmnuTRmaiZeF/qcd.root",
+    "CMS/Zmumu/single_top.root": "https://cernbox.cern.ch/remote.php/dav/public-files/qV2jmnuTRmaiZeF/single_top.root",
+    "CMS/Zmumu/ttbar.root": "https://cernbox.cern.ch/remote.php/dav/public-files/qV2jmnuTRmaiZeF/ttbar.root",
+    "CMS/Zmumu/wjets.root": "https://cernbox.cern.ch/remote.php/dav/public-files/qV2jmnuTRmaiZeF/wjets.root",
+    "CMS/Zmumu/ww.root": "https://cernbox.cern.ch/remote.php/dav/public-files/qV2jmnuTRmaiZeF/ww.root",
+    "CMS/Zmumu/wz.root": "https://cernbox.cern.ch/remote.php/dav/public-files/qV2jmnuTRmaiZeF/wz.root",
+    "CMS/Zmumu/zz.root": "https://cernbox.cern.ch/remote.php/dav/public-files/qV2jmnuTRmaiZeF/zz.root"
+
+}

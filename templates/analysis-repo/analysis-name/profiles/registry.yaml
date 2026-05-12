@@ -1,0 +1,6 @@
+registry:
+  transforms: {}
+  hooks: {}
+  sinks: {}
+  functions: {}
+  constants: {}

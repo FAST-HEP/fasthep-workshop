@@ -1,0 +1,151 @@
+version: 4.0
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_curator:registry
+    - fasthep_curator:default_context
+    - fasthep_curator:runtime_diagnostics
+    - fasthep_render:registry
+
+data:
+  datasets:
+    - name: l1t
+      files:
+        - data/CMS/L1Trigger/2k.root
+        # - data/CMS/L1Trigger/2kmc.root
+        - data/CMS/L1Trigger/2kmu.root
+  defaults:
+    eventtype: mc
+
+sources:
+  l1:
+    kind: root_tree
+    tree: l1UpgradeTree/L1UpgradeTree
+    stream_type: event_stream
+  reco:
+    kind: root_tree
+    tree: l1JetRecoTree/JetRecoTree
+    stream_type: event_stream
+
+joins:
+  events:
+    kind: zip
+    on_mismatch: warn
+    inputs:
+      - {source: l1,   prefix: l1}
+      - {source: reco, prefix: reco}
+
+primary_stream: events
+
+styles:
+  l1t_unmatched_dr:
+    op: hep.render.hist1d
+    figure: {dpi: 150}
+    axes:
+      x:
+        name: unmatched_dR
+        label: "Unmatched jet ΔR"
+        limits: [0, 1]
+      y:
+        name: events
+        label: Number of Events
+        scale: log
+        limits: [1e-2, 1e7]
+    legend: {ncol: 4, loc: upper right}
+    style:
+      experiment: CMS
+
+  l1t_jets:
+    op: hep.render.heatmap2d
+    figure: {dpi: 150}
+    axes:
+      x:
+        name: reco_et
+        label: "Offline pT [GeV]"
+        limits: [0, 500]
+      y:
+        name: l1_et
+        label: "L1 pT [GeV]"
+        limits: [0, 500]
+      z:
+        name: events
+        label: Number of Events
+        scale: log
+    heatmap2d:
+      per_dataset: true
+      cbar: true
+    style:
+      experiment: CMS
+
+
+fields:
+  l1_jetEt:   {stream: events, branch: "l1.jetEt"}
+  l1_jetEta:  {stream: events, branch: "l1.jetEta"}
+  l1_jetPhi:  {stream: events, branch: "l1.jetPhi"}
+
+  reco_jetEtCorr: {stream: events, branch: "reco.etCorr"}
+  reco_jetEta:    {stream: events, branch: "reco.eta"}
+  reco_jetPhi:    {stream: events, branch: "reco.phi"}
+
+observers:
+  - kind: hep.schema_snapshot
+    at: [join.events, project.events, stage.MatchJets]
+    out: schema
+
+analysis:
+  stages:
+    - id: MatchJets
+      op: cms.match_l1t_jets
+      params:
+        reco:
+          et:  reco_jetEtCorr
+          eta: reco_jetEta
+          phi: reco_jetPhi
+        l1:
+          et:  l1_jetEt
+          eta: l1_jetEta
+          phi: l1_jetPhi
+        dr_max: 0.4
+
+    - id: HasMatch
+      op: hep.selection.cutflow
+      from: MatchJets
+      params:
+        selection:
+          All:
+            - "n_matched >= 1"
+
+    - id: NoMatch
+      op: hep.selection.cutflow
+      from: MatchJets
+      params:
+        selection:
+          All:
+            - "n_matched == 0"
+
+    - id: H_MatchedEt
+      op: hep.hist
+      from: HasMatch
+      params:
+        dataset_axis: true
+        axes:
+          - {name: reco_et, type: regular, source: matched_reco_et, bins: {low: 0, high: 500, nbins: 100}}
+          - {name: l1_et,   type: regular, source: matched_l1_et,   bins: {low: 0, high: 500, nbins: 100}}
+      render:
+        style: l1t_jets
+        when: final
+        out: H_MatchedEt
+
+    - id: H_unmatched_dR
+      op: hep.hist
+      from: NoMatch
+      params:
+        dataset_axis: true
+        axes:
+          - {name: unmatched_dR, type: regular, source: unmatched_dr, bins: {low: 0, high: 1, nbins: 100}}
+      render:
+        style: l1t_unmatched_dr
+        when: final
+        out: H_unmatched_dR

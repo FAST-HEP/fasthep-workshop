@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "analysis-name"
+version = "0.1.0"
+description = "FAST-HEP analysis package scaffold."
+requires-python = ">=3.12"
+dependencies = [
+    "fasthep-flow",
+    "fasthep-carpenter",
+    "fasthep-curator",
+    "fasthep-render",
+    "fasthep-cli",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+"analysis_name" = ["registry.yaml", "profiles/*.yaml"]

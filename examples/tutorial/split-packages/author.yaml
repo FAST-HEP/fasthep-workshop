@@ -1,0 +1,61 @@
+version: 1.0
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_curator:registry
+    - fasthep_curator:default_context
+    - fasthep_curator:runtime_diagnostics
+    - fasthep_render:registry
+
+data:
+  datasets:
+    - name: toy
+      files: [data/tutorial/split-packages/events.root]
+      nevents: 12
+      eventtype: mc
+  defaults:
+    eventtype: mc
+    tree_primary: events
+
+sources:
+  events:
+    kind: root_tree
+    tree: events
+    stream_type: event_stream
+
+observers:
+  - kind: hep.schema_snapshot
+    at: [read.events, stage.DefinePt]
+    out: schema
+
+styles:
+  pt_plot:
+    op: hep.render.hist1d
+    figure: {dpi: 120}
+    axes:
+      x: {name: pt_scaled, label: "Toy pT", limits: [0, 120]}
+      y: {name: events, label: Events}
+    style:
+      experiment: FAST-HEP
+
+analysis:
+  stages:
+    - id: DefinePt
+      op: hep.define
+      params:
+        variables:
+          - {name: pt_scaled, expr: "pt * 1.0"}
+
+    - id: PtHist
+      op: hep.hist
+      from: DefinePt
+      params:
+        dataset_axis: true
+        axes:
+          - {name: pt_scaled, type: regular, source: pt_scaled, bins: {low: 0, high: 120, nbins: 12}}
+      render:
+        style: pt_plot
+        when: final
+        out: pt_hist

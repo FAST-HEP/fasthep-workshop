@@ -1,0 +1,5 @@
+smoke:
+  image: python:3.12
+  script:
+    - python -m pip install -e .
+    - fasthep compile author.yaml --outdir build/analysis-name

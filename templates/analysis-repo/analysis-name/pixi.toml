@@ -1,0 +1,9 @@
+[project]
+name = "analysis-name"
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "osx-arm64"]
+
+[tasks]
+run = "fasthep run author.yaml --outdir build/analysis-name"
+compile = "fasthep compile author.yaml --outdir build/analysis-name"
+test = "pytest -q"

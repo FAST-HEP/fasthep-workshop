@@ -1,0 +1,150 @@
+version: 1.0
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_curator:registry
+    - fasthep_curator:default_context
+    - fasthep_curator:runtime_diagnostics
+    - fasthep_render:registry
+
+data:
+  datasets:
+    - {name: data, eventtype: data, nevents: '469384', files: [data/CMS/Zmumu/data.root]}
+    - {name: dy, nevents: '77729', files: [data/CMS/Zmumu/dy.root]}
+    - {name: qcd, nevents: '142', files: [data/CMS/Zmumu/qcd.root]}
+    - {name: single_top, nevents: '5684', files: [data/CMS/Zmumu/single_top.root]}
+    - {name: ttbar, nevents: '36941', files: [data/CMS/Zmumu/ttbar.root]}
+    - {name: wjets, nevents: '109737', files: [data/CMS/Zmumu/wjets.root]}
+    - {name: ww, nevents: '4580', files: [data/CMS/Zmumu/ww.root]}
+    - {name: wz, nevents: '3367', files: [data/CMS/Zmumu/wz.root]}
+    - {name: zz, nevents: '2421', files: [data/CMS/Zmumu/zz.root]}
+  defaults:
+    eventtype: mc
+    tree_primary: events
+
+sources:
+  events:
+    kind: root_tree
+    tree: events
+    stream_type: event_stream
+
+styles:
+  base_counts_data_mc:
+    op: hep.render.data_mc
+    figure: {size: [12, 12], dpi: 300}
+    axes:
+      ratio: {name: ratio, label: Data/MC, limits: [0.5, 1.5]}
+    legend: {loc: upper right, ncol: 3}
+    style:
+      experiment: CMS
+      datasets:
+        data: {label: "Data", color: black, kind: data}
+        dy: {label: "DY", color: yellow, kind: signal}
+        ttbar: {label: '$t\bar{t}$', color: red, kind: background}
+        wjets: {label: "W+jets", color: blue, kind: background}
+        single_top: {label: "Single top", color: green, kind: background}
+        qcd: {label: "QCD", color: orange, kind: background}
+        ww: {label: "WW", color: cyan, kind: background}
+        wz: {label: "WZ", color: magenta, kind: background}
+        zz: {label: "ZZ", color: gray, kind: background}
+    data_mc:
+      data: data
+      signals: [dy]
+      backgrounds: [qcd, single_top, ttbar, wjets, ww, wz, zz]
+      stack: true
+      ratio: true
+      histtype_mc: fill
+      show_mc_uncertainty: true
+  dimuon_mass:
+    use: base_counts_data_mc
+    with:
+      axes:
+        x: {name: dimu_mass, label: 'Di-muon Mass, $M_{\mu\mu}$ [GeV/c$^{2}]$', limits: [60, 120]}
+        y: {name: events, label: Events, scale: log, limits: [1e-2, 1e5]}
+  n_muons_heatmap:
+    op: hep.render.heatmap2d
+    figure: {size: [12, 12], dpi: 300}
+    axes:
+      x: {name: nMuons, label: "Number of $\\mu$", limits: [0, 5]}
+      y: {name: nIsoMuons, label: "Number of isolated $\\mu$", limits: [0, 5]}
+      z: {name: events, label: Events, scale: log}
+    heatmap2d:
+      per_dataset: true
+      cbar: true
+  n_muons_proj_x:
+    op: hep.render.project
+    project:
+      axis: nMuons
+      keep_dataset: true
+      then:
+        use: base_counts_data_mc
+        with:
+          axes:
+            x: {name: nMuons, label: "Number of $\\mu$", limits: [0, 5]}
+            y: {name: events, label: Events, scale: log, limits: [1e-2, 1e7]}
+  n_muons_proj_y:
+    op: hep.render.project
+    project:
+      axis: nIsoMuons
+      keep_dataset: true
+      then:
+        use: base_counts_data_mc
+        with:
+          axes:
+            x: {name: nIsoMuons, label: "Number of isolated $\\mu$", limits: [0, 5]}
+            y: {name: events, label: Events, scale: log, limits: [1e-2, 1e7]}
+
+observers:
+  - kind: hep.schema_snapshot
+    at: [read.events, stage.BasicVars]
+    out: schema
+
+analysis:
+  stages:
+    - id: BasicVars
+      op: hep.define
+      params:
+        variables:
+          - {name: Muon_Pt, expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"}
+          - {name: IsoMuon_Idx, expr: "(Muon_Iso / Muon_Pt) < 0.10"}
+          - {name: NIsoMuon, reduce: {op: count_nonzero, over: IsoMuon_Idx}}
+
+    - id: DiMuons
+      op: hep.di_object_mass
+      params: {collection: Muon, mask: IsoMuon_Idx}
+
+    - id: NumberMuons
+      op: hep.hist
+      params:
+        dataset_axis: true
+        axes:
+          - {name: nMuons, type: regular, source: NMuon, bins: {low: 0, high: 5, nbins: 6}}
+          - {name: nIsoMuons, type: regular, source: NIsoMuon, bins: {low: 0, high: 5, nbins: 6}}
+        weight_expr: EventWeight
+      render:
+        - {style: n_muons_heatmap, when: final, out: "NumberMuons_heatmap"}
+        - {style: n_muons_proj_x,   when: final, out: "NumberMuons_proj_nMuons.png"}
+        - {style: n_muons_proj_y,   when: final, out: "NumberMuons_proj_nIsoMuons.png"}
+
+    - id: EventSelection
+      op: hep.selection.cutflow
+      params:
+        selection:
+          All:
+            - "NIsoMuon >= 2"
+            - "triggerIsoMu24 == 1"
+            - {reduce: {op: any, over: "Muon_Pt > 25"}}
+        weight_expr: EventWeight
+
+    - id: DiMuonMass
+      op: hep.hist
+      params:
+        dataset_axis: true
+        axes:
+          - {name: dimu_mass, source: DiMuon_Mass, type: regular, bins: {low: 60, high: 120, nbins: 60}}
+        weight_expr: EventWeight
+      render:
+        style: dimuon_mass
+        when: final

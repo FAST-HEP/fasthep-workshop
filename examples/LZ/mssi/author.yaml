@@ -1,0 +1,98 @@
+version: 2.1
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_curator:registry
+    - fasthep_curator:default_context
+    - fasthep_curator:runtime_diagnostics
+    - fasthep_render:registry
+
+data:
+  datasets:
+    - name: lz_mc
+      files:
+        - data/LZ/mssi/SS_skim_U238-late_AnodeGridWires.root
+        - data/LZ/mssi/SS_skim_Th232-late_HVInnerCone.root
+
+sources:
+  scatters: {kind: root_tree, tree: Scatters, stream_type: event_stream}
+
+primary_stream: scatters
+
+fields:
+  ss_nSingleScatters: {stream: scatters, branch: "ss./ss.nSingleScatters"}
+  s1_phd:             {stream: scatters, branch: "ss./ss.s1Area_phd"}
+  s2_raw:             {stream: scatters, branch: "ss./ss.s2Area_phd"}
+  s2_corrected:       {stream: scatters, branch: "ss./ss.correctedS2Area_phd"}
+  s2_xy_corrected:    {stream: scatters, branch: "ss./ss.correctedS2Area_phd"}
+  s2_x:               {stream: scatters, branch: "ss./ss.correctedX_cm"}
+  s2_y:               {stream: scatters, branch: "ss./ss.correctedY_cm"}
+
+styles:
+  default_lz_plot:
+    op: hep.render.hist1d
+    figure: {dpi: 150}
+    style:
+      experiment: LZ
+
+  lz_plot2d:
+    use: default_lz_plot
+    with:
+      op: hep.render.heatmap2d
+      heatmap2d:
+        cbar: true
+
+analysis:
+  stages:
+    - id: SelectSS
+      op: hep.selection.cutflow
+      params:
+        selection:
+          SS: ["ss_nSingleScatters == 1"]
+
+    - id: Vars
+      op: hep.define
+      params:
+        variables:
+          - {name: s2_R, expr: "sqrt(s2_x**2 + s2_y**2)"}
+          - {name: elife_correction, expr: "s2_corrected / s2_xy_corrected"}
+          - {name: s2_elife, expr: "s2_raw * elife_correction"}
+          - {name: log10_s2_raw, expr: "log(s2_raw)"}
+          - {name: log10_s2_corrected, expr: "log(s2_corrected)"}
+          - {name: log10_s2_xy_corrected, expr: "log(s2_xy_corrected)"}
+          - {name: log10_s2_elife, expr: "log(s2_elife)"}
+
+    - id: BoxCut
+      op: hep.selection.cutflow
+      params:
+        selection:
+          All:
+            - "log10_s2_elife >= 4.0"
+            - "log10_s2_elife <= 5.0"
+            - "s1_phd >= 150"
+            - "s1_phd <= 400"
+
+    - id: H_elife
+      op: hep.hist
+      params:
+        axes:
+          - {name: elife, type: regular, source: elife_correction, bins: {low: 0, high: 2, nbins: 200}}
+      render:
+        style: default_lz_plot
+        when: final
+
+    - id: H_s1_log10s2_elife
+      op: hep.hist
+      params:
+        axes:
+          - {name: s1, type: regular, source: s1_phd, bins: {low: 0, high: 1000, nbins: 1000}}
+          - {name: log10s2, type: regular, source: log10_s2_elife, bins: {low: 0, high: 7, nbins: 140}}
+      render:
+        style: lz_plot2d
+        when: final
+        overlays:
+          - kind: box
+            x: [150, 400]
+            y: [4.0, 5.0]
