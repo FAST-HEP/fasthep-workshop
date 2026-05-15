@@ -8,6 +8,7 @@ use:
     - fasthep_curator:default_context
     - fasthep_curator:runtime_diagnostics
     - fasthep_render:registry
+    - fasthep_workshop:registry
 
 data:
   datasets: []
@@ -17,15 +18,9 @@ data:
 
 sources:
   events:
-    kind: root_tree
+    kind: toy_events
     tree: events
     stream_type: event_stream
-
-registry:
-  sources:
-    root_tree:
-      spec: scripts.ci.toy_source:TOY_SOURCE_SPEC
-      impl: scripts.ci.toy_source:run_toy_source
 
 observers:
   - kind: hep.schema_snapshot

@@ -1,0 +1,109 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fasthep-workshop"
+dynamic = ["version"]
+description = "FAST-HEP workshop examples and analysis-style extension package."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "FAST-HEP contributors" },
+]
+dependencies = [
+    "fasthep-flow",
+    "fasthep-carpenter",
+    "fasthep-curator",
+    "fasthep-render",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+fallback_version = "0.0.0"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/fasthep_workshop/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fasthep_workshop"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/fasthep_workshop",
+    "examples",
+    "tests",
+    "README.md",
+    "pyproject.toml",
+]
+
+[tool.ruff]
+src = ["src", "tests"]
+line-length = 88
+target-version = "py311"
+extend-exclude = [
+  "src/fasthep_workshop/_version.py",
+]
+
+[tool.ruff.lint]
+select = [
+  "E", "F", "W",
+  "B",
+  "I",
+  "ARG",
+  "C4",
+  "ICN",
+  "ISC",
+  "G",
+  "PGH",
+  "PIE",
+  "PL",
+  "PT",
+  "PTH",
+  "RET",
+  "RUF",
+  "SIM",
+  "T20",
+  "UP",
+  "YTT",
+]
+ignore = [
+  "E501",
+  "PLR",
+  "EM101",
+  "EM102",
+  "EM103",
+]
+unfixable = ["T20", "F841"]
+
+[tool.ruff.lint.flake8-unused-arguments]
+ignore-variadic-names = true
+
+[tool.ruff.lint.isort]
+required-imports = ["from __future__ import annotations"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["T20", "ARG"]
+"src/fasthep_workshop/**/*.py" = [
+  "ARG001",
+  "ARG002",
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = [
+    "-ra",
+    "--showlocals",
+    "--strict-markers",
+    "--strict-config",
+]
+xfail_strict = true
+filterwarnings = ["error"]
+testpaths = ["tests"]

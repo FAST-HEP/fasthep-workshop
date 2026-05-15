@@ -7,6 +7,7 @@ import pytest
 import yaml
 
 from hepflow.api import compile_author_file, run_author_file
+from hepflow.compiler.profiles import load_profile_config
 
 
 WORKSHOP_ROOT = Path(__file__).parents[2]
@@ -32,7 +33,14 @@ def test_author_yaml_parses(author_path: Path) -> None:
         "fasthep_curator:default_context",
         "fasthep_curator:runtime_diagnostics",
         "fasthep_render:registry",
+        "fasthep_workshop:registry",
     ]
+
+
+def test_fasthep_workshop_imports() -> None:
+    import fasthep_workshop
+
+    assert fasthep_workshop.__version__
 
 
 def test_package_profiles_are_installed_resources() -> None:
@@ -42,11 +50,21 @@ def test_package_profiles_are_installed_resources() -> None:
         ("fasthep_curator.profiles", "default_context.yaml"),
         ("fasthep_curator.profiles", "runtime_diagnostics.yaml"),
         ("fasthep_render.profiles", "registry.yaml"),
+        ("fasthep_workshop.profiles", "registry.yaml"),
     ]
 
     for package, name in profile_refs:
         text = resources.files(package).joinpath(name).read_text(encoding="utf-8")
         assert text.strip()
+
+
+def test_workshop_registry_profile_loads() -> None:
+    config = load_profile_config("fasthep_workshop:registry", project_root=WORKSHOP_ROOT)
+
+    assert (
+        config["registry"]["sources"]["toy_events"]["impl"]
+        == "fasthep_workshop.sources.toy_source:run_toy_source"
+    )
 
 
 @pytest.mark.parametrize("author_path", AUTHOR_PATHS)
@@ -56,9 +74,11 @@ def test_examples_compile(author_path: Path, tmp_path: Path) -> None:
         outdir=tmp_path / author_path.parent.name,
     )
 
-    source_impl = plan.registry["sources"]["root_tree"]["impl"]
-    assert source_impl.startswith("fasthep_carpenter.") or source_impl.startswith(
-        "scripts.ci.toy_source:"
+    registry_text = yaml.safe_dump(plan.registry)
+    assert "scripts." not in registry_text
+    assert (
+        plan.registry["sources"]["toy_events"]["impl"]
+        == "fasthep_workshop.sources.toy_source:run_toy_source"
     )
     assert "hep.schema_snapshot" in plan.registry["observers"]
     assert "hep.render.hist1d" in plan.registry["sinks"]

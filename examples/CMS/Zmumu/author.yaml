@@ -8,6 +8,7 @@ use:
     - fasthep_curator:default_context
     - fasthep_curator:runtime_diagnostics
     - fasthep_render:registry
+    - fasthep_workshop:registry
 
 data:
   datasets:

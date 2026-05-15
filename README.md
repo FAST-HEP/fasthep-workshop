@@ -2,7 +2,7 @@
 
 `fasthep-workshop` is the home for FAST-HEP tutorials, examples, regression workflows, public validation workflows, and the first lightweight analysis-repository template.
 
-This repository is primarily content and validation material, not an implementation package. Examples should use public data or include fetch/generation instructions.
+It is also a lightweight installable analysis-example package. Its import namespace is `fasthep_workshop`, and package-owned registry/profile resources demonstrate how an analysis repository can contribute custom components without relying on fragile `scripts.*` imports.
 
 ## Install
 
@@ -15,7 +15,7 @@ pip install fasthep-flow fasthep-cli
 HEP analysis workflows:
 
 ```bash
-pip install fasthep-flow fasthep-carpenter fasthep-curator fasthep-render fasthep-cli
+pip install fasthep-flow fasthep-carpenter fasthep-curator fasthep-render fasthep-cli fasthep-workshop
 ```
 
 Later this should become:

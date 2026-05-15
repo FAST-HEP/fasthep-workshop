@@ -1,0 +1,23 @@
+[workspace]
+name = "fasthep-workshop"
+authors = ["FAST-HEP contributors"]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+version = "0.1.0"
+exclude-newer = "14d"
+
+[dependencies]
+python = ">=3.11"
+pytest = "*"
+
+[pypi-dependencies]
+fasthep-workshop = { path = ".", editable = true }
+fasthep-flow = { path = "../fasthep-flow", editable = true }
+fasthep-carpenter = { path = "../fasthep-carpenter", editable = true }
+fasthep-curator = { path = "../fasthep-curator", editable = true }
+fasthep-render = { path = "../fasthep-render", editable = true }
+fasthep-cli = { path = "../fasthep-cli", editable = true }
+
+[tasks]
+test = "pytest"
+ci = { depends-on = ["test"] }
