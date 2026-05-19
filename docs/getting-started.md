@@ -11,7 +11,7 @@ pip install fasthep-flow fasthep-carpenter fasthep-curator fasthep-render fasthe
 Then run a workflow:
 
 ```bash
-fasthep run examples/tutorial/runtime-smoke/author.yaml --outdir build/tutorial/runtime-smoke
+fasthep run examples/CMS/Zmumu/author.yaml --outdir build/CMS/Zmumu
 ```
 
 Examples use package-owned profiles:

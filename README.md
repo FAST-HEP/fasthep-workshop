@@ -26,23 +26,26 @@ pip install "fasthep[hep]"
 
 ## Run Examples
 
+Tutorial examples are intended for users and docs. Testing examples are internal
+validation workflows for CI, smoke tests, and package integration checks.
+
 Compile the Zmumu tutorial:
 
 ```bash
 fasthep compile examples/CMS/Zmumu/author.yaml --outdir build/Zmumu
 ```
 
-Run the CI-friendly runtime smoke tutorial:
+Run the CI-friendly runtime smoke workflow:
 
 ```bash
-fasthep run examples/tutorial/runtime-smoke/author.yaml --outdir build/tutorial/runtime-smoke
+fasthep run examples/testing/runtime-smoke/author.yaml --outdir build/testing/runtime-smoke
 ```
 
-Compile the generated-data ROOT split package tutorial:
+Compile the generated-data ROOT split package validation workflow:
 
 ```bash
-python scripts/ci/make_tutorial_data.py
-fasthep compile examples/tutorial/split-packages/author.yaml --outdir build/tutorial/split-packages
+python scripts/ci/make_testing_data.py
+fasthep compile examples/testing/split-packages/author.yaml --outdir build/testing/split-packages
 ```
 
 Outputs appear under the selected `build/...` directory. Runtime artifacts are written under `artifacts/`.

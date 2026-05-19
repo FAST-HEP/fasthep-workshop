@@ -13,7 +13,7 @@ use:
 data:
   datasets:
     - name: toy
-      files: [data/tutorial/split-packages/events.root]
+      files: [data/testing/split-packages/events.root]
       nevents: 12
       eventtype: mc
   defaults:

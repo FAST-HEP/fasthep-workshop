@@ -1,4 +1,4 @@
-# Runtime Smoke Tutorial
+# Runtime Smoke Validation
 
 This tiny workflow runs end to end without external files. It uses a small toy source helper so CI can validate the split package path quickly.
 
@@ -12,5 +12,5 @@ It still exercises:
 Run:
 
 ```bash
-fasthep run examples/tutorial/runtime-smoke/author.yaml --outdir build/tutorial/runtime-smoke
+fasthep run examples/testing/runtime-smoke/author.yaml --outdir build/testing/runtime-smoke
 ```

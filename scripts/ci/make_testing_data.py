@@ -7,7 +7,7 @@ import uproot
 
 
 def main() -> None:
-    path = Path("data/tutorial/split-packages/events.root")
+    path = Path("data/testing/split-packages/events.root")
     path.parent.mkdir(parents=True, exist_ok=True)
     with uproot.recreate(path) as output:
         output["events"] = {

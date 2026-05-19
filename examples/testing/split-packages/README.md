@@ -1,4 +1,4 @@
-# Split Packages Tutorial
+# Split Packages Validation
 
 This tiny workflow exercises the split package architecture without requiring external data.
 
@@ -12,8 +12,8 @@ It uses:
 Generate local toy data and run:
 
 ```bash
-python scripts/ci/make_tutorial_data.py
-fasthep run examples/tutorial/split-packages/author.yaml --outdir build/tutorial/split-packages
+python scripts/ci/make_testing_data.py
+fasthep run examples/testing/split-packages/author.yaml --outdir build/testing/split-packages
 ```
 
-Outputs are written under `build/tutorial/split-packages`.
+Outputs are written under `build/testing/split-packages`.

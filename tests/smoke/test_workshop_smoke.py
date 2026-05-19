@@ -16,8 +16,8 @@ AUTHOR_PATHS = [
     WORKSHOP_ROOT / "examples" / "CMS" / "Zmumu" / "author.yaml",
     WORKSHOP_ROOT / "examples" / "CMS" / "L1Trigger" / "author.yaml",
     WORKSHOP_ROOT / "examples" / "LZ" / "mssi" / "author.yaml",
-    WORKSHOP_ROOT / "examples" / "tutorial" / "split-packages" / "author.yaml",
-    WORKSHOP_ROOT / "examples" / "tutorial" / "runtime-smoke" / "author.yaml",
+    WORKSHOP_ROOT / "examples" / "testing" / "split-packages" / "author.yaml",
+    WORKSHOP_ROOT / "examples" / "testing" / "runtime-smoke" / "author.yaml",
 ]
 
 
@@ -82,13 +82,16 @@ def test_examples_compile(author_path: Path, tmp_path: Path) -> None:
     assert "hep.render.hist1d" in plan.registry["sinks"]
 
 
-def test_tutorial_runs_end_to_end(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_runtime_smoke_runs_end_to_end(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     monkeypatch.chdir(WORKSHOP_ROOT)
     monkeypatch.setenv("MPLCONFIGDIR", str(tmp_path / "mplconfig"))
 
-    outdir = tmp_path / "tutorial-run"
+    outdir = tmp_path / "runtime-smoke"
     result = run_author_file(
-        WORKSHOP_ROOT / "examples" / "tutorial" / "runtime-smoke" / "author.yaml",
+        WORKSHOP_ROOT / "examples" / "testing" / "runtime-smoke" / "author.yaml",
         outdir=outdir,
     )
 
