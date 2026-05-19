@@ -21,3 +21,9 @@ fasthep-cli = { path = "../fasthep-cli", editable = true }
 [tasks]
 test = "pytest"
 ci = { depends-on = ["test"] }
+
+[tasks.docs]
+cmd = "sphinx-build -b html docs docs/_build/html"
+
+[tasks.docs-clean]
+cmd = "rm -rf docs/_build"

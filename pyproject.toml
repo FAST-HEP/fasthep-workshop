@@ -23,6 +23,14 @@ test = [
     "pytest",
 ]
 
+docs = [
+  "myst-parser",
+  "pydata-sphinx-theme",
+  "sphinx",
+  "sphinx-copybutton",
+  "sphinx-design",
+]
+
 [tool.hatch.version]
 source = "vcs"
 
