@@ -18,8 +18,11 @@ data:
 
 sources:
   events:
-    kind: toy_events
-    tree: events
+    kind: workshop.toy_source
+    nevents: 10000
+    seed: 42
+    dataset: runtime-smoke
+    event_type: mc
     stream_type: event_stream
 
 observers:
@@ -32,7 +35,7 @@ styles:
     op: hep.render.hist1d
     figure: {dpi: 120}
     axes:
-      x: {name: pt_scaled, label: "Toy pT", limits: [0, 120]}
+      x: {name: leading_muon_pt, label: "Leading muon pT", limits: [0, 120]}
       y: {name: events, label: Events}
     style:
       experiment: FAST-HEP
@@ -43,14 +46,14 @@ analysis:
       op: hep.define
       params:
         variables:
-          - {name: pt_scaled, expr: "pt * 1.0"}
+          - {name: leading_muon_pt, expr: "leading(sqrt(Muon_Px**2 + Muon_Py**2))"}
 
     - id: PtHist
       op: hep.hist
       from: DefinePt
       params:
         axes:
-          - {name: pt_scaled, type: regular, source: pt_scaled, bins: {low: 0, high: 120, nbins: 12}}
+          - {name: leading_muon_pt, type: regular, source: leading_muon_pt, bins: {low: 0, high: 120, nbins: 12}}
       render:
         style: pt_plot
         when: final

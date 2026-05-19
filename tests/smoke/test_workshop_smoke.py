@@ -4,11 +4,11 @@ import importlib.resources as resources
 from pathlib import Path
 
 import pytest
-import yaml
-
+import yaml  # type: ignore[import-untyped]
 from hepflow.api import compile_author_file, run_author_file
 from hepflow.compiler.profiles import load_profile_config
 
+import fasthep_workshop
 
 WORKSHOP_ROOT = Path(__file__).parents[2]
 
@@ -38,8 +38,6 @@ def test_author_yaml_parses(author_path: Path) -> None:
 
 
 def test_fasthep_workshop_imports() -> None:
-    import fasthep_workshop
-
     assert fasthep_workshop.__version__
 
 
@@ -62,7 +60,7 @@ def test_workshop_registry_profile_loads() -> None:
     config = load_profile_config("fasthep_workshop:registry", project_root=WORKSHOP_ROOT)
 
     assert (
-        config["registry"]["sources"]["toy_events"]["impl"]
+        config["registry"]["sources"]["workshop.toy_source"]["impl"]
         == "fasthep_workshop.sources.toy_source:run_toy_source"
     )
 
@@ -77,7 +75,7 @@ def test_examples_compile(author_path: Path, tmp_path: Path) -> None:
     registry_text = yaml.safe_dump(plan.registry)
     assert "scripts." not in registry_text
     assert (
-        plan.registry["sources"]["toy_events"]["impl"]
+        plan.registry["sources"]["workshop.toy_source"]["impl"]
         == "fasthep_workshop.sources.toy_source:run_toy_source"
     )
     assert "hep.schema_snapshot" in plan.registry["observers"]

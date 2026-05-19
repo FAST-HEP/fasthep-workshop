@@ -1,6 +1,6 @@
 registry:
   sources:
-    toy_events:
+    workshop.toy_source:
       spec: fasthep_workshop.sources.toy_source:TOY_SOURCE_SPEC
       impl: fasthep_workshop.sources.toy_source:run_toy_source
 

@@ -9,6 +9,8 @@ exclude-newer = "14d"
 [dependencies]
 python = ">=3.11"
 pytest = "*"
+ruff = "*"
+mypy = "*"
 
 [pypi-dependencies]
 fasthep-workshop = { path = ".", editable = true }
@@ -19,8 +21,11 @@ fasthep-render = { path = "../fasthep-render", editable = true }
 fasthep-cli = { path = "../fasthep-cli", editable = true }
 
 [tasks]
+lint = "ruff check src tests"
+lint-fix = "ruff check --fix src tests"
+typecheck = "mypy src tests"
 test = "pytest"
-ci = { depends-on = ["test"] }
+ci = { depends-on = ["lint", "typecheck", "test"] }
 
 [tasks.docs]
 cmd = "sphinx-build -b html docs docs/_build/html"

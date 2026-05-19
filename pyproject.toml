@@ -12,10 +12,12 @@ authors = [
     { name = "FAST-HEP contributors" },
 ]
 dependencies = [
+    "awkward",
     "fasthep-flow",
     "fasthep-carpenter",
     "fasthep-curator",
     "fasthep-render",
+    "numpy",
 ]
 
 [project.optional-dependencies]
