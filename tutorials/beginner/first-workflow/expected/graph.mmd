@@ -1,0 +1,8 @@
+flowchart TD
+  read_events["read.events<br/>source<br/>workshop.toy_source"]
+  stage_BasicVars["stage.BasicVars<br/>transform<br/>hep.define"]
+  stage_MuonPt["stage.MuonPt<br/>transform<br/>hep.hist"]
+  render_MuonPt_0["render.MuonPt.0<br/>sink<br/>hep.render.hist1d"]
+  read_events -->|stream -> stream| stage_BasicVars
+  stage_BasicVars -->|stream -> stream| stage_MuonPt
+  stage_MuonPt -->|hist -> target| render_MuonPt_0

@@ -1,0 +1,29 @@
+backend: local
+strategy: default
+success: true
+execution:
+  backend: local
+  strategy: default
+  config: {}
+partitions:
+- partition:
+    id: events__toy__0
+    dataset: toy
+    file: toy://dy
+    source: events
+    part: '0_0'
+    start: 0
+    stop: 100000
+  outputs:
+  - node: read.events
+    port: stream
+    type: Array
+  - node: stage.BasicVars
+    port: stream
+    type: dict
+  - node: stage.MuonPt
+    port: hist
+    type: Hist
+warnings: []
+hooks:
+  enabled: []

@@ -1,0 +1,69 @@
+version: 1.0
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_render:registry
+    - fasthep_workshop:registry
+
+data:
+  datasets:
+    - name: toy
+      eventtype: mc
+      nevents: 100000
+      files: [toy://dy]
+  defaults:
+    eventtype: mc
+    tree_primary: events
+
+sources:
+  events:
+    kind: workshop.toy_source
+    stream_type: event_stream
+    nevents: 100000
+    seed: 1729
+    dataset: toy
+    eventtype: mc
+    weight: 1.0
+
+styles:
+  muon_pt:
+    op: hep.render.hist1d
+    figure:
+      size: [8, 6]
+      dpi: 150
+    axes:
+      x:
+        name: Muon_Pt
+        label: "Muon $p_T$ [GeV]"
+        limits: [0, 120]
+      y:
+        name: events
+        label: "Events"
+        scale: linear
+
+analysis:
+  stages:
+    - id: BasicVars
+      op: hep.define
+      params:
+        variables:
+          - name: Muon_Pt
+            expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"
+
+    - id: MuonPt
+      op: hep.hist
+      params:
+        axes:
+          - name: Muon_Pt
+            source: Muon_Pt
+            type: regular
+            bins:
+              low: 0
+              high: 120
+              nbins: 60
+      render:
+        style: muon_pt
+        when: final
+        out: MuonPt.png
