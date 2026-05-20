@@ -31,6 +31,7 @@ docs = [
   "sphinx",
   "sphinx-copybutton",
   "sphinx-design",
+  "sphinxcontrib-mermaid",
 ]
 
 [tool.hatch.version]

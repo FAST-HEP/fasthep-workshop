@@ -1,29 +1,23 @@
-# Getting Started
+# Getting started
 
-Install the split packages needed by the workflow you want to run.
+The FAST-HEP Workshop contains runnable tutorials and examples.
 
-For HEP examples:
+The recommended way to run the workshop is with Pixi.
 
-```bash
-pip install fasthep-flow fasthep-carpenter fasthep-curator fasthep-render fasthep-cli fasthep-workshop
-```
-
-Then run a workflow:
+## Clone the repository
 
 ```bash
-fasthep run examples/CMS/Zmumu/author.yaml --outdir build/CMS/Zmumu
+git clone git@github.com:FAST-HEP/fasthep-workshop.git
+cd fasthep-workshop
 ```
 
-Examples use package-owned profiles:
+## Install dependencies
+```bash
+pixi install
+```
 
-```yaml
-use:
-  profiles:
-    - registry
-    - fasthep_carpenter:registry
-    - fasthep_curator:registry
-    - fasthep_curator:default_context
-    - fasthep_curator:runtime_diagnostics
-    - fasthep_render:registry
-    - fasthep_workshop:registry
+## Check the environment
+```bash
+pixi run fasthep version
+pixi run fasthep versions
 ```

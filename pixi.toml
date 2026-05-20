@@ -20,6 +20,22 @@ fasthep-curator = { path = "../fasthep-curator", editable = true }
 fasthep-render = { path = "../fasthep-render", editable = true }
 fasthep-cli = { path = "../fasthep-cli", editable = true }
 
+[feature.docs.dependencies]
+python = ">=3.11"
+sphinx = "*"
+myst-parser = "*"
+pydata-sphinx-theme = "*"
+sphinx-copybutton = "*"
+sphinx-design = "*"
+sphinxcontrib-mermaid = "*"
+
+[feature.docs.pypi-dependencies]
+fasthep-workshop = { path = ".", editable = true }
+
+[environments]
+default = ["default"]
+docs = ["docs"]
+
 [tasks]
 lint = "ruff check src tests"
 lint-fix = "ruff check --fix src tests"

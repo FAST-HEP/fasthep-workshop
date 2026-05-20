@@ -7,6 +7,7 @@ extensions = [
     "myst_parser",
     "sphinx_copybutton",
     "sphinx_design",
+    "sphinxcontrib.mermaid",
 ]
 
 source_suffix = {
@@ -29,3 +30,5 @@ myst_enable_extensions = [
     "deflist",
     "substitution",
 ]
+
+mermaid_params = ['--theme', 'forest', '--width', '600', '--backgroundColor', 'transparent']
