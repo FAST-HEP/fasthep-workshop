@@ -1,3 +1,5 @@
+# FAST-HEP overview
+
 ## Workflows
 FAST-HEP workflows start from an `author.yaml`, then compile to normalized author and execution-plan files.
 
@@ -55,7 +57,7 @@ flowchart LR
     Workshop --> Flow
 ```
 
-### Overview
+
 | Package | Purpose | Documentation | Git Repo | 
 |---|---|---|---|
 | `fasthep-flow` | Workflow compilation, planning, runtime orchestration | [API docs](https://fasthep-flow.readthedocs.io/en/latest/) | [FAST-HEP/fasthep-flow](https://github.com/FAST-HEP/fasthep-flow) |
