@@ -4,6 +4,16 @@
       "impl": "hep.render.hist1d",
       "node_id": "render.MuonPt.0",
       "out": "MuonPt.png",
+      "product": {
+        "kind": "histogram",
+        "path": "artifacts/histograms/MuonPt.pkl"
+      },
+      "products": {
+        "hist": {
+          "kind": "histogram",
+          "path": "artifacts/histograms/MuonPt.pkl"
+        }
+      },
       "spec": {
         "axes": {
           "x": {

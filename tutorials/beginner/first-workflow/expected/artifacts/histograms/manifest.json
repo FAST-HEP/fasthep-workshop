@@ -1,0 +1,9 @@
+{
+  "histograms": [
+    {
+      "id": "MuonPt",
+      "path": "artifacts/histograms/MuonPt.pkl",
+      "producer": "stage.MuonPt"
+    }
+  ]
+}

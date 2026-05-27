@@ -333,6 +333,9 @@ The main expected output is:
 
 ```text
 ├── artifacts
+│   ├── histograms
+│   │   ├── MuonPt.pkl
+│   │   └── manifest.json
 │   └── plots
 │       └── MuonPt.png
 ├── compile
@@ -358,9 +361,10 @@ The main expected output is:
 └── run_summary.yaml
 ```
 
-User-facing products are under `artifacts/`, compiler products under `compile/`,
-graph exports under `graph/`, render metadata under `render/`, and structured
-reports under `reports/`.
+User-facing products are under `artifacts/`, including persisted histogram
+products in `artifacts/histograms/` and rendered plots in `artifacts/plots/`.
+Compiler products are under `compile/`, graph exports under `graph/`, render
+metadata under `render/`, and structured reports under `reports/`.
 
 You can compare your generated output against:
 

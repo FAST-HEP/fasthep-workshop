@@ -1,6 +1,13 @@
 node_id: render.MuonPt.0
 impl: hep.render.hist1d
 out: MuonPt.png
+product:
+  kind: histogram
+  path: artifacts/histograms/MuonPt.pkl
+products:
+  hist:
+    kind: histogram
+    path: artifacts/histograms/MuonPt.pkl
 spec:
   op: hep.render.hist1d
   figure:
