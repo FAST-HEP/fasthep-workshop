@@ -333,11 +333,14 @@ The main expected output is:
 
 ```text
 ├── artifacts
-│   └── MuonPt.png
-├── graph.dot
-├── graph.mmd
-├── normalized.yaml
-├── plan.yaml
+│   └── plots
+│       └── MuonPt.png
+├── compile
+│   ├── normalized.yaml
+│   └── plan.yaml
+├── graph
+│   ├── graph.dot
+│   └── graph.mmd
 └── run_summary.yaml
 
 ```

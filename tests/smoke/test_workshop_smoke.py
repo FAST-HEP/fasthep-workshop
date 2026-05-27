@@ -96,7 +96,7 @@ def test_runtime_smoke_runs_end_to_end(
     )
 
     assert result.success
-    assert (outdir / "normalized.yaml").exists()
-    assert (outdir / "plan.yaml").exists()
+    assert (outdir / "compile" / "normalized.yaml").exists()
+    assert (outdir / "compile" / "plan.yaml").exists()
     assert (outdir / "run_summary.yaml").exists()
-    assert any((outdir / "artifacts").rglob("*.png"))
+    assert any((outdir / "artifacts" / "plots").rglob("*.png"))
