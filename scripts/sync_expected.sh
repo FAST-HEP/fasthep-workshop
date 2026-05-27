@@ -29,9 +29,12 @@ find "${expected_dir}" -mindepth 1 -delete
 
 rsync -a \
     --exclude ".gitkeep" \
+    --exclude "debug/" \
+    --exclude "**/__pycache__/" \
     "${build_dir}/" \
     "${expected_dir}/"
 
+touch "${build_dir}/.gitkeep"
 touch "${expected_dir}/.gitkeep"
 
 echo "Synced:"

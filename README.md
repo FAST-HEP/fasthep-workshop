@@ -48,7 +48,7 @@ python scripts/ci/make_testing_data.py
 fasthep compile examples/testing/split-packages/author.yaml --outdir build/testing/split-packages
 ```
 
-Outputs appear under the selected `build/...` directory. Compiler products are written under `compile/`, graph files under `graph/`, and runtime artifacts under `artifacts/`.
+Outputs appear under the selected `build/...` directory. Compiler products are written under `compile/`, graph files under `graph/`, render metadata under `render/`, structured reports under `reports/`, user-facing files under `artifacts/`, and backend/runtime diagnostics under `debug/`.
 
 ## CI Role
 

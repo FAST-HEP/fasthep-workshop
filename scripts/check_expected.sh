@@ -34,40 +34,37 @@ fi
 echo "Cleaning build directory..."
 rm -rf "${build_dir}"
 mkdir -p "${build_dir}"
+touch "${build_dir}/.gitkeep"
 
 echo "Running tutorial..."
 pixi run fasthep run "${author}" --outdir "${build_dir}"
+touch "${build_dir}/.gitkeep"
+
+if ! find "${expected_dir}" -mindepth 1 -print -quit | grep -q .; then
+    touch "${expected_dir}/.gitkeep"
+fi
 
 echo
 echo "Comparing outputs..."
 
-diff_found=0
+exclude_args=(
+    --exclude ".gitkeep"
+    --exclude "debug/"
+    --exclude "**/__pycache__/"
+)
 
-while IFS= read -r expected_file; do
-    rel="${expected_file#${expected_dir}/}"
-    build_file="${build_dir}/${rel}"
+# debug/ is intentionally excluded because backend/runtime diagnostics can contain
+# non-deterministic logs and performance files that are not tutorial goldens.
+diff_output="$(
+    rsync -rcn --delete --itemize-changes \
+        "${exclude_args[@]}" \
+        "${build_dir}/" \
+        "${expected_dir}/"
+)"
 
-    if [[ ! -f "${build_file}" ]]; then
-        echo "Missing build output:"
-        echo "  ${rel}"
-        diff_found=1
-        continue
-    fi
-
-    if ! cmp -s "${expected_file}" "${build_file}"; then
-        echo "Different output:"
-        echo "  ${rel}"
-        diff_found=1
-    else
-        echo "OK:"
-        echo "  ${rel}"
-    fi
-
-done < <(find "${expected_dir}" -type f ! -name ".gitkeep" | sort)
-
-echo
-
-if [[ "${diff_found}" -ne 0 ]]; then
+if [[ -n "${diff_output}" ]]; then
+    echo "${diff_output}"
+    echo
     echo "Tutorial output check FAILED"
     exit 1
 fi

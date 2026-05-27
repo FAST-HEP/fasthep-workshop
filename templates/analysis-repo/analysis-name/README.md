@@ -16,3 +16,8 @@ Start from:
 ```bash
 fasthep run author.yaml --outdir build/analysis-name
 ```
+
+Generated outputs are grouped by purpose: plans under `build/analysis-name/compile/`,
+graphs under `build/analysis-name/graph/`, plots and other user artifacts under
+`build/analysis-name/artifacts/`, render metadata under
+`build/analysis-name/render/`, and diagnostics under `build/analysis-name/reports/`.

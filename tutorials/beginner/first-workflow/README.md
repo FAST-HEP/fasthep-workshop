@@ -319,7 +319,7 @@ pixi run fasthep run tutorials/beginner/first-workflow/author.yaml \
   --outdir tutorials/beginner/first-workflow/build
 ```
 
-The output plot should be written to the build directory.
+The output plot should be written under `build/artifacts/plots/`.
 
 ## Expected output
 
@@ -336,14 +336,31 @@ The main expected output is:
 │   └── plots
 │       └── MuonPt.png
 ├── compile
+│   ├── analysis.ir.yaml
+│   ├── dataset_entries.json
+│   ├── deps.yaml
 │   ├── normalized.yaml
-│   └── plan.yaml
+│   ├── plan.yaml
+│   └── report.compile.yaml
 ├── graph
 │   ├── graph.dot
+│   ├── graph.json
 │   └── graph.mmd
+├── render
+│   ├── report.render.json
+│   └── specs
+│       └── render_MuonPt_0.yaml
+├── reports
+│   ├── diagnostics
+│   ├── provenance
+│   └── schema
+├── debug
 └── run_summary.yaml
-
 ```
+
+User-facing products are under `artifacts/`, compiler products under `compile/`,
+graph exports under `graph/`, render metadata under `render/`, and structured
+reports under `reports/`.
 
 You can compare your generated output against:
 
