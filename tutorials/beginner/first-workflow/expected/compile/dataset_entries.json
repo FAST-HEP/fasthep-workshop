@@ -1,0 +1,12 @@
+{
+  "toy": {
+    "eventtype": "mc",
+    "files": [
+      "toy://dy"
+    ],
+    "group": "toy",
+    "meta": {},
+    "name": "toy",
+    "nevents": "100000"
+  }
+}

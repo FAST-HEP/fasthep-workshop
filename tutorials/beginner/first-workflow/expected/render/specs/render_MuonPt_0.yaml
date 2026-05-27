@@ -1,0 +1,21 @@
+node_id: render.MuonPt.0
+impl: hep.render.hist1d
+out: MuonPt.png
+spec:
+  op: hep.render.hist1d
+  figure:
+    size:
+    - 8
+    - 6
+    dpi: 150
+  axes:
+    x:
+      name: Muon_Pt
+      label: Muon $p_T$ [GeV]
+      limits:
+      - 0
+      - 120
+    y:
+      name: events
+      label: Events
+      scale: linear

@@ -1,0 +1,40 @@
+{
+  "edges": [
+    {
+      "input_name": "stream",
+      "output": "stream",
+      "source": "read.events",
+      "target": "stage.BasicVars"
+    },
+    {
+      "input_name": "stream",
+      "output": "stream",
+      "source": "stage.BasicVars",
+      "target": "stage.MuonPt"
+    },
+    {
+      "input_name": "target",
+      "output": "hist",
+      "source": "stage.MuonPt",
+      "target": "render.MuonPt.0"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "read.events",
+      "payload": "GraphNode(id='read.events', role='source', impl='workshop.toy_source', params={'datasets': [{'name': 'toy', 'files': ['toy://dy'], 'nevents': '100000', 'eventtype': 'mc', 'group': 'toy', 'meta': {}}], 'defaults': {'eventtype': 'mc', 'tree_primary': 'events'}, 'stream_type': 'event_stream', 'nevents': 100000, 'seed': 1729, 'dataset': 'toy', 'eventtype': 'mc', 'weight': 1.0}, outputs={'stream': 'event_stream'}, meta={'source_name': 'events', 'author_kind': 'workshop.toy_source'})"
+    },
+    {
+      "id": "stage.BasicVars",
+      "payload": "GraphNode(id='stage.BasicVars', role='transform', impl='hep.define', params={'variables': [{'name': 'Muon_Pt', 'expr': 'sqrt(Muon_Px ** 2 + Muon_Py ** 2)'}]}, outputs={'stream': 'event_stream'}, meta={'stage_id': 'BasicVars', 'author_op': 'hep.define'})"
+    },
+    {
+      "id": "stage.MuonPt",
+      "payload": "GraphNode(id='stage.MuonPt', role='transform', impl='hep.hist', params={'axes': [{'name': 'Muon_Pt', 'source': 'Muon_Pt', 'type': 'regular', 'bins': {'low': 0, 'high': 120, 'nbins': 60}}], 'storage': 'count'}, outputs={'hist': 'histogram'}, meta={'stage_id': 'MuonPt', 'author_op': 'hep.hist'})"
+    },
+    {
+      "id": "render.MuonPt.0",
+      "payload": "GraphNode(id='render.MuonPt.0', role='sink', impl='hep.render.hist1d', params={'spec': {'op': 'hep.render.hist1d', 'figure': {'size': [8, 6], 'dpi': 150}, 'axes': {'x': {'name': 'Muon_Pt', 'label': 'Muon $p_T$ [GeV]', 'limits': [0, 120]}, 'y': {'name': 'events', 'label': 'Events', 'scale': 'linear'}}}, 'when': 'run_end', 'out': 'MuonPt.png'}, outputs={'artifact': 'artifact'}, meta={'stage_id': 'MuonPt', 'style_ref': 'muon_pt', 'author_op': 'hep.render.hist1d'})"
+    }
+  ]
+}

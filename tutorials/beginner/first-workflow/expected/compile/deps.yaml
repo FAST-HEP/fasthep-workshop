@@ -1,0 +1,22 @@
+required_sources:
+  events:
+    data:
+    - Muon_Px
+    - Muon_Py
+    branches:
+    - Muon_Px
+    - Muon_Py
+consumers:
+  Muon_Pt:
+  - stage.MuonPt
+  Muon_Px:
+  - stage.BasicVars
+  Muon_Py:
+  - stage.BasicVars
+origins:
+  Muon_Pt:
+    kind: produced
+    node: stage.BasicVars
+notes:
+- Data flow is inferred for the primary event stream first; joined source branch decomposition
+  is TODO.
