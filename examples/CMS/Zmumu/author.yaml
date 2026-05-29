@@ -96,6 +96,8 @@ styles:
           axes:
             x: {name: nIsoMuons, label: "Number of isolated $\\mu$", limits: [0, 5]}
             y: {name: events, label: Events, scale: log, limits: [1e-2, 1e7]}
+  event_selection_cutflow:
+    op: hep.render.cutflow_csv
 
 observers:
   - kind: hep.schema_snapshot
@@ -138,6 +140,10 @@ analysis:
             - "triggerIsoMu24 == 1"
             - {reduce: {op: any, over: "Muon_Pt > 25"}}
         weight_expr: EventWeight
+      render:
+        style: event_selection_cutflow
+        when: final
+        out: EventSelection.csv
 
     - id: DiMuonMass
       op: hep.hist
