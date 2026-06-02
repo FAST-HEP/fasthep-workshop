@@ -43,14 +43,14 @@ default = ["default"]
 docs = ["docs"]
 
 [tasks]
+format = "ruff format src tests"
 lint = "ruff check src tests"
 lint-fix = "ruff check --fix src tests"
 typecheck = "mypy src tests"
 test = "pytest"
-ci = { depends-on = ["lint", "typecheck", "test"] }
-
-[tasks.docs]
-cmd = "sphinx-build -b html docs docs/_build/html"
-
-[tasks.docs-clean]
-cmd = "rm -rf docs/_build"
+build = "python -m build"
+check = { depends-on = ["lint", "typecheck", "test"] }
+ci = { depends-on = ["check", "build"] }
+check-dist = "twine check dist/*"
+docs = "sphinx-build -b html docs docs/_build/html"
+docs-clean = "rm -rf docs/_build"
