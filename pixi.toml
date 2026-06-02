@@ -14,11 +14,18 @@ mypy = "*"
 
 [pypi-dependencies]
 fasthep-workshop = { path = ".", editable = true }
-fasthep-flow = { path = "../fasthep-flow", editable = true }
-fasthep-carpenter = { path = "../fasthep-carpenter", editable = true }
-fasthep-curator = { path = "../fasthep-curator", editable = true }
-fasthep-render = { path = "../fasthep-render", editable = true }
-fasthep-cli = { path = "../fasthep-cli", editable = true }
+fasthep-flow = ">=2026.06.1"
+fasthep-carpenter = ">=2026.06.1"
+fasthep-curator = ">=2026.06.1"
+fasthep-render = ">=2026.06.1"
+fasthep-toolbench = ">=2026.06.1"
+fasthep-cli = ">=2026.06.1"
+# fasthep-flow = { path = "../fasthep-flow", editable = true }
+# fasthep-carpenter = { path = "../fasthep-carpenter", editable = true }
+# fasthep-curator = { path = "../fasthep-curator", editable = true }
+# fasthep-render = { path = "../fasthep-render", editable = true }
+# fasthep-cli = { path = "../fasthep-cli", editable = true }
+
 
 [feature.docs.dependencies]
 python = ">=3.11"

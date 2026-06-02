@@ -14,9 +14,9 @@ authors = [
 dependencies = [
     "awkward",
     "fasthep-flow",
-    "fasthep-carpenter @ git+https://github.com/FAST-HEP/fasthep-carpenter.git",
-    "fasthep-curator @ git+https://github.com/FAST-HEP/fasthep-curator.git",
-    "fasthep-render @ git+https://github.com/FAST-HEP/fasthep-render.git",
+    "fasthep-carpenter",
+    "fasthep-curator",
+    "fasthep-render",
     "numpy",
 ]
 
@@ -38,7 +38,7 @@ docs = [
 source = "vcs"
 
 [tool.hatch.version.raw-options]
-fallback_version = "0.0.0"
+fallback_version = "2026.06.1"
 
 [tool.hatch.build.hooks.vcs]
 version-file = "src/fasthep_workshop/_version.py"
