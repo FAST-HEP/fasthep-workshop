@@ -1,0 +1,94 @@
+version: 1.0
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_render:registry
+    - fasthep_workshop:registry
+
+data:
+  datasets:
+    - {name: toy, eventtype: mc, files: [toy://dy]}
+    - {name: toy_alt, eventtype: mc, files: [toy://ttbar]}
+
+sources:
+  events:
+    kind: workshop.toy_source
+    stream_type: event_stream
+    nevents: 100000
+    seed: 1729
+
+systematics:
+  include_nominal: true
+  variations:
+    - name: trigger_eff_up
+      group: trigger_eff
+      direction: up
+      applies_to: mc
+      requires: [stage.TriggerEfficiencyWeights]
+      weight:
+        multiply: TriggerEffWeight_up
+
+    - name: trigger_eff_down
+      group: trigger_eff
+      direction: down
+      applies_to: mc
+      requires: [stage.TriggerEfficiencyWeights]
+      weight:
+        multiply: TriggerEffWeight_down
+
+    - name: muon_pt_scale_up
+      group: muon_pt_scale
+      direction: up
+      applies_to: mc
+      replace:
+        Muon_Pt: Muon_Pt_scale_up
+
+    - name: dataset_alt
+      group: dataset_replacement
+      direction: alt
+      applies_to:
+        datasets: [toy]
+      datasets:
+        replace:
+          toy: toy_alt
+
+styles:
+  muon_pt:
+    op: hep.render.hist1d
+    figure: {size: [8, 6], dpi: 150}
+    axes:
+      x: {name: Muon_Pt, label: "Muon $p_T$ [GeV]", limits: [0, 120]}
+      y: {name: events, label: "Events"}
+
+analysis:
+  stages:
+    - id: BasicVars
+      op: hep.define
+      params:
+        variables:
+          - name: Muon_Pt
+            expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"
+          - name: Muon_Pt_scale_up
+            expr: "1.05 * sqrt(Muon_Px ** 2 + Muon_Py ** 2)"
+          - name: TriggerEffWeight
+            expr: "1.0"
+          - name: TriggerEffWeight_up
+            expr: "1.05"
+          - name: TriggerEffWeight_down
+            expr: "0.95"
+
+    - id: MuonPt
+      op: hep.hist
+      params:
+        axes:
+          - name: Muon_Pt
+            source: Muon_Pt
+            type: regular
+            bins: {low: 0, high: 120, nbins: 60}
+        weight_expr: EventWeight
+      render:
+        style: muon_pt
+        when: final
+        out: MuonPt.png

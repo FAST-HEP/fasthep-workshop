@@ -258,23 +258,25 @@ fasthep run-plan build/compile/nominal/plan.yaml
 fasthep run-plan build/compile/trigger_eff_up/plan.yaml
 ```
 
-When no explicit `--outdir` is provided, variation plans run into matching
-variation runtime directories:
+When no explicit `--outdir` is provided, variation plans use the workflow build
+root and namespace outputs by variation:
 
 ```text
 build/
-├── nominal/
-│   ├── artifacts/
-│   ├── reports/
-│   └── run_summary.yaml
-├── trigger_eff_up/
-│   ├── artifacts/
-│   ├── reports/
-│   └── run_summary.yaml
-└── trigger_eff_down/
-    ├── artifacts/
-    ├── reports/
-    └── run_summary.yaml
+├── artifacts/
+│   ├── nominal/
+│   │   ├── histograms/
+│   │   └── plots/
+│   └── trigger_eff_up/
+│       ├── histograms/
+│       └── plots/
+├── reports/
+│   ├── nominal/
+│   └── trigger_eff_up/
+├── debug/
+│   ├── nominal/
+│   └── trigger_eff_up/
+└── run_summary.yaml
 ```
 
 For now, `fasthep run author.yaml --outdir build` compiles all variation plans
