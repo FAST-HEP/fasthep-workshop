@@ -225,4 +225,7 @@ snapshots/
 .hepflow/**
 .fasthep/**
 
+# hatch-vcs generated version file
+src/fasthep_workshop/_version.py
+
 pixi.lock
