@@ -13,10 +13,10 @@ authors = [
 ]
 dependencies = [
     "awkward",
-    "fasthep-flow",
-    "fasthep-carpenter",
-    "fasthep-curator",
-    "fasthep-render",
+    "fasthep-flow == 2026.06.1",
+    "fasthep-carpenter == 2026.06.1",
+    "fasthep-curator == 2026.06.1",
+    "fasthep-render == 2026.06.1",
     "numpy",
 ]
 
