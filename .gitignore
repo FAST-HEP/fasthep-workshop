@@ -225,3 +225,4 @@ snapshots/
 .hepflow/**
 .fasthep/**
 
+pixi.lock
