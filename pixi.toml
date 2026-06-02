@@ -7,9 +7,17 @@ version = "0.1.0"
 
 [dependencies]
 python = ">=3.11"
+pip = "*"
+python-build = "*"
+hatchling = "*"
+hatch-vcs = "*"
 pytest = "*"
 ruff = "*"
 mypy = "*"
+pre-commit = "*"
+codespell = "*"
+twine = "*"
+
 
 [pypi-dependencies]
 fasthep-workshop = { path = ".", editable = true }
