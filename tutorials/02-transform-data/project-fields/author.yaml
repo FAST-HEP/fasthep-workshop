@@ -1,0 +1,45 @@
+version: 1.0
+
+include:
+  - datasets.yaml
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_curator:registry
+    - fasthep_curator:default_context
+    - fasthep_curator:runtime_diagnostics
+    - fasthep_workshop:registry
+
+data:
+  defaults:
+    eventtype: data
+    tree_primary: Events
+
+sources:
+  events:
+    kind: root_tree
+    tree: Events
+    stream_type: event_stream
+    branches:
+      - HLT_Photon26_R9Id85_OR_CaloId24b40e_Iso50T80L_Photon16_AND_HE10_R9Id65_Eta2_Mass60
+    start: 0
+    stop: 1000
+
+observers:
+  - kind: hep.schema_snapshot
+    at: [read.events, stage.TriggerSelection]
+    out: schema
+
+fields:
+  analysis_trigger: {stream: events, branch: "HLT_Photon26_R9Id85_OR_CaloId24b40e_Iso50T80L_Photon16_AND_HE10_R9Id65_Eta2_Mass60"}
+
+analysis:
+  stages:
+    - id: TriggerSelection
+      op: hep.selection.cutflow
+      params:
+        selection:
+          All:
+            - "analysis_trigger == 1"

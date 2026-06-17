@@ -1,0 +1,48 @@
+version: 1.0
+
+include:
+  - datasets.yaml
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_curator:registry
+    - fasthep_curator:default_context
+    - fasthep_curator:runtime_diagnostics
+    - fasthep_workshop:registry
+
+data:
+  defaults:
+    tree_primary: events
+
+sources:
+  events:
+    kind: root_tree
+    tree: events
+    stream_type: event_stream
+    branches:
+      - NMuon
+      - Muon_Px
+      - Muon_Py
+      - Muon_Iso
+
+observers:
+  - kind: hep.schema_snapshot
+    at: [read.events, stage.DerivedMuonColumns]
+    out: schema
+
+analysis:
+  stages:
+    - id: DerivedMuonColumns
+      op: hep.define
+      params:
+        variables:
+          - name: Muon_Pt
+            expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"
+          - name: IsolatedMuon
+            expr: "(Muon_Iso / Muon_Pt) < 0.10"
+          - name: NIsolatedMuon
+            reduce:
+              op: count_nonzero
+              over: IsolatedMuon

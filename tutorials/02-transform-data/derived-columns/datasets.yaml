@@ -1,0 +1,11 @@
+datasets:
+  data:
+    eventtype: data
+    nevents: "469384"
+    files:
+      - data/CMS/Zmumu/data.root
+  dy:
+    eventtype: mc
+    nevents: "77729"
+    files:
+      - data/CMS/Zmumu/dy.root
