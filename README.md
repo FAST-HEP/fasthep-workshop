@@ -48,6 +48,8 @@ pip install \
   fasthep-workshop
 ```
 
+Please note that all instructions include `pixi run` - if you do not use pixi, please exclude this prefix to the commands.
+
 ## Repository Layout
 
 ```text

@@ -5,7 +5,7 @@ This tutorial shows how to read ROOT files with FAST-HEP.
 ## 1. Download the example files
 
 ```bash
-fasthep download --json tutorials/data/CMS/Zmumu/files.json --destination data
+pixi run fasthep download --json tutorials/data/CMS/Zmumu/files.json --destination data
 ```
 
 The manifest downloads small Z &rarr; $\mu\mu$ datasets from the CMS experiment into `data/CMS/Zmumu/`.
@@ -33,7 +33,7 @@ The workflow reads the `events` tree and records a schema snapshot.
 ## 3. Run the workflow
 
 ```bash
-fasthep run tutorials/01-read-data/root-files/author.yaml --outdir build/tutorials/01-read-data/root-files
+pixi run fasthep run tutorials/01-read-data/root-files/author.yaml --outdir build/tutorials/01-read-data/root-files
 ```
 
 ## 4. Inspect the outputs

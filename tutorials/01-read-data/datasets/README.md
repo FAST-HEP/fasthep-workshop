@@ -5,7 +5,7 @@ This tutorial extends the ROOT-file reader example to two datasets.
 ## 1. Reuse the downloaded files
 
 ```bash
-fasthep download --json tutorials/data/CMS/Zmumu/files.json --destination data
+pixi run fasthep download --json tutorials/data/CMS/Zmumu/files.json --destination data
 ```
 
 ## 2. Inspect the dataset entries
@@ -31,7 +31,7 @@ can use for grouping. `eventtype` separates data from simulated samples.
 ## 3. Run the workflow
 
 ```bash
-fasthep run tutorials/01-read-data/datasets/author.yaml --outdir build/tutorials/01-read-data/datasets
+pixi run fasthep run tutorials/01-read-data/datasets/author.yaml --outdir build/tutorials/01-read-data/datasets
 ```
 
 ## 4. Inspect the outputs
