@@ -4,8 +4,8 @@ set -euo pipefail
 
 if [[ $# -ne 1 ]]; then
     echo "Usage:"
-    echo "  $0 beginner/first-workflow"
-    echo "  $0 tutorials/beginner/first-workflow"
+    echo "  $0 00-overview/first-workflow"
+    echo "  $0 tutorials/00-overview/first-workflow"
     exit 1
 fi
 

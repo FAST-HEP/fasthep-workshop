@@ -11,48 +11,20 @@ getting-started
 ```
 
 ```{toctree}
-:maxdepth: 1
-:caption: Beginner tutorials
+:maxdepth: 2
+:caption: Tutorials
 
-tutorials/beginner/first-workflow
-tutorials/beginner/selections
-tutorials/beginner/weights-and-datasets
-tutorials/beginner/multiple-outputs
-tutorials/beginner/heatmaps-and-projections
-```
-
-```{toctree}
-:maxdepth: 1
-:caption: Intermediate tutorials
-
-tutorials/intermediate/inspect-before-running
-tutorials/intermediate/diagnostics
-tutorials/intermediate/sinks
-tutorials/intermediate/profiles-and-registries
-tutorials/intermediate/analysis-repository-layout
-```
-
-```{toctree}
-:maxdepth: 1
-:caption: Advanced tutorials
-
-tutorials/advanced/parallel-workflows
-tutorials/advanced/backends
-tutorials/advanced/strategies
-tutorials/advanced/render-from-specs
-tutorials/advanced/validation
-```
-
-```{toctree}
-:maxdepth: 1
-:caption: Expert tutorials
-
-tutorials/expert/custom-source
-tutorials/expert/custom-transform
-tutorials/expert/custom-sink
-tutorials/expert/hooks
-tutorials/expert/profiling
-tutorials/expert/systematics
+tutorials/00-overview
+tutorials/01-read-data
+tutorials/02-transform-data
+tutorials/03-summarise-data
+tutorials/04-save-data
+tutorials/05-systematics
+tutorials/06-organise-workflows
+tutorials/07-scale-execution
+tutorials/08-accelerators
+tutorials/09-extend-fasthep
+tutorials/10-complete
 ```
 
 ```{toctree}

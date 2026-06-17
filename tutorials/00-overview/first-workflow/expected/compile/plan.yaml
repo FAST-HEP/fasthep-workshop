@@ -247,7 +247,7 @@ provenance:
     path: package:fasthep_workshop.profiles/registry.yaml
   - name: author
     kind: author
-    path: tutorials/beginner/first-workflow/author.yaml
+    path: tutorials/00-overview/first-workflow/author.yaml
   registry_changes:
     added:
     - section: functions
@@ -367,7 +367,7 @@ provenance:
     path: package:fasthep_workshop.profiles/registry.yaml
   - name: author
     kind: author
-    path: tutorials/beginner/first-workflow/author.yaml
+    path: tutorials/00-overview/first-workflow/author.yaml
   execution_hook_layers:
   - name: builtin
     kind: builtin
@@ -385,7 +385,7 @@ provenance:
     path: package:fasthep_workshop.profiles/registry.yaml
   - name: author
     kind: author
-    path: tutorials/beginner/first-workflow/author.yaml
+    path: tutorials/00-overview/first-workflow/author.yaml
 execution:
   backend: local
   strategy: default

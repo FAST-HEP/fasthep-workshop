@@ -221,6 +221,8 @@ __marimo__/
 
 data
 data/**
+!tutorials/data/
+!tutorials/data/**/*.json
 snapshots/
 .hepflow/**
 .fasthep/**

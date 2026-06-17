@@ -22,7 +22,7 @@ You will see how to:
 ## Files
 
 ```text
-tutorials/beginner/first-workflow/
+tutorials/00-overview/first-workflow/
 ├── author.yaml
 ├── README.md
 ├── expected/
@@ -315,8 +315,8 @@ to generate the final output image.
 From the `fasthep-workshop` repository root:
 
 ```bash
-pixi run fasthep run tutorials/beginner/first-workflow/author.yaml \
-  --outdir tutorials/beginner/first-workflow/build
+pixi run fasthep run tutorials/00-overview/first-workflow/author.yaml \
+  --outdir tutorials/00-overview/first-workflow/build
 ```
 
 The output plot should be written under `build/artifacts/plots/`.
@@ -326,7 +326,7 @@ The output plot should be written under `build/artifacts/plots/`.
 After running, inspect:
 
 ```text
-tutorials/beginner/first-workflow/build/
+tutorials/00-overview/first-workflow/build/
 ```
 
 The main expected output is:
@@ -369,7 +369,7 @@ metadata under `render/`, and structured reports under `reports/`.
 You can compare your generated output against:
 
 ```text
-tutorials/beginner/first-workflow/expected/
+tutorials/00-overview/first-workflow/expected/
 ```
 
 ## Full workflow
