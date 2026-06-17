@@ -1,55 +1,175 @@
-# fasthep-workshop
+# FAST-HEP Workshop
 
-`fasthep-workshop` is the home for FAST-HEP tutorials, examples, regression workflows, public validation workflows, and the first lightweight analysis-repository template.
+`fasthep-workshop` contains tutorials, examples, and complete analysis workflows for the FAST-HEP ecosystem.
 
-It is also a lightweight installable analysis-example package. Its import namespace is `fasthep_workshop`, and package-owned registry/profile resources demonstrate how an analysis repository can contribute custom components without relying on fragile `scripts.*` imports.
+The workshop is designed to help users learn the FAST-HEP workflow language step-by-step, from reading ROOT files to running distributed analyses on HTCondor or Slurm.
 
-## Install
+## Getting Started
 
-Basic workflow tools:
-
-```bash
-pip install fasthep-flow fasthep-cli
-```
-
-HEP analysis workflows:
+Clone the repository:
 
 ```bash
-pip install fasthep-flow fasthep-carpenter fasthep-curator fasthep-render fasthep-cli fasthep-workshop
+git clone https://github.com/FAST-HEP/fasthep-workshop.git
+cd fasthep-workshop
 ```
 
-Later this should become:
+### Install Pixi (Recommended)
+
+FAST-HEP tutorials use Pixi to provide reproducible environments.
+
+Follow the Pixi installation instructions:
+
+https://pixi.sh/latest/
+
+Then create the environment:
 
 ```bash
-pip install "fasthep[hep]"
+pixi install
 ```
 
-## Run Examples
-
-Tutorial examples are intended for users and docs. Testing examples are internal
-validation workflows for CI, smoke tests, and package integration checks.
-
-Compile the Zmumu tutorial:
+Run commands inside the environment:
 
 ```bash
-fasthep compile examples/CMS/Zmumu/author.yaml --outdir build/Zmumu
+pixi run fasthep --help
 ```
 
-Run the CI-friendly runtime smoke workflow:
+### Alternative: pip
+
+If you prefer not to use Pixi, install the required FAST-HEP packages manually:
 
 ```bash
-fasthep run examples/testing/runtime-smoke/author.yaml --outdir build/testing/runtime-smoke
+pip install \
+  fasthep-flow \
+  fasthep-carpenter \
+  fasthep-curator \
+  fasthep-render \
+  fasthep-toolbench \
+  fasthep-cli \
+  fasthep-workshop
 ```
 
-Compile the generated-data ROOT split package validation workflow:
+## Repository Layout
+
+```text
+tutorials/
+    Step-by-step learning material
+
+examples/
+    Standalone examples and demonstrations
+
+data/
+    Example datasets and download manifests
+
+docs/
+    Additional documentation
+```
+
+### Tutorials
+
+The tutorials are organised as a learning path.
+
+```text
+00-overview/
+    Introduction to FAST-HEP
+
+01-read-data/
+    Reading ROOT files and datasets
+
+02-transform-data/
+    Derived quantities and selections
+
+03-summarise-data/
+    Histograms and cutflows
+
+04-save-data/
+    Skims and outputs
+
+05-systematics/
+    Variations and uncertainties
+
+06-organise-workflows/
+    Profiles, registries, and modular workflows
+
+07-scale-execution/
+    Distributed execution and resource pools
+
+08-accelerators/
+    GPU execution
+
+09-extend-fasthep/
+    Custom operations and extensions
+
+10-complete/
+    End-to-end analysis examples
+```
+
+Start here:
+
+```text
+tutorials/00-overview/first-workflow/
+```
+
+## Running a Tutorial
+
+Most tutorials contain a dedicated README with instructions.
+
+For example:
 
 ```bash
-python scripts/ci/make_testing_data.py
-fasthep compile examples/testing/split-packages/author.yaml --outdir build/testing/split-packages
+pixi run fasthep compile tutorials/00-overview/first-workflow/author.yaml
 ```
 
-Outputs appear under the selected `build/...` directory. Compiler products are written under `compile/`, graph files under `graph/`, render metadata under `render/`, structured reports under `reports/`, user-facing files under `artifacts/`, and backend/runtime diagnostics under `debug/`.
+or:
 
-## CI Role
+```bash
+pixi run fasthep run tutorials/00-overview/first-workflow/author.yaml
+```
 
-These examples are intended as public golden-path validation workflows. Public CI should run parse/compile smoke checks and small runtime examples. CERN GitLab can add private-data and heavier validation workflows without making private data required here.
+See the tutorial README for expected outputs and explanations.
+
+## Example Data
+
+Several tutorials use small CMS datasets based on the classic Z → μμ analysis.
+
+Download the tutorial files:
+
+```bash
+pixi run fasthep download tutorials/data/CMS/Zmumu/files.json --outdir data
+```
+
+The downloaded files are intentionally small so that tutorials can run on a laptop.
+
+## Output Structure
+
+FAST-HEP workflows write outputs into a build directory.
+
+Typical contents include:
+
+```text
+build/
+├── artifacts/
+├── compile/
+├── debug/
+├── graph/
+├── render/
+└── reports/
+```
+
+* `compile/` – compiler outputs such as normalized workflows and execution plans
+* `graph/` – workflow visualisations
+* `render/` – rendering metadata
+* `reports/` – structured reports and summaries
+* `artifacts/` – user-facing outputs
+* `debug/` – backend and runtime diagnostics
+
+## Next Steps
+
+After completing the introductory tutorials, explore:
+
+* distributed execution with HTCondor or Slurm,
+* heterogeneous CPU/GPU worker pools,
+* skimming workflows,
+* complete analysis examples.
+
+
+> 📝 The long-term goal is to build fully reproducible public analysis records using FAST-HEP.
