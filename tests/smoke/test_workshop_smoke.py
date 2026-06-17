@@ -23,6 +23,7 @@ AUTHOR_PATHS = [
 READ_DATA_TUTORIAL_AUTHOR_PATHS = [
     WORKSHOP_ROOT / "tutorials" / "01-read-data" / "root-files" / "author.yaml",
     WORKSHOP_ROOT / "tutorials" / "01-read-data" / "datasets" / "author.yaml",
+    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "remote-data" / "author.yaml",
 ]
 
 

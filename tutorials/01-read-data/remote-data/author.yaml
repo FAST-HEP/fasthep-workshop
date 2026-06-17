@@ -1,0 +1,39 @@
+version: 1.0
+
+include:
+  - datasets.yaml
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_curator:registry
+    - fasthep_curator:default_context
+    - fasthep_curator:runtime_diagnostics
+    - fasthep_workshop:registry
+
+data:
+  defaults:
+    eventtype: data
+    tree_primary: Events
+
+sources:
+  events:
+    kind: root_tree
+    tree: Events
+    stream_type: event_stream
+    branches:
+      - run
+      - luminosityBlock
+      - event
+      - nMuon
+      - Muon_pt
+      - Muon_eta
+      - Muon_phi
+      - Muon_charge
+    stop: 1000
+
+observers:
+  - kind: hep.schema_snapshot
+    at: [read.events]
+    out: schema
