@@ -20,6 +20,11 @@ AUTHOR_PATHS = [
     WORKSHOP_ROOT / "examples" / "testing" / "runtime-smoke" / "author.yaml",
 ]
 
+READ_DATA_TUTORIAL_AUTHOR_PATHS = [
+    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "root-files" / "author.yaml",
+    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "datasets" / "author.yaml",
+]
+
 
 @pytest.mark.parametrize("author_path", AUTHOR_PATHS)
 def test_author_yaml_parses(author_path: Path) -> None:
@@ -80,6 +85,18 @@ def test_examples_compile(author_path: Path, tmp_path: Path) -> None:
     )
     assert "hep.schema_snapshot" in plan.registry["observers"]
     assert "hep.render.hist1d" in plan.registry["sinks"]
+
+
+@pytest.mark.parametrize("author_path", READ_DATA_TUTORIAL_AUTHOR_PATHS)
+def test_read_data_tutorials_compile(author_path: Path, tmp_path: Path) -> None:
+    plan = compile_author_file(
+        author_path,
+        outdir=tmp_path / author_path.parent.name,
+    )
+
+    read_node = next(node for node in plan.nodes if node.id == "read.events")
+    assert read_node.impl == "root_tree"
+    assert "hep.schema_snapshot" in plan.registry["observers"]
 
 
 def test_runtime_smoke_runs_end_to_end(

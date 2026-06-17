@@ -1,0 +1,38 @@
+version: 1.0
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_curator:registry
+    - fasthep_curator:default_context
+    - fasthep_curator:runtime_diagnostics
+    - fasthep_workshop:registry
+
+data:
+  datasets:
+    - name: data
+      eventtype: data
+      files:
+        - data/CMS/Zmumu/data.root
+  defaults:
+    eventtype: mc
+    tree_primary: events
+
+sources:
+  events:
+    kind: root_tree
+    tree: events
+    stream_type: event_stream
+    branches:
+      - NMuon
+      - Muon_Px
+      - Muon_Py
+      - Muon_Pz
+      - EventWeight
+    stop: 1000
+
+observers:
+  - kind: hep.schema_snapshot
+    at: [read.events]
+    out: schema
