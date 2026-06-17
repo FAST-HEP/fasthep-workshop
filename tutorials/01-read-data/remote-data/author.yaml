@@ -22,15 +22,7 @@ sources:
     kind: root_tree
     tree: Events
     stream_type: event_stream
-    branches:
-      - run
-      - luminosityBlock
-      - event
-      - nMuon
-      - Muon_pt
-      - Muon_eta
-      - Muon_phi
-      - Muon_charge
+    start: 0
     stop: 1000
 
 observers:
