@@ -102,11 +102,20 @@ FAST-HEP workflows are declarative.
 
 Rather than writing explicit event loops, you describe:
 
-* what data should be processed
-* which quantities should be computed
-* which outputs should be produced
+- what data should be processed
+- which quantities should be computed
+- which outputs should be produced
 
 FAST-HEP then builds an execution plan automatically.
+
+This workshop focuses on learning by doing. Throughout the tutorials you will build workflows incrementally and discover the language through practical examples.
+
+For a more complete description of the workflow language and FAST-HEP architecture, see:
+
+- [FAST-HEP documentation](https://fast-hep.github.io)
+- [fasthep-flow documentation](https://fasthep-flow.readthedocs.io)
+- [fasthep-carpenter documentation](https://fasthep-carpenter.readthedocs.io)
+- [fasthep-curator documentation](https://fasthep-curator.readthedocs.io)
 
 The complete workflow is shown at the end of this tutorial.
 
@@ -152,7 +161,7 @@ A curated set of expected outputs is provided in:
 tutorials/00-overview/first-workflow/expected/
 ```
 
-These files highlight the most important results from the workflow without including the entire build directory.
+These files highlight the most important results from the build directory.
 
 ### Plot
 
