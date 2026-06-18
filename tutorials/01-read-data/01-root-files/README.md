@@ -51,6 +51,9 @@ Look at:
 - `build/tutorials/01-read-data/01-root-files/reports/schema/`
 - `build/tutorials/01-read-data/01-root-files/run_summary.yaml`
 
+The curated fixture in `expected/snippets/` keeps the resolved dataset entry and
+a compact run summary.
+
 ## 5. What happened?
 
 FAST-HEP resolved the dataset entry, read selected branches from the ROOT tree

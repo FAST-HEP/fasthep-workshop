@@ -1,0 +1,7 @@
+items:
+  - from: compile/deps.yaml
+    to: snippets/deps.yaml
+
+  - from: artifacts/cutflows/TriggerSelection.json
+    to: snippets/TriggerSelection.summary.json
+    mode: cutflow_summary

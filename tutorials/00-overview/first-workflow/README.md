@@ -449,6 +449,11 @@ Try changing:
 
 Then rerun the workflow and compare the output.
 
+## Curated expected output
+
+A small documentation fixture is kept in `expected/plots/MuonPt.png`, with the
+matching histogram manifest in `expected/snippets/`.
+
 ## Next tutorial
 
 The next tutorial adds a selection step and shows how cuts affect the resulting histogram.

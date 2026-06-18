@@ -44,3 +44,6 @@ pixi run fasthep run tutorials/01-read-data/02-datasets/author.yaml --outdir bui
 
 Compare the schema report and `compile/dataset_entries.json` with the previous
 tutorial. The workflow still only reads data and records schema information.
+
+The curated fixture in `expected/snippets/dataset_entries.json` shows the
+resolved dataset definitions used by the run.

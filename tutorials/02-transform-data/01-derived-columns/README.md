@@ -75,3 +75,6 @@ Look at:
 - `build/tutorials/02-transform-data/01-derived-columns/run_summary.yaml`
 
 The schema snapshots show where the new derived fields enter the stream.
+
+The curated fixture in `expected/snippets/deps.yaml` shows the derived field
+origins recorded by the compiler.

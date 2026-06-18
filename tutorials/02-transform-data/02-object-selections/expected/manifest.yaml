@@ -2,6 +2,3 @@ items:
   - from: artifacts/cutflows/SelectDimuonEvents.json
     to: snippets/SelectDimuonEvents.summary.json
     mode: cutflow_summary
-
-  - from: artifacts/tables/SelectDimuonEvents.csv
-    to: tables/SelectDimuonEvents.csv

@@ -1,0 +1,12 @@
+{
+  "data": {
+    "eventtype": "data",
+    "files": [
+      "data/CMS/Zmumu/data.root"
+    ],
+    "group": "data",
+    "meta": {},
+    "name": "data",
+    "nevents": null
+  }
+}

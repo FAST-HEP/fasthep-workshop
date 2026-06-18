@@ -1,0 +1,12 @@
+items:
+  - from: artifacts/plots/NumberMuons_proj_nMuons.png
+    to: plots/NumberMuons_proj_nMuons.png
+
+  - from: artifacts/plots/NumberMuons_proj_nIsoMuons.png
+    to: plots/NumberMuons_proj_nIsoMuons.png
+
+  - from: artifacts/plots/NumberMuons_heatmap/data.png
+    to: plots/NumberMuons_heatmap_data.png
+
+  - from: artifacts/histograms/manifest.json
+    to: snippets/histograms.manifest.json

@@ -1,0 +1,3 @@
+items:
+  - from: compile/deps.yaml
+    to: snippets/deps.yaml

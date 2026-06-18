@@ -1,0 +1,9 @@
+{
+  "histograms": [
+    {
+      "id": "NumberMuons",
+      "path": "artifacts/histograms/NumberMuons.pkl",
+      "producer": "stage.NumberMuons"
+    }
+  ]
+}

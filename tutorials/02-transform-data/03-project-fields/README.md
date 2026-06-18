@@ -59,3 +59,5 @@ Look at:
 
 The schema snapshots show the original remote branches and the added
 `analysis_trigger` alias. Note that by default only used branches are loaded.
+The curated fixtures in `expected/snippets/` show the projected alias and a
+compact trigger cutflow summary.

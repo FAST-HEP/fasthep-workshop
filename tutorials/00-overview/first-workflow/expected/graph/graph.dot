@@ -1,9 +1,0 @@
-digraph hepflow {
-  "read.events" [label="read.events\\nsource\\nworkshop.toy_source"];
-  "stage.BasicVars" [label="stage.BasicVars\\ntransform\\nhep.define"];
-  "stage.MuonPt" [label="stage.MuonPt\\ntransform\\nhep.hist"];
-  "render.MuonPt.0" [label="render.MuonPt.0\\nsink\\nhep.render.hist1d"];
-  "read.events" -> "stage.BasicVars" [label="stream"];
-  "stage.BasicVars" -> "stage.MuonPt" [label="stream"];
-  "stage.MuonPt" -> "render.MuonPt.0" [label="hist"];
-}

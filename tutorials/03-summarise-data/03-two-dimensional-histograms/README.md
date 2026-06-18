@@ -51,3 +51,6 @@ Look at:
 - `build/tutorials/03-summarise-data/03-two-dimensional-histograms/artifacts/plots/`
 - `build/tutorials/03-summarise-data/03-two-dimensional-histograms/render/`
 - `build/tutorials/03-summarise-data/03-two-dimensional-histograms/run_summary.yaml`
+
+The curated fixtures in `expected/plots/` keep the projection plots and one
+example heatmap image.

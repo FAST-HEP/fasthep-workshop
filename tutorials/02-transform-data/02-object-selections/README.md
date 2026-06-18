@@ -65,3 +65,6 @@ and after the selection.
 
 `SelectDimuonEvents.json` has the full information about the order of cuts as well as the number of events going into and out of a cut.
 Later we will see how to make these more human-readable.
+
+The curated fixture in `expected/snippets/SelectDimuonEvents.summary.json`
+keeps a compact cutflow summary.

@@ -1,0 +1,50 @@
+backend: local
+strategy: default
+success: true
+execution:
+  backend: local
+  strategy: default
+  profiles: []
+  resources: {}
+  pools: {}
+  environment: {}
+  config: {}
+partitions:
+- partition:
+    id: events__data__0
+    dataset: data
+    file: data/CMS/Zmumu/data.root
+    source: events
+    part: '0_0'
+    start: null
+    stop: null
+  outputs:
+  - node: observe.hep_schema_snapshot.0.read_events
+    port: report
+    type: OutputResult
+  - node: read.events
+    port: stream
+    type: Array
+warnings: []
+hooks:
+  enabled:
+  - kind: hep.dataset_context
+    events:
+    - partition_start
+    calls: 1
+    source: profile:fasthep_curator:default_context
+    scope: global
+  - kind: hep.error_report
+    events:
+    - on_node_error
+    calls: 0
+    source: profile:fasthep_curator:runtime_diagnostics
+    scope: global
+  - kind: hep.warning_capture
+    events:
+    - around_node
+    calls: 2
+    source: profile:fasthep_curator:runtime_diagnostics
+    scope: global
+summary_path: build/tutorials/01-read-data/01-root-files/run_summary.yaml
+artifacts_path: build/tutorials/01-read-data/01-root-files/artifacts

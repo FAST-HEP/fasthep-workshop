@@ -58,3 +58,6 @@ Look at:
 
 The histogram artifact is a machine-readable product that later render stages
 can turn into plots.
+
+The curated fixture in `expected/snippets/histograms.manifest.json` records the
+histogram artifact produced by the run.

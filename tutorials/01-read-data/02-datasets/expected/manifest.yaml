@@ -1,0 +1,3 @@
+items:
+  - from: compile/dataset_entries.json
+    to: snippets/dataset_entries.json

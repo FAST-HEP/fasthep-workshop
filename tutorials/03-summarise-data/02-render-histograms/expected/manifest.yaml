@@ -1,0 +1,6 @@
+items:
+  - from: artifacts/plots/DiMuonMass.png
+    to: plots/DiMuonMass.png
+
+  - from: artifacts/histograms/manifest.json
+    to: snippets/histograms.manifest.json

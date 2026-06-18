@@ -53,6 +53,9 @@ Look at:
 - `build/tutorials/03-summarise-data/04-cutflow-tables/render/`
 - `build/tutorials/03-summarise-data/04-cutflow-tables/run_summary.yaml`
 
+The curated fixtures in `expected/` keep a compact cutflow JSON snippet and the
+small CSV table.
+
 The JSON representation, such as `SelectDimuonEvents.json`, is intended for
 machines and automation. Later tutorials will show alternative human-readable
 presentations.

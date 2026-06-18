@@ -1,0 +1,6 @@
+items:
+  - from: compile/dataset_entries.json
+    to: snippets/dataset_entries.json
+
+  - from: run_summary.yaml
+    to: snippets/run_summary.yaml

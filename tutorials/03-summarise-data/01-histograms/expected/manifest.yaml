@@ -1,0 +1,3 @@
+items:
+  - from: artifacts/histograms/manifest.json
+    to: snippets/histograms.manifest.json

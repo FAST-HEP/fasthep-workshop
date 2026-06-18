@@ -46,3 +46,6 @@ Look at:
 - `build/tutorials/03-summarise-data/02-render-histograms/run_summary.yaml`
 
 The plot output is the rendered view of the histogram product.
+
+The curated fixture in `expected/plots/DiMuonMass.png` keeps the rendered
+example image used by the documentation.

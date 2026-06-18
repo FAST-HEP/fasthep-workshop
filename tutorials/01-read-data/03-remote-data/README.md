@@ -58,3 +58,6 @@ Look at:
 - `build/tutorials/01-read-data/03-remote-data/compile/plan.yaml`
 - `build/tutorials/01-read-data/03-remote-data/reports/schema/`
 - `build/tutorials/01-read-data/03-remote-data/run_summary.yaml`
+
+The curated fixture in `expected/snippets/` captures the resolved remote dataset
+entry and a compact run summary.

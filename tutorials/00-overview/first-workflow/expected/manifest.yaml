@@ -1,0 +1,6 @@
+items:
+  - from: artifacts/plots/MuonPt.png
+    to: plots/MuonPt.png
+
+  - from: artifacts/histograms/manifest.json
+    to: snippets/histograms.manifest.json
