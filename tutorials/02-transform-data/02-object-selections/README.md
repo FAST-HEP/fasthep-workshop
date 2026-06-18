@@ -65,10 +65,3 @@ and after the selection.
 
 `SelectDimuonEvents.json` has the full information about the order of cuts as well as the number of events going into and out of a cut.
 Later we will see how to make these more human-readable.
-
----
-
-## Next steps
-
-Previous: {doc}`01. Derived Columns </tutorials/02-transform-data/01-derived-columns>`  
-Next: {doc}`03. Project Fields </tutorials/02-transform-data/03-project-fields>`

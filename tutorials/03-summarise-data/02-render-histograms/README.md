@@ -46,10 +46,3 @@ Look at:
 - `build/tutorials/03-summarise-data/02-render-histograms/run_summary.yaml`
 
 The plot output is the rendered view of the histogram product.
-
----
-
-## Next steps
-
-Previous: {doc}`01. Histograms </tutorials/03-summarise-data/01-histograms>`  
-Next: {doc}`03. Two-Dimensional Histograms </tutorials/03-summarise-data/03-two-dimensional-histograms>`

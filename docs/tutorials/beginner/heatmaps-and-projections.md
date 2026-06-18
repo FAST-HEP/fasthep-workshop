@@ -1,1 +1,0 @@
-# Heatmaps and Projections

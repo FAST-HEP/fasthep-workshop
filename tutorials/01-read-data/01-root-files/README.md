@@ -56,9 +56,3 @@ Look at:
 FAST-HEP resolved the dataset entry, read selected branches from the ROOT tree
 with the `root_tree` source, and ran a schema observer on the resulting event
 stream. No selections, histograms, skims, or distributed execution are used here.
-
----
-
-## Next steps
-
-Next: {doc}`02. Datasets </tutorials/01-read-data/02-datasets>`

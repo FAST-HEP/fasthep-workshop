@@ -44,10 +44,3 @@ pixi run fasthep run tutorials/01-read-data/02-datasets/author.yaml --outdir bui
 
 Compare the schema report and `compile/dataset_entries.json` with the previous
 tutorial. The workflow still only reads data and records schema information.
-
----
-
-## Next steps
-
-Previous: {doc}`01. ROOT Files </tutorials/01-read-data/01-root-files>`  
-Next: {doc}`03. Remote Data </tutorials/01-read-data/03-remote-data>`

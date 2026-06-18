@@ -58,9 +58,3 @@ Look at:
 - `build/tutorials/01-read-data/03-remote-data/compile/plan.yaml`
 - `build/tutorials/01-read-data/03-remote-data/reports/schema/`
 - `build/tutorials/01-read-data/03-remote-data/run_summary.yaml`
-
----
-
-## Next steps
-
-Previous: {doc}`02. Datasets </tutorials/01-read-data/02-datasets>`

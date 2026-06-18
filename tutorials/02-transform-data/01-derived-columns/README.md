@@ -75,9 +75,3 @@ Look at:
 - `build/tutorials/02-transform-data/01-derived-columns/run_summary.yaml`
 
 The schema snapshots show where the new derived fields enter the stream.
-
----
-
-## Next steps
-
-Next: {doc}`02. Object Selections </tutorials/02-transform-data/02-object-selections>`

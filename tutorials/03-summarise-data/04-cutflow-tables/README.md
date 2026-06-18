@@ -56,9 +56,3 @@ Look at:
 The JSON representation, such as `SelectDimuonEvents.json`, is intended for
 machines and automation. Later tutorials will show alternative human-readable
 presentations.
-
----
-
-## Next steps
-
-Previous: {doc}`03. Two-Dimensional Histograms </tutorials/03-summarise-data/03-two-dimensional-histograms>`

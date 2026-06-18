@@ -58,9 +58,3 @@ Look at:
 
 The histogram artifact is a machine-readable product that later render stages
 can turn into plots.
-
----
-
-## Next steps
-
-Next: {doc}`02. Render Histograms </tutorials/03-summarise-data/02-render-histograms>`

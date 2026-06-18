@@ -59,9 +59,3 @@ Look at:
 
 The schema snapshots show the original remote branches and the added
 `analysis_trigger` alias. Note that by default only used branches are loaded.
-
----
-
-## Next steps
-
-Previous: {doc}`02. Object Selections </tutorials/02-transform-data/02-object-selections>`
