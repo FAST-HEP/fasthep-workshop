@@ -1,0 +1,17 @@
+{
+  "label": "NIsolatedMuon >= 2",
+  "selection": "dimuon_candidates",
+  "stats": [
+    {
+      "dataset": "data",
+      "n_in": 469384.0,
+      "n_out": 16208.0,
+      "n_unweighted_in": 469384,
+      "n_unweighted_out": 16208,
+      "sumw2_in": 469384.0,
+      "sumw2_out": 16208.0,
+      "sumw_in": 469384.0,
+      "sumw_out": 16208.0
+    }
+  ]
+}

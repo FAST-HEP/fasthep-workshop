@@ -129,6 +129,18 @@ pixi run fasthep run tutorials/00-overview/first-workflow/author.yaml
 
 See the tutorial README for expected outputs and explanations.
 
+## Expected Tutorial Outputs
+
+Expected tutorial outputs are documentation fixtures, not full build snapshots.
+They are synced with per-tutorial `expected/manifest.yaml` files:
+
+```bash
+pixi run python scripts/sync_expected.py tutorials/03-summarise-data/04-cutflow-tables --build build/tutorials/03-summarise-data/04-cutflow-tables
+```
+
+Manifests copy only curated outputs such as plots, small tables, and compact
+JSON snippets into `expected/`.
+
 ## Example Data
 
 Several tutorials use small CMS datasets based on the classic Z → μμ analysis.
