@@ -1,0 +1,3 @@
+styles:
+  event_selection_cutflow:
+    op: hep.render.cutflow_csv

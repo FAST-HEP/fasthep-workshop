@@ -44,6 +44,25 @@ TRANSFORM_DATA_TUTORIAL_AUTHOR_PATHS = [
     / "author.yaml",
 ]
 
+SUMMARISE_DATA_TUTORIAL_AUTHOR_PATHS = [
+    WORKSHOP_ROOT / "tutorials" / "03-summarise-data" / "histograms" / "author.yaml",
+    WORKSHOP_ROOT
+    / "tutorials"
+    / "03-summarise-data"
+    / "render-histograms"
+    / "author.yaml",
+    WORKSHOP_ROOT
+    / "tutorials"
+    / "03-summarise-data"
+    / "two-dimensional-histograms"
+    / "author.yaml",
+    WORKSHOP_ROOT
+    / "tutorials"
+    / "03-summarise-data"
+    / "cutflow-tables"
+    / "author.yaml",
+]
+
 
 @pytest.mark.parametrize("author_path", AUTHOR_PATHS)
 def test_author_yaml_parses(author_path: Path) -> None:
@@ -128,6 +147,18 @@ def test_transform_data_tutorials_compile(author_path: Path, tmp_path: Path) -> 
     read_node = next(node for node in plan.nodes if node.id == "read.events")
     assert read_node.impl == "root_tree"
     assert "hep.schema_snapshot" in plan.registry["observers"]
+
+
+@pytest.mark.parametrize("author_path", SUMMARISE_DATA_TUTORIAL_AUTHOR_PATHS)
+def test_summarise_data_tutorials_compile(author_path: Path, tmp_path: Path) -> None:
+    plan = compile_author_file(
+        author_path,
+        outdir=tmp_path / author_path.parent.name,
+    )
+
+    read_node = next(node for node in plan.nodes if node.id == "read.events")
+    assert read_node.impl == "root_tree"
+    assert "hep.hist" in plan.registry["transforms"]
 
 
 def test_runtime_smoke_runs_end_to_end(

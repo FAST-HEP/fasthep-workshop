@@ -1,0 +1,54 @@
+version: 1.0
+
+include:
+  - datasets.yaml
+  - styles.yaml
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_curator:registry
+    - fasthep_curator:default_context
+    - fasthep_curator:runtime_diagnostics
+    - fasthep_workshop:registry
+
+data:
+  defaults:
+    eventtype: mc
+    tree_primary: events
+
+sources:
+  events:
+    kind: root_tree
+    tree: events
+    stream_type: event_stream
+    branches:
+      - EventWeight
+      - Muon_Px
+      - Muon_Py
+      - Muon_Pz
+      - Muon_E
+      - Muon_Iso
+
+analysis:
+  stages:
+    - id: BasicVars
+      op: hep.define
+      params:
+        variables:
+          - {name: Muon_Pt, expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"}
+          - {name: IsoMuon_Idx, expr: "(Muon_Iso / Muon_Pt) < 0.10"}
+
+    - id: DiMuons
+      op: hep.di_object_mass
+      params: {collection: Muon, mask: IsoMuon_Idx}
+
+    - id: DiMuonMass
+      op: hep.hist
+      params:
+        dataset_axis: true
+        storage: weighted
+        axes:
+          - {name: dimu_mass, source: DiMuon_Mass, type: regular, bins: {low: 60, high: 120, nbins: 60}}
+        weight_expr: EventWeight

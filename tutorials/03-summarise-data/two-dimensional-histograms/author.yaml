@@ -1,0 +1,56 @@
+version: 1.0
+
+include:
+  - datasets.yaml
+  - styles.yaml
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_curator:registry
+    - fasthep_curator:default_context
+    - fasthep_curator:runtime_diagnostics
+    - fasthep_render:registry
+    - fasthep_workshop:registry
+
+data:
+  defaults:
+    eventtype: mc
+    tree_primary: events
+
+sources:
+  events:
+    kind: root_tree
+    tree: events
+    stream_type: event_stream
+    branches:
+      - EventWeight
+      - NMuon
+      - Muon_Px
+      - Muon_Py
+      - Muon_Iso
+
+analysis:
+  stages:
+    - id: BasicVars
+      op: hep.define
+      params:
+        variables:
+          - {name: Muon_Pt, expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"}
+          - {name: IsoMuon_Idx, expr: "(Muon_Iso / Muon_Pt) < 0.10"}
+          - {name: NIsoMuon, reduce: {op: count_nonzero, over: IsoMuon_Idx}}
+
+    - id: NumberMuons
+      op: hep.hist
+      params:
+        dataset_axis: true
+        storage: weighted
+        axes:
+          - {name: nMuons, type: regular, source: NMuon, bins: {low: 0, high: 5, nbins: 6}}
+          - {name: nIsoMuons, type: regular, source: NIsoMuon, bins: {low: 0, high: 5, nbins: 6}}
+        weight_expr: EventWeight
+      render:
+        - {style: n_muons_heatmap, when: final, out: "NumberMuons_heatmap"}
+        - {style: n_muons_proj_x, when: final, out: "NumberMuons_proj_nMuons.png"}
+        - {style: n_muons_proj_y, when: final, out: "NumberMuons_proj_nIsoMuons.png"}
