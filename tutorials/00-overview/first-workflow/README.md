@@ -1,36 +1,60 @@
-# First workflow
+# First Workflow
 
-This tutorial introduces the smallest useful FAST-HEP workflow:
+> Part 1 of 1 in **Overview**
+>
+> ▶ 01. First Workflow
+
+This tutorial shows a complete FAST-HEP workflow from start to finish.
+
+You are **not expected to understand every detail yet**.
+
+The goal is to see the entire analysis pipeline once before we explore each piece in dedicated tutorials.
+
+By the end of this page, you will have run a workflow that:
 
 ```text
-toy source → derived variable → histogram → plot
+toy data
+→ derived quantity
+→ histogram
+→ plot
 ```
 
-The workflow uses the workshop toy source to generate event data, derives a new muon transverse momentum variable, fills a histogram, and renders the result as a PNG plot.
+and produced a publication-style analysis output with only a small amount of YAML.
 
 ## What this tutorial demonstrates
 
-You will see how to:
+This workflow includes:
 
-- load FAST-HEP profiles
-- define datasets
-- configure a source
-- define a derived variable
-- fill a histogram
-- render a plot (PNG)
+* a dataset definition
+* a data source
+* a derived variable
+* a histogram
+* a rendered plot
 
-## Files
+The following tutorials explain each concept individually.
+
+- {doc}`ROOT Files </tutorials/01-read-data/01-root-files>`
+- {doc}`Datasets </tutorials/01-read-data/02-datasets>`
+- {doc}`Remote Data </tutorials/01-read-data/03-remote-data>`
+- {doc}`Derived Columns </tutorials/02-transform-data/01-derived-columns>`
+- {doc}`Object Selections </tutorials/02-transform-data/02-object-selections>`
+- {doc}`Histograms </tutorials/03-summarise-data/01-histograms>`
+- {doc}`Render Histograms </tutorials/03-summarise-data/02-render-histograms>`
+
+The tutorials listed above cover the building blocks needed to understand this workflow. 
+
+As you progress through the workshop you will encounter many additional topics, including remote data access, skimming, systematics, distributed execution, GPU acceleration, and complete public analysis records.
+
+## Tutorial files
 
 ```text
 tutorials/00-overview/first-workflow/
 ├── author.yaml
 ├── README.md
-├── expected/
-├── assets/
-└── build/
+└── expected/
 ```
 
-The main workflow file is:
+The workflow itself is defined in:
 
 ```text
 author.yaml
@@ -41,7 +65,7 @@ author.yaml
 This workflow:
 
 1. generates toy events
-2. derives a new variable
+2. computes a derived variable
 3. fills a histogram
 4. renders a plot
 
@@ -57,403 +81,124 @@ flowchart TD
   stage_MuonPt -->|hist -> target| render_MuonPt_0
 ```
 
-FAST-HEP workflows are compiled into dependency-aware execution graphs.
+FAST-HEP compiles workflows into dependency-aware execution graphs.
 
-In this tutorial:
+You do not need to understand every node in this graph yet.
 
-- the source generates toy events
-- a transform derives `Muon_Pt`
-- another transform fills a histogram
-- a rendering sink produces a PNG plot
+For now, the important idea is that data flows through a series of operations:
 
-The graph above is generated from the workflow definition and shows how data and artifacts flow between operations.
+```text
+source
+→ transform
+→ summarise
+→ render
+```
+
+The remainder of the workshop explores each of these steps separately.
 
 ## The workflow file
 
-The workflow is defined in:
+FAST-HEP workflows are declarative.
 
-```text
-author.yaml
-```
+Rather than writing explicit event loops, you describe:
 
-FAST-HEP workflows are declarative:
+* what data should be processed
+* which quantities should be computed
+* which outputs should be produced
 
-- you describe what should happen
-- FAST-HEP determines how to execute it
+FAST-HEP then builds an execution plan automatically.
 
-The workflow is organised into sections.
-
----
-
-## Profiles
-
-The workflow begins by loading profiles:
-
-```yaml
-use:
-  profiles:
-    - registry
-    - fasthep_carpenter:registry
-    - fasthep_render:registry
-    - fasthep_workshop:registry
-```
-
-Profiles register operations, sources, sinks, hooks, and rendering behavior.
-
-In this workflow:
-
-| Profile | Purpose |
-|---|---|
-| `registry` | core FAST-HEP workflow runtime |
-| `fasthep_carpenter:registry` | transforms and histogramming |
-| `fasthep_render:registry` | rendering and plotting |
-| `fasthep_workshop:registry` | tutorial toy source |
-
-```{note}
-The first profile, `registry`, is the built-in FAST-HEP workflow registry.
-
-In future user-facing presets such as `workshop` or `hep-default` may hide these details in `author.yaml`, while the fully resolved profiles remain visible in generated plans.
-```
-
-See also:
-
-- FAST-HEP concepts: profiles and registries
-- `fasthep-flow` documentation
-
----
-
-## Datasets
-
-The workflow defines a dataset:
-
-```yaml
-data:
-  datasets:
-    - name: toy
-      eventtype: mc
-      files:
-        - toy://dy
-```
-
-Datasets describe logical analysis inputs.
-
-In this tutorial:
-
-```text
-toy://dy
-```
-
-is a virtual dataset URI interpreted by the workshop toy source.
-
-```{note}
-`toy://dy` is not a physical file.
-
-The workshop toy source interprets this URI internally to generate deterministic synthetic events for tutorials.
-```
-
-This allows tutorials to run without downloading external datasets.
-
----
-
-## Sources
-
-The workflow then defines a source:
-
-```yaml
-sources:
-  events:
-    kind: workshop.toy_source
-```
-
-Sources introduce data streams into workflows.
-
-In this case:
-
-```text
-workshop.toy_source
-```
-
-generates synthetic event data containing:
-
-- muons
-- jets
-- event weights
-- trigger decisions
-- missing transverse energy
-
-The source produces an event stream called:
-
-```text
-events
-```
-
-which downstream operations consume.
-
----
-
-## Transforms
-
-The workflow derives a new variable:
-
-```yaml
-- id: BasicVars
-  op: hep.define
-  params:
-    variables:
-      - name: Muon_Pt
-        expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"
-```
-
-This transform computes:
-
-```text
-Muon_Pt
-```
-
-from:
-
-```text
-Muon_Px
-Muon_Py
-```
-
-```{note}
-FAST-HEP describes what should be computed rather than explicitly writing event loops.
-
-The workflow engine determines execution order and dependencies automatically.
-```
-
-See also:
-
-- FAST-HEP concepts: workflow language
-- `fasthep-flow` documentation
-
----
-
-## Histogramming
-
-The next stage fills a histogram:
-
-```yaml
-- id: MuonPt
-  op: hep.hist
-  params:
-    axes:
-      - name: Muon_Pt
-        source: Muon_Pt
-        type: regular
-        bins:
-          low: 0
-          high: 120
-          nbins: 60
-```
-
-This operation:
-
-- reads the derived `Muon_Pt`
-- fills histogram bins
-- produces a histogram artifact
-
-The histogram configuration specifies:
-
-- histogram axes
-- binning
-- ranges
-- weighting behavior
-
-In this tutorial the histogram is unweighted.
-
----
-
-## Rendering
-
-The histogram is then rendered as a PNG plot:
-
-```yaml
-render:
-  style: muon_pt
-```
-which references this style:
-```yaml
-styles:
-  muon_pt:
-    op: hep.render.hist1d
-    figure:
-      size: [8, 6]
-      dpi: 150
-    axes:
-      x:
-        name: Muon_Pt
-        label: "Muon $p_T$ [GeV]"
-        limits: [0, 120]
-      y:
-        name: events
-        label: "Events"
-        scale: linear
-```
-
-Rendering is separated from histogram creation.
-
-This allows:
-
-- plots to be regenerated independently
-- rendering styles to be reused
-- visual appearance to evolve separately from analysis logic
-
-The render sink uses:
-
-```text
-hep.render.hist1d
-```
-
-to generate the final output image.
-
----
+The complete workflow is shown at the end of this tutorial.
 
 ## Run the tutorial
 
-From the `fasthep-workshop` repository root:
+From the repository root:
 
 ```bash
 pixi run fasthep run tutorials/00-overview/first-workflow/author.yaml \
-  --outdir tutorials/00-overview/first-workflow/build
+  --outdir build/tutorials/00-overview/first-workflow
 ```
 
-The output plot should be written under `build/artifacts/plots/`.
+## Inspect the outputs
 
-## Expected output
-
-After running, inspect:
+The workflow produces outputs under:
 
 ```text
-tutorials/00-overview/first-workflow/build/
+build/tutorials/00-overview/first-workflow/
 ```
 
-The main expected output is:
+The most important directories are:
 
 ```text
-├── artifacts
-│   ├── histograms
-│   │   ├── MuonPt.pkl
-│   │   └── manifest.json
-│   └── plots
-│       └── MuonPt.png
-├── compile
-│   ├── analysis.ir.yaml
-│   ├── dataset_entries.json
-│   ├── deps.yaml
-│   ├── normalized.yaml
-│   ├── plan.yaml
-│   └── report.compile.yaml
-├── graph
-│   ├── graph.dot
-│   ├── graph.json
-│   └── graph.mmd
-├── render
-│   ├── report.render.json
-│   └── specs
-│       └── render_MuonPt_0.yaml
-├── reports
-│   ├── diagnostics
-│   ├── provenance
-│   └── schema
-├── debug
+build/tutorials/00-overview/first-workflow/
+├── artifacts/
+├── compile/
+├── graph/
+├── reports/
 └── run_summary.yaml
 ```
 
-User-facing products are under `artifacts/`, including persisted histogram
-products in `artifacts/histograms/` and rendered plots in `artifacts/plots/`.
-Compiler products are under `compile/`, graph exports under `graph/`, render
-metadata under `render/`, and structured reports under `reports/`.
+* `artifacts/` contains user-facing outputs such as plots and histograms
+* `compile/` contains compiler products and execution plans
+* `graph/` contains workflow visualisations
+* `reports/` contains diagnostics and metadata
+* `run_summary.yaml` summarises the workflow execution
 
-You can compare your generated output against:
+## Expected outputs
+
+A curated set of expected outputs is provided in:
 
 ```text
 tutorials/00-overview/first-workflow/expected/
 ```
 
-## Full workflow
+These files highlight the most important results from the workflow without including the entire build directory.
 
-```yaml
-version: 1.0
+### Plot
 
-use:
-  profiles:
-    - registry
-    - fasthep_carpenter:registry
-    - fasthep_render:registry
-    - fasthep_workshop:registry
+The workflow produces a histogram of the derived muon transverse momentum.
 
-data:
-  datasets:
-    - name: toy
-      eventtype: mc
-      files:
-        - toy://dy
+```{figure} /_static/_generated/tutorials/00-overview/first-workflow/plots/MuonPt.png
+:alt: Muon transverse momentum histogram
+:width: 420px
+:target: /_static/_generated/tutorials/00-overview/first-workflow/plots/MuonPt.png
 
-sources:
-  events:
-    kind: workshop.toy_source
-    stream_type: event_stream
-
-styles:
-  muon_pt:
-    op: hep.render.hist1d
-    figure:
-      size: [8, 6]
-      dpi: 150
-    axes:
-      x:
-        name: Muon_Pt
-        label: "Muon $p_T$ [GeV]"
-        limits: [0, 120]
-      y:
-        name: events
-        label: "Events"
-
-analysis:
-  stages:
-    - id: BasicVars
-      op: hep.define
-      params:
-        variables:
-          - name: Muon_Pt
-            expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"
-
-    - id: MuonPt
-      op: hep.hist
-      params:
-        axes:
-          - name: Muon_Pt
-            source: Muon_Pt
-            type: regular
-            bins:
-              low: 0
-              high: 120
-              nbins: 60
-      render:
-        style: muon_pt
-        when: final
-        out: MuonPt.png
+Expected `MuonPt.png` plot produced by this tutorial.
 ```
 
-## What to try next
+### Histogram metadata
 
-Try changing:
+The expected directory also contains a small histogram manifest (`expected/snippets/histograms.manifest.json`):
 
-- the number of events
-- the histogram range
-- the number of bins
-- the render style
-- the random seed
+```{literalinclude} /_static/_generated/tutorials/00-overview/first-workflow/snippets/histograms.manifest.json
+:language: json
+```
 
-Then rerun the workflow and compare the output.
+This demonstrates how histogram products are recorded and tracked.
 
-## Curated expected output
+Your generated outputs should look similar, although exact values may vary slightly between environments and package versions.
 
-A small documentation fixture is kept in `expected/plots/MuonPt.png`, with the
-matching histogram manifest in `expected/snippets/`.
+## Full workflow
 
-## Next tutorial
+:::{dropdown} Show `author.yaml`
+```{literalinclude} ../../../tutorials/00-overview/first-workflow/author.yaml
+:language: yaml
+```
+:::
 
-The next tutorial adds a selection step and shows how cuts affect the resulting histogram.
+## What happens next?
+
+This tutorial showed the complete workflow all at once.
+
+The rest of the workshop introduces each concept separately:
+
+1. reading data
+2. transforming data
+3. creating histograms
+4. rendering outputs
+
+one step at a time.
+
+Continue with {doc}`tutorials/01-read-data/01-root-files </tutorials/01-read-data/01-root-files>`
+
+which introduces the first real analysis input: ROOT files.
