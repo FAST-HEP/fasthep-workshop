@@ -1,5 +1,11 @@
 # Project fields
 
+> Part 3 of 3 in **Transform Data**
+>
+> ✓ 01. Derived Columns  
+> ✓ 02. Object Selections  
+> ▶ 03. Project Fields
+
 This tutorial reads one public CMS Open Data NanoAOD file directly over XRootD
 and aliases a long technical branch name to an analysis-facing field name.
 
@@ -41,15 +47,21 @@ added to the event stream.
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/02-transform-data/project-fields/author.yaml --outdir build/tutorials/02-transform-data/project-fields
+pixi run fasthep run tutorials/02-transform-data/03-project-fields/author.yaml --outdir build/tutorials/02-transform-data/03-project-fields
 ```
 
 ## 4. Inspect the outputs
 
 Look at:
 
-- `build/tutorials/02-transform-data/project-fields/reports/schema/`
-- `build/tutorials/02-transform-data/project-fields/run_summary.yaml`
+- `build/tutorials/02-transform-data/03-project-fields/reports/schema/`
+- `build/tutorials/02-transform-data/03-project-fields/run_summary.yaml`
 
 The schema snapshots show the original remote branches and the added
 `analysis_trigger` alias. Note that by default only used branches are loaded.
+
+---
+
+## Next steps
+
+Previous: {doc}`02. Object Selections </tutorials/02-transform-data/02-object-selections>`

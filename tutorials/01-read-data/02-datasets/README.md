@@ -1,5 +1,11 @@
 # Datasets
 
+> Part 2 of 3 in **Read Data**
+>
+> ✓ 01. ROOT Files  
+> ▶ 02. Datasets  
+> ○ 03. Remote Data
+
 This tutorial extends the ROOT-file reader example to two datasets.
 
 ## 1. Reuse the downloaded files
@@ -31,10 +37,17 @@ can use for grouping. `eventtype` separates data from simulated samples.
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/01-read-data/datasets/author.yaml --outdir build/tutorials/01-read-data/datasets
+pixi run fasthep run tutorials/01-read-data/02-datasets/author.yaml --outdir build/tutorials/01-read-data/02-datasets
 ```
 
 ## 4. Inspect the outputs
 
 Compare the schema report and `compile/dataset_entries.json` with the previous
 tutorial. The workflow still only reads data and records schema information.
+
+---
+
+## Next steps
+
+Previous: {doc}`01. ROOT Files </tutorials/01-read-data/01-root-files>`  
+Next: {doc}`03. Remote Data </tutorials/01-read-data/03-remote-data>`

@@ -3,7 +3,7 @@
 ```{toctree}
 :maxdepth: 1
 
-root-files/README
-datasets/README
-remote-data/README
+01-root-files/README
+02-datasets/README
+03-remote-data/README
 ```

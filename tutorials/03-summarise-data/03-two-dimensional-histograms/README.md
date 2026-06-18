@@ -1,5 +1,12 @@
 # Two-dimensional histograms
 
+> Part 3 of 4 in **Summarise Data**
+>
+> ✓ 01. Histograms  
+> ✓ 02. Render Histograms  
+> ▶ 03. Two-Dimensional Histograms  
+> ○ 04. Cutflow Tables
+
 This tutorial fills and renders a 2D histogram of the number of muons versus the
 number of isolated muons.
 
@@ -33,14 +40,21 @@ plot.
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/03-summarise-data/two-dimensional-histograms/author.yaml --outdir build/tutorials/03-summarise-data/two-dimensional-histograms
+pixi run fasthep run tutorials/03-summarise-data/03-two-dimensional-histograms/author.yaml --outdir build/tutorials/03-summarise-data/03-two-dimensional-histograms
 ```
 
 ## 4. Inspect the outputs
 
 Look at:
 
-- `build/tutorials/03-summarise-data/two-dimensional-histograms/artifacts/histograms/`
-- `build/tutorials/03-summarise-data/two-dimensional-histograms/artifacts/plots/`
-- `build/tutorials/03-summarise-data/two-dimensional-histograms/render/`
-- `build/tutorials/03-summarise-data/two-dimensional-histograms/run_summary.yaml`
+- `build/tutorials/03-summarise-data/03-two-dimensional-histograms/artifacts/histograms/`
+- `build/tutorials/03-summarise-data/03-two-dimensional-histograms/artifacts/plots/`
+- `build/tutorials/03-summarise-data/03-two-dimensional-histograms/render/`
+- `build/tutorials/03-summarise-data/03-two-dimensional-histograms/run_summary.yaml`
+
+---
+
+## Next steps
+
+Previous: {doc}`02. Render Histograms </tutorials/03-summarise-data/02-render-histograms>`  
+Next: {doc}`04. Cutflow Tables </tutorials/03-summarise-data/04-cutflow-tables>`

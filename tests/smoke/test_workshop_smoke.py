@@ -21,45 +21,45 @@ AUTHOR_PATHS = [
 ]
 
 READ_DATA_TUTORIAL_AUTHOR_PATHS = [
-    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "root-files" / "author.yaml",
-    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "datasets" / "author.yaml",
-    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "remote-data" / "author.yaml",
+    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "01-root-files" / "author.yaml",
+    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "02-datasets" / "author.yaml",
+    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "03-remote-data" / "author.yaml",
 ]
 
 TRANSFORM_DATA_TUTORIAL_AUTHOR_PATHS = [
     WORKSHOP_ROOT
     / "tutorials"
     / "02-transform-data"
-    / "derived-columns"
+    / "01-derived-columns"
     / "author.yaml",
     WORKSHOP_ROOT
     / "tutorials"
     / "02-transform-data"
-    / "object-selections"
+    / "02-object-selections"
     / "author.yaml",
     WORKSHOP_ROOT
     / "tutorials"
     / "02-transform-data"
-    / "project-fields"
+    / "03-project-fields"
     / "author.yaml",
 ]
 
 SUMMARISE_DATA_TUTORIAL_AUTHOR_PATHS = [
-    WORKSHOP_ROOT / "tutorials" / "03-summarise-data" / "histograms" / "author.yaml",
+    WORKSHOP_ROOT / "tutorials" / "03-summarise-data" / "01-histograms" / "author.yaml",
     WORKSHOP_ROOT
     / "tutorials"
     / "03-summarise-data"
-    / "render-histograms"
+    / "02-render-histograms"
     / "author.yaml",
     WORKSHOP_ROOT
     / "tutorials"
     / "03-summarise-data"
-    / "two-dimensional-histograms"
+    / "03-two-dimensional-histograms"
     / "author.yaml",
     WORKSHOP_ROOT
     / "tutorials"
     / "03-summarise-data"
-    / "cutflow-tables"
+    / "04-cutflow-tables"
     / "author.yaml",
 ]
 

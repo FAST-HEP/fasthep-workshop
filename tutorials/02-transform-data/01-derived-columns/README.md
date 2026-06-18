@@ -1,5 +1,11 @@
 # Derived columns
 
+> Part 1 of 3 in **Transform Data**
+>
+> ▶ 01. Derived Columns  
+> ○ 02. Object Selections  
+> ○ 03. Project Fields
+
 This tutorial reads the small local Z &rarr; $\mu\mu$ ROOT files and adds a few
 derived quantities to the event stream.
 
@@ -56,16 +62,22 @@ These three variables, `Muon_Pt`, `IsolatedMuon`, and `NIsolatedMuon`, are then 
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/02-transform-data/derived-columns/author.yaml --outdir build/tutorials/02-transform-data/derived-columns
+pixi run fasthep run tutorials/02-transform-data/01-derived-columns/author.yaml --outdir build/tutorials/02-transform-data/01-derived-columns
 ```
 
 ## 4. Inspect the outputs
 
 Look at:
 
-- `build/tutorials/02-transform-data/derived-columns/compile/normalized.yaml`
-- `build/tutorials/02-transform-data/derived-columns/compile/plan.yaml`
-- `build/tutorials/02-transform-data/derived-columns/reports/schema/`
-- `build/tutorials/02-transform-data/derived-columns/run_summary.yaml`
+- `build/tutorials/02-transform-data/01-derived-columns/compile/normalized.yaml`
+- `build/tutorials/02-transform-data/01-derived-columns/compile/plan.yaml`
+- `build/tutorials/02-transform-data/01-derived-columns/reports/schema/`
+- `build/tutorials/02-transform-data/01-derived-columns/run_summary.yaml`
 
 The schema snapshots show where the new derived fields enter the stream.
+
+---
+
+## Next steps
+
+Next: {doc}`02. Object Selections </tutorials/02-transform-data/02-object-selections>`

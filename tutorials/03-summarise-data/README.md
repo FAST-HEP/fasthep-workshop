@@ -7,8 +7,8 @@ and cutflow tables.
 ```{toctree}
 :maxdepth: 1
 
-histograms/README
-render-histograms/README
-two-dimensional-histograms/README
-cutflow-tables/README
+01-histograms/README
+02-render-histograms/README
+03-two-dimensional-histograms/README
+04-cutflow-tables/README
 ```

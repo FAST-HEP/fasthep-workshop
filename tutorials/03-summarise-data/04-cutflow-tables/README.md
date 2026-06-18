@@ -1,10 +1,17 @@
 # Cutflow tables
 
+> Part 4 of 4 in **Summarise Data**
+>
+> ✓ 01. Histograms  
+> ✓ 02. Render Histograms  
+> ✓ 03. Two-Dimensional Histograms  
+> ▶ 04. Cutflow Tables
+
 This tutorial turns the dimuon event selection into a cutflow product and a
 rendered table.
 
 It uses the same selection ideas introduced in
-`tutorials/02-transform-data/object-selections`, now with `EventWeight` so the
+`tutorials/02-transform-data/02-object-selections`, now with `EventWeight` so the
 cutflow tracks weighted data/MC yields.
 
 ## 1. Inspect the selection
@@ -34,18 +41,24 @@ styles:
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/03-summarise-data/cutflow-tables/author.yaml --outdir build/tutorials/03-summarise-data/cutflow-tables
+pixi run fasthep run tutorials/03-summarise-data/04-cutflow-tables/author.yaml --outdir build/tutorials/03-summarise-data/04-cutflow-tables
 ```
 
 ## 4. Inspect the outputs
 
 Look at:
 
-- `build/tutorials/03-summarise-data/cutflow-tables/artifacts/cutflows/`
-- `build/tutorials/03-summarise-data/cutflow-tables/artifacts/tables/`
-- `build/tutorials/03-summarise-data/cutflow-tables/render/`
-- `build/tutorials/03-summarise-data/cutflow-tables/run_summary.yaml`
+- `build/tutorials/03-summarise-data/04-cutflow-tables/artifacts/cutflows/`
+- `build/tutorials/03-summarise-data/04-cutflow-tables/artifacts/tables/`
+- `build/tutorials/03-summarise-data/04-cutflow-tables/render/`
+- `build/tutorials/03-summarise-data/04-cutflow-tables/run_summary.yaml`
 
 The JSON representation, such as `SelectDimuonEvents.json`, is intended for
 machines and automation. Later tutorials will show alternative human-readable
 presentations.
+
+---
+
+## Next steps
+
+Previous: {doc}`03. Two-Dimensional Histograms </tutorials/03-summarise-data/03-two-dimensional-histograms>`

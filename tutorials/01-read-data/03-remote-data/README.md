@@ -1,5 +1,11 @@
 # Remote data
 
+> Part 3 of 3 in **Read Data**
+>
+> ✓ 01. ROOT Files  
+> ✓ 02. Datasets  
+> ▶ 03. Remote Data
+
 This tutorial reads one public CMS Open Data ROOT file directly over XRootD.
 No local ROOT file is downloaded.
 
@@ -37,7 +43,7 @@ make histograms, skim events, or use distributed execution.
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/01-read-data/remote-data/author.yaml --outdir build/tutorials/01-read-data/remote-data
+pixi run fasthep run tutorials/01-read-data/03-remote-data/author.yaml --outdir build/tutorials/01-read-data/03-remote-data
 ```
 
 XRootD support is required in the runtime environment. If the command fails
@@ -48,7 +54,13 @@ Uproot/XRootD support and network access.
 
 Look at:
 
-- `build/tutorials/01-read-data/remote-data/compile/normalized.yaml`
-- `build/tutorials/01-read-data/remote-data/compile/plan.yaml`
-- `build/tutorials/01-read-data/remote-data/reports/schema/`
-- `build/tutorials/01-read-data/remote-data/run_summary.yaml`
+- `build/tutorials/01-read-data/03-remote-data/compile/normalized.yaml`
+- `build/tutorials/01-read-data/03-remote-data/compile/plan.yaml`
+- `build/tutorials/01-read-data/03-remote-data/reports/schema/`
+- `build/tutorials/01-read-data/03-remote-data/run_summary.yaml`
+
+---
+
+## Next steps
+
+Previous: {doc}`02. Datasets </tutorials/01-read-data/02-datasets>`
