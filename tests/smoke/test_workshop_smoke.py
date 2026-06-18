@@ -179,3 +179,33 @@ def test_runtime_smoke_runs_end_to_end(
     assert (outdir / "compile" / "plan.yaml").exists()
     assert (outdir / "run_summary.yaml").exists()
     assert any((outdir / "artifacts" / "plots").rglob("*.png"))
+
+
+def test_transform_derived_columns_tutorial_runs_with_event_arrays(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    if not (WORKSHOP_ROOT / "data" / "CMS" / "Zmumu" / "data.root").exists():
+        pytest.skip("local CMS/Zmumu tutorial data is not installed")
+
+    monkeypatch.chdir(WORKSHOP_ROOT)
+
+    outdir = tmp_path / "02-transform-data" / "01-derived-columns"
+    result = run_author_file(
+        WORKSHOP_ROOT
+        / "tutorials"
+        / "02-transform-data"
+        / "01-derived-columns"
+        / "author.yaml",
+        outdir=outdir,
+    )
+
+    assert result.success
+    summary = yaml.safe_load((outdir / "run_summary.yaml").read_text(encoding="utf-8"))
+    output_types = {
+        item["type"]
+        for partition in summary["partitions"]
+        for item in partition["outputs"]
+        if item["node"] == "read.events"
+    }
+    assert output_types == {"Array"}

@@ -24,7 +24,7 @@ partitions:
     type: OutputResult
   - node: read.events
     port: stream
-    type: Array
+    type: RootTreeSchema
 warnings: []
 hooks:
   enabled:
