@@ -1,0 +1,33 @@
+{
+  "awkward_type": {
+    "EventWeight": "float",
+    "Muon_Px": "float[]",
+    "Muon_Py": "float[]",
+    "Muon_Pz": "float[]",
+    "NMuon": "int32_t"
+  },
+  "entry_count": 1000,
+  "envelope": {
+    "unwrapped": false
+  },
+  "fields": [
+    "NMuon",
+    "Muon_Px",
+    "Muon_Py",
+    "Muon_Pz",
+    "EventWeight"
+  ],
+  "inspected_python_type": "RootTreeSchema",
+  "kind": "schema_snapshot",
+  "metadata": {
+    "dataset_name": "data",
+    "file": "data/CMS/Zmumu/data.root",
+    "part": "0_0",
+    "partition_id": "events__data__0",
+    "source": "events",
+    "start": null,
+    "stop": null
+  },
+  "node_id": "read.events",
+  "python_type": "RootTreeSchema"
+}

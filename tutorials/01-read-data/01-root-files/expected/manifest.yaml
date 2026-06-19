@@ -1,6 +1,6 @@
 items:
-  - from: compile/dataset_entries.json
-    to: snippets/dataset_entries.json
+  - from: reports/schema/schema/read_events/events__data__0.json
+    to: snippets/schema.json
 
   - from: run_summary.yaml
     to: snippets/run_summary.yaml
