@@ -17,7 +17,7 @@ small enough to run and inspect before moving to the next one.
 
 - [01. Derived Columns](02-transform-data/01-derived-columns/)
 - [02. Object Selections](02-transform-data/02-object-selections/)
-- [03. Project Fields](02-transform-data/03-project-fields/)
+- [03. Field Mapping](02-transform-data/03-field-mapping/)
 
 ## 03. Summarise Data
 

@@ -14,16 +14,15 @@ use:
 
 data:
   defaults:
-    eventtype: data
-    tree_primary: Events
+    tree_primary: events
 
 sources:
   events:
     kind: root_tree
-    tree: Events
+    tree: events
     stream_type: event_stream
     branches:
-      - HLT_Photon26_R9Id85_OR_CaloId24b40e_Iso50T80L_Photon16_AND_HE10_R9Id65_Eta2_Mass60
+      - triggerIsoMu24
     start: 0
     stop: 1000
 
@@ -33,7 +32,7 @@ observers:
     out: schema
 
 fields:
-  analysis_trigger: {stream: events, branch: "HLT_Photon26_R9Id85_OR_CaloId24b40e_Iso50T80L_Photon16_AND_HE10_R9Id65_Eta2_Mass60"}
+  analysis_trigger: {stream: events, branch: "triggerIsoMu24"}
 
 analysis:
   stages:

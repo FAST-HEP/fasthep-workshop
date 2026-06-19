@@ -1,0 +1,7 @@
+data:
+  datasets:
+    - name: data
+      eventtype: data
+      nevents: "469384"
+      files:
+        - data/CMS/Zmumu/data.root

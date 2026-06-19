@@ -7,7 +7,7 @@ Most High Energy Physics datasets are naturally represented as **columnar data**
 Many of these quantities are also **jagged**: one event may contain two muons, another five, and another none at all.
 FAST-HEP builds on the [Awkward Array](https://awkward-array.org/doc/main/) and [NumPy](https://numpy.org/doc/stable/) ecosystems, allowing workflows to operate naturally on variable-length collections using familiar array-oriented expressions.
 
-All available quantities can be referenced by name. As workflows grow, it is often useful to create aliases or derive new variables with more meaningful names.
+All available quantities can be referenced by name. As workflows grow, it is often useful to map dataset-specific branch names onto stable analysis-facing field names, or derive new variables with more meaningful names.
 
 FAST-HEP also provides a number of convenience functions for working with irregular event data, including operations such as selecting leading objects, handling missing values, and accessing specific entries within variable-length collections.
 
@@ -15,7 +15,7 @@ The following tutorials introduce the most common transformation operations:
 
 - [deriving new quantities](02-transform-data/01-derived-columns)
 - [selecting objects and events](02-transform-data/02-object-selections)
-- [projecting and renaming fields](02-transform-data/03-project-fields)
+- [mapping dataset fields](02-transform-data/03-field-mapping)
 
 ```{toctree}
 :maxdepth: 1
@@ -23,5 +23,5 @@ The following tutorials introduce the most common transformation operations:
 
 02-transform-data/01-derived-columns
 02-transform-data/02-object-selections
-02-transform-data/03-project-fields
+02-transform-data/03-field-mapping
 ```

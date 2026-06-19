@@ -21,11 +21,6 @@ sources:
     kind: root_tree
     tree: events
     stream_type: event_stream
-    branches:
-      - NMuon
-      - Muon_Px
-      - Muon_Py
-      - Muon_Iso
 
 observers:
   - kind: hep.schema_snapshot

@@ -30,12 +30,12 @@ sources:
 
 observers:
   - kind: hep.schema_snapshot
-    at: [read.events, stage.MuonObjectFlags, stage.SelectDimuonEvents]
+    at: [read.events, stage.DerivedMuonColumns, stage.SelectDimuonEvents]
     out: schema
 
 analysis:
   stages:
-    - id: MuonObjectFlags
+    - id: DerivedMuonColumns
       op: hep.define
       params:
         variables:

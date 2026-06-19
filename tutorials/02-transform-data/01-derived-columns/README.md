@@ -4,14 +4,10 @@
 >
 > ▶ 01. Derived Columns  
 > ○ 02. Object Selections  
-> ○ 03. Project Fields
+> ○ 03. Field Mapping
 
 This tutorial reads the small local Z &rarr; $\mu\mu$ ROOT files and adds a few
 derived quantities to the event stream.
-
-It does not make histograms, skim files, run systematics, or use distributed
-execution. The output to inspect is the schema report before and after the
-transform.
 
 ## 1. Inspect the dataset file
 
@@ -31,7 +27,14 @@ The data files are the same small files used by the read-data tutorials.
 
 ## 2. Inspect the transform
 
-`author.yaml` adds fields with `hep.define`:
+`author.yaml` adds fields with `hep.define`.
+The first derived quantity is the muon transverse momentum:
+
+```{math}
+p_T = \sqrt{p_x^2 + p_y^2}
+```
+
+In FAST-HEP expression syntax this becomes almost a direct translation:
 
 ```yaml
 analysis:
@@ -43,6 +46,9 @@ analysis:
           - name: Muon_Pt
             expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"
 ```
+
+The expression uses the same branch names that appear in the input data. It also follows NumPy-style syntax,
+where `** 2` means “squared” and functions such as `sqrt(...)` act on whole arrays rather than single values
 
 The same stage also defines an isolated-muon mask:
 ```yaml
@@ -67,14 +73,60 @@ pixi run fasthep run tutorials/02-transform-data/01-derived-columns/author.yaml 
 
 ## 4. Inspect the outputs
 
-Look at:
+This workflow does not list the input branches explicitly in the source.
 
-- `build/tutorials/02-transform-data/01-derived-columns/compile/normalized.yaml`
-- `build/tutorials/02-transform-data/01-derived-columns/compile/plan.yaml`
-- `build/tutorials/02-transform-data/01-derived-columns/reports/schema/`
-- `build/tutorials/02-transform-data/01-derived-columns/run_summary.yaml`
+Instead, FAST-HEP inspects the expressions in `hep.define`, works out which input quantities are needed, and includes those branches automatically.
 
-The schema snapshots show where the new derived fields enter the stream.
+In this tutorial, the derived fields require:
 
-The curated fixture in `expected/snippets/deps.yaml` shows the derived field
-origins recorded by the compiler.
+- `Muon_Px`
+- `Muon_Py`
+- `Muon_Iso`
+
+You can see this in the compiler dependency output:
+
+```
+build/tutorials/02-transform-data/01-derived-columns/compile/deps.yaml
+```
+
+The workflow also writes schema snapshots before and after the define stage:
+
+```
+build/tutorials/02-transform-data/01-derived-columns/reports/schema/read_events/events__data__0.json
+build/tutorials/02-transform-data/01-derived-columns/reports/schema/stage_DerivedMuonColumns/events__data__0.json
+```
+
+The first schema shows the stream read from the ROOT file. The second schema shows the stream after `DerivedMuonColumns` has run.
+
+The important difference is that the stream now contains three additional fields:
+
+- `Muon_Pt`
+- `IsolatedMuon`
+- `NIsolatedMuon`
+
+## Expected outputs
+
+### Inferred dependencies
+
+The dependency snippet shows that FAST-HEP recorded the input quantities required by the derived expressions.
+
+```{literalinclude} /_static/_generated/tutorials/02-transform-data/01-derived-columns/snippets/deps.yaml
+:language: yaml
+```
+This is useful because analysis authors do not need to manually keep branch lists in sync with their expressions.
+If a derived quantity uses a new input branch, FAST-HEP can include it automatically.
+
+### Schema after the define stage
+
+The schema after `DerivedMuonColumns` includes the newly created fields.
+```{literalinclude} /_static/_generated/tutorials/02-transform-data/01-derived-columns/snippets/schema_after_define.summary.json
+:language: json
+```
+
+Compare this with the source schema if you want to see exactly where the stream changes:
+
+```bash
+diff \
+  build/tutorials/02-transform-data/01-derived-columns/reports/schema/read_events/events__data__0.json \
+  build/tutorials/02-transform-data/01-derived-columns/reports/schema/stage_DerivedMuonColumns/events__data__0.json
+```

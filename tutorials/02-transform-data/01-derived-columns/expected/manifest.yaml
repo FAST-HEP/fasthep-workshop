@@ -1,3 +1,7 @@
 items:
   - from: compile/deps.yaml
     to: snippets/deps.yaml
+
+  - from: reports/schema/stage_DerivedMuonColumns/events__data__0.json
+    to: snippets/schema_after_define.summary.json
+    mode: schema_summary

@@ -40,7 +40,7 @@ TRANSFORM_DATA_TUTORIAL_AUTHOR_PATHS = [
     WORKSHOP_ROOT
     / "tutorials"
     / "02-transform-data"
-    / "03-project-fields"
+    / "03-field-mapping"
     / "author.yaml",
 ]
 
