@@ -1,0 +1,26 @@
+{
+  "datasets": {
+    "data": {
+      "files": {
+        "data/CMS/Zmumu/data.root": {
+          "by_tree": {
+            "events": 469384
+          },
+          "entries": 469384
+        }
+      },
+      "total_entries": 469384
+    },
+    "dy": {
+      "files": {
+        "data/CMS/Zmumu/dy.root": {
+          "by_tree": {
+            "events": 77729
+          },
+          "entries": 77729
+        }
+      },
+      "total_entries": 77729
+    }
+  }
+}
