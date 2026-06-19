@@ -42,6 +42,8 @@ def sync_expected_outputs(*, tutorial: Path, build: Path, dry_run: bool = False)
             copy_item(source, target)
         elif mode == "cutflow_summary":
             write_cutflow_summary(source, target)
+        elif mode == "schema_summary":
+            write_schema_summary(source, target)
         else:
             raise ValueError(f"Unsupported expected-output sync mode: {mode!r}")
 
@@ -90,6 +92,14 @@ def write_cutflow_summary(source: Path, target: Path) -> None:
     target.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
 
 
+def write_schema_summary(source: Path, target: Path) -> None:
+    _require_source(source)
+    schema = json.loads(source.read_text(encoding="utf-8"))
+    summary = schema_summary(schema)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+
+
 def cutflow_summary(cutflow: Any) -> dict[str, Any]:
     if not isinstance(cutflow, dict):
         raise ValueError("cutflow_summary expects a JSON object")
@@ -128,6 +138,42 @@ def _first_stat(stats: Any) -> dict[str, Any]:
         return {"dataset": dataset, **values}
 
     raise ValueError("cutflow_summary requires nodes[0].stats to be a list or mapping")
+
+
+def schema_summary(schema: Any, *, limit: int = 5) -> dict[str, Any]:
+    if not isinstance(schema, dict):
+        raise ValueError("schema_summary expects a JSON object")
+    if limit < 1:
+        raise ValueError("schema_summary limit must be positive")
+
+    summary: dict[str, Any] = {}
+    if "node_id" in schema:
+        summary["node_id"] = schema["node_id"]
+
+    metadata = schema.get("metadata")
+    if isinstance(metadata, dict):
+        summary["metadata"] = dict(metadata)
+
+    awkward_type = schema.get("awkward_type")
+    if awkward_type is not None:
+        if not isinstance(awkward_type, dict):
+            raise ValueError("schema_summary requires awkward_type to be a mapping")
+        summary["awkward_type"] = _limited_mapping(awkward_type, limit=limit)
+
+    inspected_python_type = schema.get("inspected_python_type")
+    if inspected_python_type is not None:
+        if not isinstance(inspected_python_type, str):
+            raise ValueError(
+                "schema_summary requires inspected_python_type to be a string"
+            )
+        summary["inspected_python_type"] = inspected_python_type
+
+    return summary
+
+
+def _limited_mapping(value: dict[Any, Any], *, limit: int) -> dict[str, Any]:
+    items = sorted((str(key), item) for key, item in value.items())
+    return dict(items[:limit])
 
 
 def _require_source(path: Path) -> None:
