@@ -26,6 +26,10 @@ selection:
     - "HasMuonAbove25"
 ```
 
+Each requirement is evaluated in sequence. FAST-HEP records how many events pass each step, producing a cutflow artifact.
+
+Unlike the earlier object-selection tutorial, this workflow applies EventWeight, so the cutflow tracks weighted data and Monte Carlo yields as well as simple event counts.
+
 ## 2. Inspect the style file
 
 `styles.yaml` keeps visual presentation separate from analysis logic. For this
@@ -37,6 +41,8 @@ styles:
   event_selection_cutflow:
     op: hep.render.cutflow_csv
 ```
+
+Just as histogram renderers convert histogram products into plots, the cutflow renderer converts a machine-readable cutflow artifact into a table that can be inspected directly or imported into other tools.
 
 ## 3. Run the workflow
 
@@ -53,9 +59,22 @@ Look at:
 - `build/tutorials/03-summarise-data/04-cutflow-tables/render/`
 - `build/tutorials/03-summarise-data/04-cutflow-tables/run_summary.yaml`
 
-The curated fixtures in `expected/` keep a compact cutflow JSON snippet and the
-small CSV table.
+The cutflow artifact records the full machine-readable selection history, including the order of cuts and the event yields after each step.
 
-The JSON representation, such as `SelectDimuonEvents.json`, is intended for
-machines and automation. Later tutorials will show alternative human-readable
-presentations.
+The rendered table is a human-readable view of the same information.
+
+As with histogram rendering, the cutflow and its presentation are kept separate. This allows the same cutflow artifact to be rendered in different formats without rerunning the analysis.
+
+## Expected outputs
+
+The compact cutflow snippet shows the selection logic and weighted yields recorded in the machine-readable artifact.
+
+```{literalinclude} /_static/_generated/tutorials/03-summarise-data/04-cutflow-tables/snippets/SelectDimuonEvents.summary.json
+:language: json
+```
+
+The CSV table is rendered from the same cutflow artifact:
+
+```{literalinclude} /_static/_generated/tutorials/03-summarise-data/04-cutflow-tables/tables/SelectDimuonEvents.csv
+:language: text
+```

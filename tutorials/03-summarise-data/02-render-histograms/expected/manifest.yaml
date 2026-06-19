@@ -4,3 +4,7 @@ items:
 
   - from: artifacts/histograms/manifest.json
     to: snippets/histograms.manifest.json
+
+  - from: render/specs/render_DiMuonMass_0.yaml
+    to: snippets/render_DiMuonMass_0.yaml
+    

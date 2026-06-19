@@ -1,0 +1,88 @@
+node_id: render.DiMuonMass.0
+impl: hep.render.data_mc
+out: null
+spec:
+  op: hep.render.data_mc
+  figure:
+    size:
+    - 12
+    - 12
+    dpi: 300
+  axes:
+    ratio:
+      name: ratio
+      label: Data/MC
+      limits:
+      - 0.5
+      - 1.5
+    x:
+      name: dimu_mass
+      label: Di-muon Mass, $M_{\mu\mu}$ [GeV/c$^{2}]$
+      limits:
+      - 60
+      - 120
+    y:
+      name: events
+      label: Events
+      scale: log
+      limits:
+      - 1e-2
+      - 1e5
+  legend:
+    loc: upper right
+    ncol: 3
+  style:
+    experiment: CMS
+    datasets:
+      data:
+        label: Data
+        color: black
+        kind: data
+      dy:
+        label: DY
+        color: yellow
+        kind: signal
+      ttbar:
+        label: $t\bar{t}$
+        color: red
+        kind: background
+      wjets:
+        label: W+jets
+        color: blue
+        kind: background
+      single_top:
+        label: Single top
+        color: green
+        kind: background
+      qcd:
+        label: QCD
+        color: orange
+        kind: background
+      ww:
+        label: WW
+        color: cyan
+        kind: background
+      wz:
+        label: WZ
+        color: magenta
+        kind: background
+      zz:
+        label: ZZ
+        color: gray
+        kind: background
+  data_mc:
+    data: data
+    signals:
+    - dy
+    backgrounds:
+    - qcd
+    - single_top
+    - ttbar
+    - wjets
+    - ww
+    - wz
+    - zz
+    stack: true
+    ratio: true
+    histtype_mc: fill
+    show_mc_uncertainty: true
