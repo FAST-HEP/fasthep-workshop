@@ -53,7 +53,7 @@ Uproot/XRootD support (`fsspec-xrootd`) and network access.
 
 Look at:
 
-- `build/tutorials/01-read-data/03-remote-data/reports/schema/schema/read_events/events__DoubleMuon__0.json`
+- `build/tutorials/01-read-data/03-remote-data/reports/schema/read_events/events__DoubleMuon__0.json`
 - `build/tutorials/01-read-data/03-remote-data/run_summary.yaml`
 
 ## Expected outputs

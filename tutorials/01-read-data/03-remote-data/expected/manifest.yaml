@@ -1,4 +1,4 @@
 items:
-  - from: reports/schema/schema/read_events/events__DoubleMuon__0.json
+  - from: reports/schema/read_events/events__DoubleMuon__0.json
     to: snippets/schema.summary.json
     mode: schema_summary

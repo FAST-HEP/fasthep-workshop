@@ -1,5 +1,5 @@
 items:
-  - from: reports/schema/schema/read_events/events__data__0.json
+  - from: reports/schema/read_events/events__data__0.json
     to: snippets/schema.json
 
   - from: run_summary.yaml
