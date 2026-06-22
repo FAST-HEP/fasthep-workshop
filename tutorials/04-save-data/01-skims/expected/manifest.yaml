@@ -10,3 +10,7 @@ items:
   - from: artifacts/cutflows/SelectDimuonEvents.json
     to: snippets/SelectDimuonEvents.summary.json
     mode: cutflow_summary
+
+  # Show the files produced by the ROOT-tree writer
+  - from: artifacts/files/dimuon_candidates/manifest.json
+    to: snippets/dimuon_candidates.manifest.json

@@ -98,6 +98,12 @@ The cutflow summary shows how many events survived the skim selection.
 :language: json
 ```
 
+Finally, the writer manifest shows you the files that have been written, their respective entries and sizes:
+
+```{literalinclude} /_static/_generated/tutorials/04-save-data/01-skims/snippets/dimuon_candidates.manifest.json
+:language: json
+```
+
 ## What you learned
 
 This tutorial introduced event skims.

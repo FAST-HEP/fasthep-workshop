@@ -1,0 +1,36 @@
+{
+  "kind": "root_tree",
+  "name": "dimuon_candidates",
+  "node_id": "write.SelectDimuonEvents.0",
+  "input_node": "stage.SelectDimuonEvents",
+  "tree": "events",
+  "total_entries": 53258,
+  "datasets": {
+    "data": {
+      "total_entries": 15995,
+      "files": [
+        {
+          "path": "artifacts/files/dimuon_candidates/data/0_0.root",
+          "dataset": "data",
+          "partition": 0,
+          "attempt": 0,
+          "entries": 15995,
+          "size_bytes": 563966
+        }
+      ]
+    },
+    "dy": {
+      "total_entries": 37263,
+      "files": [
+        {
+          "path": "artifacts/files/dimuon_candidates/dy/0_0.root",
+          "dataset": "dy",
+          "partition": 0,
+          "attempt": 0,
+          "entries": 37263,
+          "size_bytes": 1308571
+        }
+      ]
+    }
+  }
+}
