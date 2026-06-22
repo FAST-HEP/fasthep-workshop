@@ -1,0 +1,9 @@
+datasets:
+  data:
+    files:
+      - data/CMS/Zmumu/data.root
+
+  dy:
+    eventtype: mc
+    files:
+      - data/CMS/Zmumu/dy.root

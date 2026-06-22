@@ -1,0 +1,12 @@
+version: 1
+
+items:
+  # Show what is being written
+  - from: reports/schema/stage_SelectDimuonEvents/events__data__0.json
+    to: snippets/schema.summary.json
+    mode: schema_summary
+
+  # Show how many events survived
+  - from: artifacts/cutflows/SelectDimuonEvents.json
+    to: snippets/SelectDimuonEvents.summary.json
+    mode: cutflow_summary

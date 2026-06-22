@@ -1,0 +1,20 @@
+{
+  "node_id": "stage.SelectDimuonEvents",
+  "metadata": {
+    "dataset_name": "data",
+    "file": "data/CMS/Zmumu/data.root",
+    "part": "0_0",
+    "partition_id": "events__data__0",
+    "source": "events",
+    "start": null,
+    "stop": null
+  },
+  "awkward_type": {
+    "HasMuonAbove25": "bool",
+    "IsolatedMuon": "var * bool",
+    "Muon_Iso": "var * float32",
+    "Muon_Pt": "var * float32",
+    "Muon_Px": "var * float32"
+  },
+  "inspected_python_type": "Array"
+}
