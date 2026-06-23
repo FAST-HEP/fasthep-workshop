@@ -11,6 +11,7 @@
       "files": [
         {
           "path": "artifacts/files/dimuon_candidates/data/0_0.root",
+          "path_type": "relative_to_outdir",
           "dataset": "data",
           "partition": 0,
           "attempt": 0,
@@ -24,6 +25,7 @@
       "files": [
         {
           "path": "artifacts/files/dimuon_candidates/dy/0_0.root",
+          "path_type": "relative_to_outdir",
           "dataset": "dy",
           "partition": 0,
           "attempt": 0,
