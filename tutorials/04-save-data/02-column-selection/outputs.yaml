@@ -1,0 +1,25 @@
+outputs:
+  dimuon_candidates:
+    tree: events
+    keep:
+      - NJet
+      - Jet_Px
+      - Jet_Py
+      - Jet_Pz
+      - Jet_E
+      - Jet_btag
+      - Jet_ID
+
+      - NMuon
+      - Muon_Px
+      - Muon_Py
+      - Muon_Pz
+      - Muon_E
+      - Muon_Charge
+      - Muon_Iso
+
+      - Muon_Pt
+      - IsolatedMuon
+      - NIsolatedMuon
+      - HasMuonAbove25
+      - triggerIsoMu24

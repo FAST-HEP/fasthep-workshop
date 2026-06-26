@@ -104,10 +104,15 @@ Finally, the writer manifest shows you the files that have been written, their r
 :language: json
 ```
 
-## What you learned
+## What is written?
 
-This tutorial introduced event skims.
+The writer saves the event stream after `SelectDimuonEvents`.
 
-A skim is simply a saved event stream. Because FAST-HEP treats transformations, selections, and outputs as part of the same workflow, derived quantities and event selections can be applied before writing the output dataset.
+That stream contains the quantities that were read or created earlier in the workflow:
 
-In the next tutorial, you will reduce the number of stored columns to create a compact analysis-specific dataset.
+```python
+>>> import uproot
+>>> f = uproot.open("build/tutorials/04-save-data/01-skims/artifacts/files/dimuon_candidates/data/0_0.root")
+>>> f["events"].keys()
+['HasMuonAbove25', 'IsolatedMuon', 'Muon_Iso', 'Muon_Pt', 'Muon_Px', 'Muon_Py', 'NIsolatedMuon', 'triggerIsoMu24']
+```

@@ -1,0 +1,66 @@
+version: 1.0
+
+include:
+  - datasets.yaml
+  - outputs.yaml
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_curator:registry
+    - fasthep_curator:default_context
+    - fasthep_curator:runtime_diagnostics
+
+data:
+  defaults:
+    eventtype: data
+    tree_primary: events
+
+sources:
+  events:
+    kind: root_tree
+    tree: events
+    stream_type: event_stream
+
+observers:
+  - kind: hep.schema_snapshot
+    at:
+      - stage.SelectDimuonEvents
+      - write.SelectDimuonEvents.0
+    out: schema
+
+analysis:
+  stages:
+    - id: DerivedMuonColumns
+      op: hep.define
+      params:
+        variables:
+          - name: Muon_Pt
+            expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"
+
+          - name: IsolatedMuon
+            expr: "(Muon_Iso / Muon_Pt) < 0.10"
+
+          - name: NIsolatedMuon
+            reduce:
+              op: count_nonzero
+              over: IsolatedMuon
+
+          - name: HasMuonAbove25
+            reduce:
+              op: any
+              over: "Muon_Pt > 25"
+
+    - id: SelectDimuonEvents
+      op: hep.selection.cutflow
+      params:
+        selection:
+          dimuon_candidates:
+            - "NIsolatedMuon >= 2"
+            - "triggerIsoMu24 == 1"
+            - "HasMuonAbove25"
+      write:
+        - kind: root_tree
+          path: dimuon_candidates.root
+          use: dimuon_candidates
