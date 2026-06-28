@@ -31,6 +31,7 @@ fasthep-render = ">=2026.06.1"
 fasthep-toolbench = ">=2026.06.1"
 fasthep-cli = ">=2026.06.1"
 fasthep-workshop = { path = ".", editable = true }
+uproot-browser = "*"
 
 [feature.dev.pypi-dependencies]
 fasthep-flow = { path = "../flow", editable = true, extras = ["distributed"]}
