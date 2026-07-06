@@ -2,9 +2,7 @@ version: 1.0
 
 use:
   profiles:
-    - registry
-    - fasthep_carpenter:registry
-    - fasthep_render:registry
+    - hep_debug
     - fasthep_workshop:registry
 
 data:
