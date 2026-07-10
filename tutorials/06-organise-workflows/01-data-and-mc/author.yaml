@@ -1,0 +1,74 @@
+version: 1.0
+
+use:
+  profiles:
+    - hep_debug
+    - fasthep_workshop:registry
+
+data:
+  datasets:
+    - {name: data, eventtype: data, files: [toy://data], nevents: 1000}
+    - {name: ttbar, eventtype: mc, files: [toy://ttbar], nevents: 1000}
+
+sources:
+  events:
+    kind: workshop.toy_source
+    stream_type: event_stream
+    nevents: 1000
+    seed: 2601
+
+styles:
+  muon_pt:
+    op: hep.render.hist1d
+    figure: {size: [8, 6], dpi: 150}
+    axes:
+      x: {name: Muon_Pt, label: "Muon pT [GeV]", limits: [0, 180]}
+      y: {name: events, label: Events}
+
+  mc_lepton_pt:
+    op: hep.render.hist1d
+    figure: {size: [8, 6], dpi: 150}
+    axes:
+      x: {name: MCLepton_Pt, label: "Generator lepton pT [GeV]", limits: [0, 180]}
+      y: {name: events, label: Events}
+
+analysis:
+  stages:
+    - id: MuonColumns
+      op: hep.define
+      params:
+        variables:
+          - name: Muon_Pt
+            expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"
+
+    - id: MuonPt
+      op: hep.hist
+      params:
+        dataset_axis: true
+        axes:
+          - {name: Muon_Pt, source: Muon_Pt, type: regular, bins: {low: 0, high: 180, nbins: 60}}
+      render:
+        style: muon_pt
+        when: final
+        out: MuonPt.png
+
+    - id: MCLeptonColumns
+      op: hep.define
+      applies_to:
+        eventtype: mc
+      params:
+        variables:
+          - name: MCLepton_Pt
+            expr: "sqrt(MCLepton_Px ** 2 + MCLepton_Py ** 2)"
+
+    - id: MCLeptonPt
+      op: hep.hist
+      applies_to:
+        eventtype: mc
+      params:
+        axes:
+          - {name: MCLepton_Pt, source: MCLepton_Pt, type: regular, bins: {low: 0, high: 180, nbins: 60}}
+      render:
+        style: mc_lepton_pt
+        when: dataset
+        out: MCLeptonPt.png
