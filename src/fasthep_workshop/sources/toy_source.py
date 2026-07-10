@@ -221,27 +221,29 @@ def build_event_record(
     met: NDArray[np.float64],
 ) -> ak.Array:
     event_count = cfg.nevents
-    return ak.Array(
-        {
-            "EventNumber": np.arange(event_count, dtype=np.int64),
-            "RunNumber": rng.integers(300_000, 310_000, size=event_count, dtype=np.int32),
-            "LumiBlock": rng.integers(1, 2_001, size=event_count, dtype=np.int32),
-            "Dataset": np.full(event_count, cfg.name),
-            "EventWeight": _event_weights(cfg),
-            "Trigger": rng.random(event_count) < 0.98,
-            "Muon_Px": muons.px,
-            "Muon_Py": muons.py,
-            "Muon_Pz": muons.pz,
-            "Muon_Iso": muons.extra,
-            "Muon_Charge": muon_charge,
-            "Jet_Px": jets.px,
-            "Jet_Py": jets.py,
-            "Jet_Pz": jets.pz,
-            "MET_Px": met_px,
-            "MET_Py": met_py,
-            "MET": met,
-        }
-    )
+    record = {
+        "EventNumber": np.arange(event_count, dtype=np.int64),
+        "RunNumber": rng.integers(300_000, 310_000, size=event_count, dtype=np.int32),
+        "LumiBlock": rng.integers(1, 2_001, size=event_count, dtype=np.int32),
+        "Dataset": np.full(event_count, cfg.name),
+        "EventWeight": _event_weights(cfg),
+        "Trigger": rng.random(event_count) < 0.98,
+        "Muon_Px": muons.px,
+        "Muon_Py": muons.py,
+        "Muon_Pz": muons.pz,
+        "Muon_Iso": muons.extra,
+        "Muon_Charge": muon_charge,
+        "Jet_Px": jets.px,
+        "Jet_Py": jets.py,
+        "Jet_Pz": jets.pz,
+        "MET_Px": met_px,
+        "MET_Py": met_py,
+        "MET": met,
+    }
+    if cfg.event_type == "mc":
+        record["MCLepton_Px"] = muons.px
+        record["MCLepton_Py"] = muons.py
+    return ak.Array(record)
 
 
 def run_toy_source(
