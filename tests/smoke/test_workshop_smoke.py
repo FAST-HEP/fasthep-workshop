@@ -20,6 +20,10 @@ AUTHOR_PATHS = [
     WORKSHOP_ROOT / "examples" / "testing" / "runtime-smoke" / "author.yaml",
 ]
 
+DOMAIN_NEUTRAL_AUTHOR_PATHS = [
+    WORKSHOP_ROOT / "examples" / "NASA" / "exoplanets" / "author.yaml",
+]
+
 READ_DATA_TUTORIAL_AUTHOR_PATHS = [
     WORKSHOP_ROOT / "tutorials" / "01-read-data" / "01-root-files" / "author.yaml",
     WORKSHOP_ROOT / "tutorials" / "01-read-data" / "02-datasets" / "author.yaml",
@@ -80,6 +84,17 @@ def test_author_yaml_parses(author_path: Path) -> None:
     ]
 
 
+@pytest.mark.parametrize("author_path", DOMAIN_NEUTRAL_AUTHOR_PATHS)
+def test_domain_neutral_author_yaml_parses(author_path: Path) -> None:
+    doc = yaml.safe_load(author_path.read_text(encoding="utf-8"))
+
+    assert isinstance(doc, dict)
+    assert doc["use"]["profiles"] == [
+        "registry",
+        "fasthep_workshop:registry",
+    ]
+
+
 def test_fasthep_workshop_imports() -> None:
     assert fasthep_workshop.__version__
 
@@ -100,7 +115,9 @@ def test_package_profiles_are_installed_resources() -> None:
 
 
 def test_workshop_registry_profile_loads() -> None:
-    config = load_profile_config("fasthep_workshop:registry", project_root=WORKSHOP_ROOT)
+    config = load_profile_config(
+        "fasthep_workshop:registry", project_root=WORKSHOP_ROOT
+    )
 
     assert (
         config["registry"]["sources"]["workshop.toy_source"]["impl"]
@@ -123,6 +140,19 @@ def test_examples_compile(author_path: Path, tmp_path: Path) -> None:
     )
     assert "hep.schema_snapshot" in plan.registry["observers"]
     assert "hep.render.hist1d" in plan.registry["sinks"]
+
+
+@pytest.mark.parametrize("author_path", DOMAIN_NEUTRAL_AUTHOR_PATHS)
+def test_domain_neutral_examples_compile(author_path: Path, tmp_path: Path) -> None:
+    plan = compile_author_file(
+        author_path,
+        outdir=tmp_path / author_path.parent.name,
+    )
+
+    assert plan.nodes[0].impl == "workshop.parquet"
+    assert "workshop.tabular.filter" in plan.registry["transforms"]
+    assert "workshop.console_table" in plan.registry["sinks"]
+    assert "hep.hist" not in plan.registry["transforms"]
 
 
 @pytest.mark.parametrize("author_path", READ_DATA_TUTORIAL_AUTHOR_PATHS)

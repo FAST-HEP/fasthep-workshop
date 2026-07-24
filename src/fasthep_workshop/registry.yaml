@@ -3,9 +3,24 @@ registry:
     workshop.toy_source:
       spec: fasthep_workshop.sources.toy_source:TOY_SOURCE_SPEC
       impl: fasthep_workshop.sources.toy_source:run_toy_source
+    workshop.parquet:
+      spec: fasthep_workshop.sources.parquet:PARQUET_SOURCE_SPEC
+      impl: fasthep_workshop.sources.parquet:run_parquet_source
 
-  transforms: {}
+  transforms:
+    workshop.tabular.explode:
+      spec: fasthep_workshop.transforms.tabular:TABULAR_EXPLODE_SPEC
+      impl: fasthep_workshop.transforms.tabular:run_tabular_explode
+    workshop.tabular.filter:
+      spec: fasthep_workshop.transforms.tabular:TABULAR_FILTER_SPEC
+      impl: fasthep_workshop.transforms.tabular:run_tabular_filter
+    workshop.tabular.project:
+      spec: fasthep_workshop.transforms.tabular:TABULAR_PROJECT_SPEC
+      impl: fasthep_workshop.transforms.tabular:run_tabular_project
   hooks: {}
-  sinks: {}
+  sinks:
+    workshop.console_table:
+      spec: fasthep_workshop.sinks.table:CONSOLE_TABLE_SPEC
+      impl: fasthep_workshop.sinks.table:run_console_table
   functions: {}
   constants: {}

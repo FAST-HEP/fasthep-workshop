@@ -1,0 +1,69 @@
+version: 1.0
+
+use:
+  profiles:
+    - registry
+    - fasthep_workshop:registry
+
+data:
+  datasets:
+    - name: nasa_exoplanets
+      files: [data/NASA/exoplanets.parquet]
+      eventtype: data
+  defaults:
+    eventtype: data
+    tree_primary: planets
+
+sources:
+  planets:
+    kind: workshop.parquet
+    stream_type: event_stream
+
+analysis:
+  stages:
+    - id: PlanetRows
+      op: workshop.tabular.explode
+      params:
+        fields:
+          - planet_name
+          - planet_radius
+          - planet_period
+        keep_fields:
+          - name
+
+    - id: EarthSizedPlanets
+      op: workshop.tabular.filter
+      params:
+        expr: "(planet_radius > 0.8) & (planet_radius < 1.2)"
+
+    - id: PlanetTable
+      op: workshop.tabular.project
+      params:
+        fields:
+          - name
+          - planet_name
+          - planet_radius
+          - planet_period
+      write:
+        - kind: workshop.console_table
+          path: snippets/planets.txt
+          when: final
+          fields:
+            - name
+            - planet_name
+            - planet_radius
+            - planet_period
+          columns:
+            - template: "{name} {planet_name}"
+              header: Planet
+            - field: planet_radius
+              header: Radius [Earth radii]
+              format: ".3f"
+            - field: planet_period
+              header: Period [days]
+              format: ".3f"
+          sort_by:
+            - planet_radius
+            - name
+            - planet_name
+          limit: 12

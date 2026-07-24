@@ -1,0 +1,4 @@
+items:
+  - from: artifacts/files/snippets/planets.txt
+    to: snippets/planets.txt
+    mode: copy

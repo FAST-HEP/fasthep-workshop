@@ -18,6 +18,8 @@ dependencies = [
     "fasthep-curator",
     "fasthep-render",
     "numpy",
+    "prettytable",
+    "pyarrow",
 ]
 
 [project.optional-dependencies]
