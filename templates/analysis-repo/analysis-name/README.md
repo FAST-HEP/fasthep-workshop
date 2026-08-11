@@ -14,7 +14,7 @@ Custom analysis modules belong under `src/analysis_name`. Registry entries expos
 Start from:
 
 ```bash
-fasthep run author.yaml --outdir build/analysis-name
+fasthep run workflow.yaml --outdir build/analysis-name
 ```
 
 Generated outputs are grouped by purpose: plans under `build/analysis-name/compile/`,

@@ -40,7 +40,7 @@ The `when: final` option tells FAST-HEP to render only after all datasets have b
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/03-summarise-data/02-render-histograms/author.yaml --outdir build/tutorials/03-summarise-data/02-render-histograms
+pixi run fasthep run tutorials/03-summarise-data/02-render-histograms/workflow.yaml --outdir build/tutorials/03-summarise-data/02-render-histograms
 ```
 
 ## 4. Inspect the outputs

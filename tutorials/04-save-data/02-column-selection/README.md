@@ -73,7 +73,7 @@ In future releases they may also be used for dependency resolution and source op
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/04-save-data/02-column-selection/author.yaml \
+pixi run fasthep run tutorials/04-save-data/02-column-selection/workflow.yaml \
   --outdir build/tutorials/04-save-data/02-column-selection
 ```
 

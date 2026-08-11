@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-fasthep run examples/testing/runtime-smoke/author.yaml --outdir build/testing/runtime-smoke
+fasthep run examples/testing/runtime-smoke/workflow.yaml --outdir build/testing/runtime-smoke
 
 test -f build/testing/runtime-smoke/compile/normalized.yaml
 test -f build/testing/runtime-smoke/compile/plan.yaml

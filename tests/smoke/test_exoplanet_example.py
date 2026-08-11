@@ -4,7 +4,7 @@ from pathlib import Path
 
 import awkward as ak  # type: ignore[import-untyped]
 import pytest
-from hepflow.api import compile_author_file, run_author_file
+from hepflow.api import compile_workflow_file, run_workflow_file
 
 from fasthep_workshop.sinks.table import run_console_table
 from fasthep_workshop.sources.parquet import run_parquet_source
@@ -117,7 +117,7 @@ def test_console_table_writes_deterministic_text(tmp_path: Path) -> None:
 
 
 def test_exoplanet_example_compiles_to_workshop_only_graph(tmp_path: Path) -> None:
-    plan = compile_author_file(EXAMPLE / "author.yaml", outdir=tmp_path / "plan")
+    plan = compile_workflow_file(EXAMPLE / "workflow.yaml", outdir=tmp_path / "plan")
 
     assert [f"{node.id}:{node.impl}" for node in plan.nodes] == [
         "read.planets:workshop.parquet",
@@ -142,7 +142,7 @@ def test_exoplanet_example_runs_and_matches_expected(
     monkeypatch.chdir(WORKSHOP_ROOT)
     outdir = tmp_path / "exoplanets"
 
-    result = run_author_file(EXAMPLE / "author.yaml", outdir=outdir)
+    result = run_workflow_file(EXAMPLE / "workflow.yaml", outdir=outdir)
 
     assert result.success
     actual = outdir / "artifacts" / "files" / "snippets" / "planets.txt"

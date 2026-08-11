@@ -16,7 +16,7 @@ mkdir -p \
     "${TUTORIAL_ROOT}/expected"
 
 touch "${TUTORIAL_ROOT}/README.md"
-touch "${TUTORIAL_ROOT}/author.yaml"
+touch "${TUTORIAL_ROOT}/workflow.yaml"
 touch "${TUTORIAL_ROOT}/build/.gitkeep"
 
 echo "Created tutorial scaffold:"

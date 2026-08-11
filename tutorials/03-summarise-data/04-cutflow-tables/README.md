@@ -47,7 +47,7 @@ Just as histogram renderers convert histogram products into plots, the cutflow r
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/03-summarise-data/04-cutflow-tables/author.yaml --outdir build/tutorials/03-summarise-data/04-cutflow-tables
+pixi run fasthep run tutorials/03-summarise-data/04-cutflow-tables/workflow.yaml --outdir build/tutorials/03-summarise-data/04-cutflow-tables
 ```
 
 ## 4. Inspect the outputs

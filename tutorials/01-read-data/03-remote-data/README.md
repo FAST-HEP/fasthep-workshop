@@ -29,7 +29,7 @@ easier to maintain.
 
 ## 2. Inspect the workflow
 
-`author.yaml` includes the dataset file:
+`workflow.yaml` includes the dataset file:
 
 ```yaml
 include:
@@ -42,7 +42,7 @@ make histograms, skim events, or use distributed execution.
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/01-read-data/03-remote-data/author.yaml --outdir build/tutorials/01-read-data/03-remote-data
+pixi run fasthep run tutorials/01-read-data/03-remote-data/workflow.yaml --outdir build/tutorials/01-read-data/03-remote-data
 ```
 
 XRootD support is required in the runtime environment. If the command fails

@@ -18,7 +18,7 @@ The manifest downloads small Z &rarr; $\mu\mu$ datasets from the CMS experiment 
 
 ## 2. Inspect the workflow
 
-The important pieces of `author.yaml` are:
+The important pieces of `workflow.yaml` are:
 
 ```yaml
 data:
@@ -45,7 +45,7 @@ The workflow reads the `events` tree and records a schema snapshot.
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/01-read-data/01-root-files/author.yaml --outdir build/tutorials/01-read-data/01-root-files
+pixi run fasthep run tutorials/01-read-data/01-root-files/workflow.yaml --outdir build/tutorials/01-read-data/01-root-files
 ```
 
 ## 4. Inspect the outputs

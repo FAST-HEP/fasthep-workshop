@@ -21,7 +21,7 @@ execution.
 Run the workflow from the repository root:
 
 ```bash
-pixi run fasthep run tutorials/06-organise-workflows/01-data-and-mc/author.yaml \
+pixi run fasthep run tutorials/06-organise-workflows/01-data-and-mc/workflow.yaml \
   --outdir build/tutorials/06-organise-workflows/01-data-and-mc
 ```
 

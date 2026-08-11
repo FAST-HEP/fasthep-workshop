@@ -1,13 +1,13 @@
 # FAST-HEP overview
 
 ## Workflows
-FAST-HEP workflows start from an `author.yaml`, then compile to normalized author and execution-plan files.
+FAST-HEP workflows start from an `workflow.yaml`, then compile to normalized workflow and execution-plan files.
 
 ```{mermaid}
 flowchart TD
 
     subgraph Compile["Compilation and planning"]
-        Author["author.yaml"]
+        Author["workflow.yaml"]
         Profiles["profiles and registries"]
         Normalised["normalised workflow"]
         Dependency["dependency inference"]
@@ -29,7 +29,7 @@ flowchart TD
     Plan --> Runtime
 ```
 
-Implementation packages contribute functionality through registry profiles. The workshop examples show how flow, carpenter, curator, and render profiles combine in an author file.
+Implementation packages contribute functionality through registry profiles. The workshop examples show how flow, carpenter, curator, and render profiles combine in an workflow file.
 
 ## Packages
 The FAST-HEP ecosystem is split into focused packages.

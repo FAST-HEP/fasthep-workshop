@@ -83,7 +83,7 @@ This pattern is common in HEP analyses: first derive useful quantities, then use
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/02-transform-data/02-object-selections/author.yaml --outdir build/tutorials/02-transform-data/02-object-selections
+pixi run fasthep run tutorials/02-transform-data/02-object-selections/workflow.yaml --outdir build/tutorials/02-transform-data/02-object-selections
 ```
 
 ## 4. Inspect the outputs

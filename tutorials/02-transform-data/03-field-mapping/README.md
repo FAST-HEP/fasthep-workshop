@@ -69,7 +69,7 @@ This keeps analysis logic independent of experiment-specific naming conventions 
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/02-transform-data/03-field-mapping/author.yaml --outdir build/tutorials/02-transform-data/03-field-mapping
+pixi run fasthep run tutorials/02-transform-data/03-field-mapping/workflow.yaml --outdir build/tutorials/02-transform-data/03-field-mapping
 ```
 ## 4. Inspect the outputs
 

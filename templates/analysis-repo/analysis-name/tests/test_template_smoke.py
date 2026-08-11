@@ -1,5 +1,5 @@
 from pathlib import Path
 
 
-def test_template_author_exists() -> None:
-    assert Path("author.yaml").exists()
+def test_template_workflow_exists() -> None:
+    assert Path("workflow.yaml").exists()

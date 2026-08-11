@@ -2,7 +2,7 @@
 set -euo pipefail
 
 outdir="${1:-build/Zmumu}"
-fasthep compile examples/CMS/Zmumu/author.yaml --outdir "${outdir}"
+fasthep compile examples/CMS/Zmumu/workflow.yaml --outdir "${outdir}"
 
 test -f "${outdir}/compile/normalized.yaml"
 test -f "${outdir}/compile/plan.yaml"

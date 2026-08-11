@@ -55,7 +55,7 @@ FAST-HEP itself does not interpret these values, but individual modules may use 
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/01-read-data/02-datasets/author.yaml --outdir build/tutorials/01-read-data/02-datasets
+pixi run fasthep run tutorials/01-read-data/02-datasets/workflow.yaml --outdir build/tutorials/01-read-data/02-datasets
 ```
 
 ## 4. Inspect the outputs

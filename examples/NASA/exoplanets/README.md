@@ -15,7 +15,7 @@ does not make habitability or Earth-like claims.
 Run it from the `fasthep-workshop` repository root:
 
 ```bash
-pixi run --environment dev fasthep run examples/NASA/exoplanets/author.yaml --outdir build/examples/NASA/exoplanets
+pixi run --environment dev fasthep run examples/NASA/exoplanets/workflow.yaml --outdir build/examples/NASA/exoplanets
 ```
 
 The output table is written to:

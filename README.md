@@ -118,13 +118,13 @@ Most tutorials contain a dedicated README with instructions.
 For example:
 
 ```bash
-pixi run fasthep compile tutorials/00-overview/first-workflow/author.yaml
+pixi run fasthep compile tutorials/00-overview/first-workflow/workflow.yaml
 ```
 
 or:
 
 ```bash
-pixi run fasthep run tutorials/00-overview/first-workflow/author.yaml
+pixi run fasthep run tutorials/00-overview/first-workflow/workflow.yaml
 ```
 
 See the tutorial README for expected outputs and explanations.

@@ -27,7 +27,7 @@ The data files are the same small files used by the read-data tutorials.
 
 ## 2. Inspect the transform
 
-`author.yaml` adds fields with `hep.define`.
+`workflow.yaml` adds fields with `hep.define`.
 The first derived quantity is the muon transverse momentum:
 
 ```{math}
@@ -68,7 +68,7 @@ These three variables, `Muon_Pt`, `IsolatedMuon`, and `NIsolatedMuon`, are then 
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/02-transform-data/01-derived-columns/author.yaml --outdir build/tutorials/02-transform-data/01-derived-columns
+pixi run fasthep run tutorials/02-transform-data/01-derived-columns/workflow.yaml --outdir build/tutorials/02-transform-data/01-derived-columns
 ```
 
 ## 4. Inspect the outputs

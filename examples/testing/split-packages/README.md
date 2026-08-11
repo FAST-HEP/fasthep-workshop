@@ -13,7 +13,7 @@ Generate local toy data and run:
 
 ```bash
 python scripts/ci/make_testing_data.py
-fasthep run examples/testing/split-packages/author.yaml --outdir build/testing/split-packages
+fasthep run examples/testing/split-packages/workflow.yaml --outdir build/testing/split-packages
 ```
 
 Outputs are written under `build/testing/split-packages`.

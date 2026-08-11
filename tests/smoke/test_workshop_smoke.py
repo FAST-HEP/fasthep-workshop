@@ -5,72 +5,72 @@ from pathlib import Path
 
 import pytest
 import yaml  # type: ignore[import-untyped]
-from hepflow.api import compile_author_file, run_author_file
+from hepflow.api import compile_workflow_file, run_workflow_file
 from hepflow.compiler.profiles import load_profile_config
 
 import fasthep_workshop
 
 WORKSHOP_ROOT = Path(__file__).parents[2]
 
-AUTHOR_PATHS = [
-    WORKSHOP_ROOT / "examples" / "CMS" / "Zmumu" / "author.yaml",
-    WORKSHOP_ROOT / "examples" / "CMS" / "L1Trigger" / "author.yaml",
-    WORKSHOP_ROOT / "examples" / "LZ" / "mssi" / "author.yaml",
-    WORKSHOP_ROOT / "examples" / "testing" / "split-packages" / "author.yaml",
-    WORKSHOP_ROOT / "examples" / "testing" / "runtime-smoke" / "author.yaml",
+WORKFLOW_PATHS = [
+    WORKSHOP_ROOT / "examples" / "CMS" / "Zmumu" / "workflow.yaml",
+    WORKSHOP_ROOT / "examples" / "CMS" / "L1Trigger" / "workflow.yaml",
+    WORKSHOP_ROOT / "examples" / "LZ" / "mssi" / "workflow.yaml",
+    WORKSHOP_ROOT / "examples" / "testing" / "split-packages" / "workflow.yaml",
+    WORKSHOP_ROOT / "examples" / "testing" / "runtime-smoke" / "workflow.yaml",
 ]
 
-DOMAIN_NEUTRAL_AUTHOR_PATHS = [
-    WORKSHOP_ROOT / "examples" / "NASA" / "exoplanets" / "author.yaml",
+DOMAIN_NEUTRAL_WORKFLOW_PATHS = [
+    WORKSHOP_ROOT / "examples" / "NASA" / "exoplanets" / "workflow.yaml",
 ]
 
-READ_DATA_TUTORIAL_AUTHOR_PATHS = [
-    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "01-root-files" / "author.yaml",
-    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "02-datasets" / "author.yaml",
-    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "03-remote-data" / "author.yaml",
+READ_DATA_TUTORIAL_WORKFLOW_PATHS = [
+    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "01-root-files" / "workflow.yaml",
+    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "02-datasets" / "workflow.yaml",
+    WORKSHOP_ROOT / "tutorials" / "01-read-data" / "03-remote-data" / "workflow.yaml",
 ]
 
-TRANSFORM_DATA_TUTORIAL_AUTHOR_PATHS = [
+TRANSFORM_DATA_TUTORIAL_WORKFLOW_PATHS = [
     WORKSHOP_ROOT
     / "tutorials"
     / "02-transform-data"
     / "01-derived-columns"
-    / "author.yaml",
+    / "workflow.yaml",
     WORKSHOP_ROOT
     / "tutorials"
     / "02-transform-data"
     / "02-object-selections"
-    / "author.yaml",
+    / "workflow.yaml",
     WORKSHOP_ROOT
     / "tutorials"
     / "02-transform-data"
     / "03-field-mapping"
-    / "author.yaml",
+    / "workflow.yaml",
 ]
 
-SUMMARISE_DATA_TUTORIAL_AUTHOR_PATHS = [
-    WORKSHOP_ROOT / "tutorials" / "03-summarise-data" / "01-histograms" / "author.yaml",
+SUMMARISE_DATA_TUTORIAL_WORKFLOW_PATHS = [
+    WORKSHOP_ROOT / "tutorials" / "03-summarise-data" / "01-histograms" / "workflow.yaml",
     WORKSHOP_ROOT
     / "tutorials"
     / "03-summarise-data"
     / "02-render-histograms"
-    / "author.yaml",
+    / "workflow.yaml",
     WORKSHOP_ROOT
     / "tutorials"
     / "03-summarise-data"
     / "03-two-dimensional-histograms"
-    / "author.yaml",
+    / "workflow.yaml",
     WORKSHOP_ROOT
     / "tutorials"
     / "03-summarise-data"
     / "04-cutflow-tables"
-    / "author.yaml",
+    / "workflow.yaml",
 ]
 
 
-@pytest.mark.parametrize("author_path", AUTHOR_PATHS)
-def test_author_yaml_parses(author_path: Path) -> None:
-    doc = yaml.safe_load(author_path.read_text(encoding="utf-8"))
+@pytest.mark.parametrize("workflow_path", WORKFLOW_PATHS)
+def test_workflow_yaml_parses(workflow_path: Path) -> None:
+    doc = yaml.safe_load(workflow_path.read_text(encoding="utf-8"))
 
     assert isinstance(doc, dict)
     assert doc["use"]["profiles"] == [
@@ -84,9 +84,9 @@ def test_author_yaml_parses(author_path: Path) -> None:
     ]
 
 
-@pytest.mark.parametrize("author_path", DOMAIN_NEUTRAL_AUTHOR_PATHS)
-def test_domain_neutral_author_yaml_parses(author_path: Path) -> None:
-    doc = yaml.safe_load(author_path.read_text(encoding="utf-8"))
+@pytest.mark.parametrize("workflow_path", DOMAIN_NEUTRAL_WORKFLOW_PATHS)
+def test_domain_neutral_workflow_yaml_parses(workflow_path: Path) -> None:
+    doc = yaml.safe_load(workflow_path.read_text(encoding="utf-8"))
 
     assert isinstance(doc, dict)
     assert doc["use"]["profiles"] == [
@@ -125,11 +125,11 @@ def test_workshop_registry_profile_loads() -> None:
     )
 
 
-@pytest.mark.parametrize("author_path", AUTHOR_PATHS)
-def test_examples_compile(author_path: Path, tmp_path: Path) -> None:
-    plan = compile_author_file(
-        author_path,
-        outdir=tmp_path / author_path.parent.name,
+@pytest.mark.parametrize("workflow_path", WORKFLOW_PATHS)
+def test_examples_compile(workflow_path: Path, tmp_path: Path) -> None:
+    plan = compile_workflow_file(
+        workflow_path,
+        outdir=tmp_path / workflow_path.parent.name,
     )
 
     registry_text = yaml.safe_dump(plan.registry)
@@ -142,11 +142,11 @@ def test_examples_compile(author_path: Path, tmp_path: Path) -> None:
     assert "hep.render.hist1d" in plan.registry["sinks"]
 
 
-@pytest.mark.parametrize("author_path", DOMAIN_NEUTRAL_AUTHOR_PATHS)
-def test_domain_neutral_examples_compile(author_path: Path, tmp_path: Path) -> None:
-    plan = compile_author_file(
-        author_path,
-        outdir=tmp_path / author_path.parent.name,
+@pytest.mark.parametrize("workflow_path", DOMAIN_NEUTRAL_WORKFLOW_PATHS)
+def test_domain_neutral_examples_compile(workflow_path: Path, tmp_path: Path) -> None:
+    plan = compile_workflow_file(
+        workflow_path,
+        outdir=tmp_path / workflow_path.parent.name,
     )
 
     assert plan.nodes[0].impl == "workshop.parquet"
@@ -155,11 +155,11 @@ def test_domain_neutral_examples_compile(author_path: Path, tmp_path: Path) -> N
     assert "hep.hist" not in plan.registry["transforms"]
 
 
-@pytest.mark.parametrize("author_path", READ_DATA_TUTORIAL_AUTHOR_PATHS)
-def test_read_data_tutorials_compile(author_path: Path, tmp_path: Path) -> None:
-    plan = compile_author_file(
-        author_path,
-        outdir=tmp_path / author_path.parent.name,
+@pytest.mark.parametrize("workflow_path", READ_DATA_TUTORIAL_WORKFLOW_PATHS)
+def test_read_data_tutorials_compile(workflow_path: Path, tmp_path: Path) -> None:
+    plan = compile_workflow_file(
+        workflow_path,
+        outdir=tmp_path / workflow_path.parent.name,
     )
 
     read_node = next(node for node in plan.nodes if node.id == "read.events")
@@ -167,11 +167,11 @@ def test_read_data_tutorials_compile(author_path: Path, tmp_path: Path) -> None:
     assert "hep.schema_snapshot" in plan.registry["observers"]
 
 
-@pytest.mark.parametrize("author_path", TRANSFORM_DATA_TUTORIAL_AUTHOR_PATHS)
-def test_transform_data_tutorials_compile(author_path: Path, tmp_path: Path) -> None:
-    plan = compile_author_file(
-        author_path,
-        outdir=tmp_path / author_path.parent.name,
+@pytest.mark.parametrize("workflow_path", TRANSFORM_DATA_TUTORIAL_WORKFLOW_PATHS)
+def test_transform_data_tutorials_compile(workflow_path: Path, tmp_path: Path) -> None:
+    plan = compile_workflow_file(
+        workflow_path,
+        outdir=tmp_path / workflow_path.parent.name,
     )
 
     read_node = next(node for node in plan.nodes if node.id == "read.events")
@@ -179,11 +179,11 @@ def test_transform_data_tutorials_compile(author_path: Path, tmp_path: Path) -> 
     assert "hep.schema_snapshot" in plan.registry["observers"]
 
 
-@pytest.mark.parametrize("author_path", SUMMARISE_DATA_TUTORIAL_AUTHOR_PATHS)
-def test_summarise_data_tutorials_compile(author_path: Path, tmp_path: Path) -> None:
-    plan = compile_author_file(
-        author_path,
-        outdir=tmp_path / author_path.parent.name,
+@pytest.mark.parametrize("workflow_path", SUMMARISE_DATA_TUTORIAL_WORKFLOW_PATHS)
+def test_summarise_data_tutorials_compile(workflow_path: Path, tmp_path: Path) -> None:
+    plan = compile_workflow_file(
+        workflow_path,
+        outdir=tmp_path / workflow_path.parent.name,
     )
 
     read_node = next(node for node in plan.nodes if node.id == "read.events")
@@ -199,8 +199,8 @@ def test_runtime_smoke_runs_end_to_end(
     monkeypatch.setenv("MPLCONFIGDIR", str(tmp_path / "mplconfig"))
 
     outdir = tmp_path / "runtime-smoke"
-    result = run_author_file(
-        WORKSHOP_ROOT / "examples" / "testing" / "runtime-smoke" / "author.yaml",
+    result = run_workflow_file(
+        WORKSHOP_ROOT / "examples" / "testing" / "runtime-smoke" / "workflow.yaml",
         outdir=outdir,
     )
 
@@ -221,12 +221,12 @@ def test_transform_derived_columns_tutorial_runs_with_event_arrays(
     monkeypatch.chdir(WORKSHOP_ROOT)
 
     outdir = tmp_path / "02-transform-data" / "01-derived-columns"
-    result = run_author_file(
+    result = run_workflow_file(
         WORKSHOP_ROOT
         / "tutorials"
         / "02-transform-data"
         / "01-derived-columns"
-        / "author.yaml",
+        / "workflow.yaml",
         outdir=outdir,
     )
 

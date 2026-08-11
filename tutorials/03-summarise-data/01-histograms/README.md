@@ -63,7 +63,7 @@ These options are shown here so you can see how histogram products are configure
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/03-summarise-data/01-histograms/author.yaml --outdir build/tutorials/03-summarise-data/01-histograms
+pixi run fasthep run tutorials/03-summarise-data/01-histograms/workflow.yaml --outdir build/tutorials/03-summarise-data/01-histograms
 ```
 
 ## 4. Inspect the outputs

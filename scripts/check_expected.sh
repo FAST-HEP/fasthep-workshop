@@ -15,13 +15,13 @@ if [[ "$tutorial" != tutorials/* ]]; then
     tutorial="tutorials/${tutorial}"
 fi
 
-author="${tutorial}/author.yaml"
+workflow="${tutorial}/workflow.yaml"
 build_dir="${tutorial}/build"
 expected_dir="${tutorial}/expected"
 
-if [[ ! -f "${author}" ]]; then
-    echo "Missing author.yaml:"
-    echo "  ${author}"
+if [[ ! -f "${workflow}" ]]; then
+    echo "Missing workflow.yaml:"
+    echo "  ${workflow}"
     exit 1
 fi
 
@@ -37,7 +37,7 @@ mkdir -p "${build_dir}"
 touch "${build_dir}/.gitkeep"
 
 echo "Running tutorial..."
-pixi run fasthep run "${author}" --outdir "${build_dir}"
+pixi run fasthep run "${workflow}" --outdir "${build_dir}"
 touch "${build_dir}/.gitkeep"
 
 if ! find "${expected_dir}" -mindepth 1 -print -quit | grep -q .; then

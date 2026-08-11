@@ -60,7 +60,7 @@ Later tutorials show how to restrict which columns are written.
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/04-save-data/01-skims/author.yaml --outdir build/tutorials/04-save-data/01-skims
+pixi run fasthep run tutorials/04-save-data/01-skims/workflow.yaml --outdir build/tutorials/04-save-data/01-skims
 ```
 
 ## 4. Inspect the outputs

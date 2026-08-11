@@ -49,7 +49,7 @@ As you progress through the workshop you will encounter many additional topics, 
 
 ```text
 tutorials/00-overview/first-workflow/
-├── author.yaml
+├── workflow.yaml
 ├── README.md
 └── expected/
 ```
@@ -57,7 +57,7 @@ tutorials/00-overview/first-workflow/
 The workflow itself is defined in:
 
 ```text
-author.yaml
+workflow.yaml
 ```
 
 ## Workflow overview
@@ -124,7 +124,7 @@ The complete workflow is shown at the end of this tutorial.
 From the repository root:
 
 ```bash
-pixi run fasthep run tutorials/00-overview/first-workflow/author.yaml \
+pixi run fasthep run tutorials/00-overview/first-workflow/workflow.yaml \
   --outdir build/tutorials/00-overview/first-workflow
 ```
 
@@ -189,8 +189,8 @@ Your generated outputs should look similar, although exact values may vary sligh
 
 ## Full workflow
 
-:::{dropdown} Show `author.yaml`
-```{literalinclude} ../../../tutorials/00-overview/first-workflow/author.yaml
+:::{dropdown} Show `workflow.yaml`
+```{literalinclude} ../../../tutorials/00-overview/first-workflow/workflow.yaml
 :language: yaml
 ```
 :::

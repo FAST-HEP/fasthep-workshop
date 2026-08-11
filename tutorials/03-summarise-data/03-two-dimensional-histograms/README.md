@@ -80,7 +80,7 @@ This means a single 2D histogram product can produce several different plots wit
 ## 3. Run the workflow
 
 ```bash
-pixi run fasthep run tutorials/03-summarise-data/03-two-dimensional-histograms/author.yaml --outdir build/tutorials/03-summarise-data/03-two-dimensional-histograms
+pixi run fasthep run tutorials/03-summarise-data/03-two-dimensional-histograms/workflow.yaml --outdir build/tutorials/03-summarise-data/03-two-dimensional-histograms
 ```
 
 ## 4. Inspect the outputs
