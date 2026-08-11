@@ -7,4 +7,5 @@ some nodes specific to data, simulation, or later analysis categories.
 :maxdepth: 1
 
 01-data-and-mc/README
+02-needs/README
 ```

@@ -67,6 +67,11 @@ SUMMARISE_DATA_TUTORIAL_WORKFLOW_PATHS = [
     / "workflow.yaml",
 ]
 
+ORGANISE_WORKFLOWS_TUTORIAL_WORKFLOW_PATHS = [
+    WORKSHOP_ROOT / "tutorials" / "06-organise-workflows" / "01-data-and-mc" / "workflow.yaml",
+    WORKSHOP_ROOT / "tutorials" / "06-organise-workflows" / "02-needs" / "workflow.yaml",
+]
+
 
 @pytest.mark.parametrize("workflow_path", WORKFLOW_PATHS)
 def test_workflow_yaml_parses(workflow_path: Path) -> None:
@@ -189,6 +194,21 @@ def test_summarise_data_tutorials_compile(workflow_path: Path, tmp_path: Path) -
     read_node = next(node for node in plan.nodes if node.id == "read.events")
     assert read_node.impl == "root_tree"
     assert "hep.hist" in plan.registry["transforms"]
+
+
+@pytest.mark.parametrize("workflow_path", ORGANISE_WORKFLOWS_TUTORIAL_WORKFLOW_PATHS)
+def test_organise_workflows_tutorials_compile(
+    workflow_path: Path,
+    tmp_path: Path,
+) -> None:
+    plan = compile_workflow_file(
+        workflow_path,
+        outdir=tmp_path / workflow_path.parent.name,
+    )
+
+    read_node = next(node for node in plan.nodes if node.id == "read.events")
+    assert read_node.impl == "workshop.toy_source"
+    assert "hep.define" in plan.registry["transforms"]
 
 
 def test_runtime_smoke_runs_end_to_end(

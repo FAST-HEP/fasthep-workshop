@@ -1,0 +1,66 @@
+version: 1.0
+
+use:
+  profiles:
+    - hep_debug
+    - fasthep_workshop:registry
+
+data:
+  datasets:
+    - {name: toy, eventtype: mc, files: [toy://dy], nevents: 1000}
+
+sources:
+  events:
+    kind: workshop.toy_source
+    stream_type: event_stream
+    nevents: 1000
+    seed: 2602
+
+analysis:
+  stages:
+    - id: Prepare
+      op: hep.define
+      params:
+        variables:
+          - name: Muon_Pt
+            expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"
+
+    - id: BranchA
+      op: hep.define
+      from: Prepare
+      needs:
+        - Prepare
+      params:
+        variables:
+          - name: LeadingMuonPt
+            expr: "leading(Muon_Pt)"
+
+    - id: BranchB
+      op: hep.define
+      from: Prepare
+      needs:
+        - Prepare
+      params:
+        variables:
+          - name: Jet_Pt
+            expr: "sqrt(Jet_Px ** 2 + Jet_Py ** 2)"
+
+    - id: Combine
+      op: hep.define
+      from: BranchA
+      needs:
+        - BranchA
+        - BranchB
+      params:
+        variables:
+          - name: SummaryScore
+            expr: "LeadingMuonPt + MET"
+
+    - id: IndependentAudit
+      op: hep.define
+      from: events
+      needs: []
+      params:
+        variables:
+          - name: EventNumberCopy
+            expr: "EventNumber"
