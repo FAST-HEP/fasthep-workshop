@@ -19,7 +19,7 @@ dependencies = [
     "fasthep-render",
     "numpy",
     "prettytable",
-    "pyarrow",
+    "pyarrow>=25",
 ]
 
 [project.optional-dependencies]
@@ -123,3 +123,10 @@ addopts = [
 xfail_strict = true
 filterwarnings = ["error"]
 testpaths = ["tests"]
+
+[[tool.mypy.overrides]]
+module = [
+    "pyarrow",
+    "pyarrow.*",
+]
+ignore_missing_imports = true
