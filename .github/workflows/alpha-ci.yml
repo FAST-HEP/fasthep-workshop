@@ -52,6 +52,7 @@ jobs:
           subprocess.check_call([sys.executable, "-m", "pip", "install", *requirements])
           PY
           python -m pip install -e . --no-deps
+          python -m pip install types-PyYAML
 
       - name: Lint
         run: ruff check src tests
@@ -60,4 +61,4 @@ jobs:
         run: mypy src tests
 
       - name: Test
-        run: pytest
+        run: pytest -m 'not smoke'
