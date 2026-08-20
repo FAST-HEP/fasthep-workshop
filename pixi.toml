@@ -24,26 +24,16 @@ twine = "*"
 [environments]
 default = ["released"]
 docs = ["docs"]
-dev = ["dev"]
 
 [feature.released.pypi-dependencies]
-fasthep-flow = {version = ">=2026.06.1", extras = ["distributed"]}
-fasthep-carpenter = ">=2026.06.1"
-fasthep-curator = ">=2026.06.1"
-fasthep-render = ">=2026.06.1"
-fasthep-toolbench = ">=2026.06.1"
-fasthep-cli = ">=2026.06.1"
+fasthep-flow = {version = ">=2026.08.2"}
+fasthep-carpenter = ">=2026.08.1"
+fasthep-curator = ">=2026.08.1"
+fasthep-render = ">=2026.08.1"
+fasthep-toolbench = ">=2026.08.2"
+fasthep-cli = ">=2026.08.1"
 fasthep-workshop = { path = ".", editable = true }
 uproot-browser = "*"
-
-[feature.dev.pypi-dependencies]
-fasthep-flow = { path = "../flow", editable = true, extras = ["distributed"]}
-fasthep-carpenter = { path = "../carpenter", editable = true }
-fasthep-curator = { path = "../curator", editable = true }
-fasthep-render = { path = "../render", editable = true }
-fasthep-cli = { path = "../cli", editable = true }
-fasthep-toolbench = { path = "../toolbench", editable = true }
-fasthep-workshop = { path = ".", editable = true }
 
 [feature.docs.dependencies]
 python = ">=3.11"
