@@ -123,6 +123,9 @@ addopts = [
 xfail_strict = true
 filterwarnings = ["error"]
 testpaths = ["tests"]
+markers = [
+    "smoke: end-to-end smoke tests requiring the assembled FAST-HEP environment",
+]
 
 [[tool.mypy.overrides]]
 module = [

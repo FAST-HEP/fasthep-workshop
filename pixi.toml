@@ -16,7 +16,6 @@ prettytable = "*"
 pyarrow = "*"
 ruff = "*"
 mypy = "*"
-types-pyyaml = "*"
 pre-commit = "*"
 codespell = "*"
 twine = "*"
@@ -34,6 +33,8 @@ fasthep-toolbench = ">=2026.08.2"
 fasthep-cli = ">=2026.08.1"
 fasthep-workshop = { path = ".", editable = true }
 uproot-browser = "*"
+types-PyYAML = "*"
+pytest = "*"
 
 [feature.docs.dependencies]
 python = ">=3.11"
@@ -52,7 +53,8 @@ format = "ruff format src tests"
 lint = "ruff check src tests"
 lint-fix = "ruff check --fix src tests"
 typecheck = "mypy src tests"
-test = "pytest"
+test = "pytest -m 'not smoke'"
+test-smoke = "pytest -m smoke"
 build = "python -m build"
 check = { depends-on = ["lint", "typecheck", "test"] }
 ci = { depends-on = ["check", "build"] }

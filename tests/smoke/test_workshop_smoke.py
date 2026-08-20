@@ -10,6 +10,8 @@ from hepflow.compiler.profiles import load_profile_config
 
 import fasthep_workshop
 
+pytestmark = pytest.mark.smoke
+
 WORKSHOP_ROOT = Path(__file__).parents[2]
 
 WORKFLOW_PATHS = [
