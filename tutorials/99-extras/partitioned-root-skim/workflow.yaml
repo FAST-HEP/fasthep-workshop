@@ -1,0 +1,76 @@
+version: 1.0
+
+include:
+  - datasets.yaml
+
+use:
+  profiles:
+    - hep_debug
+
+data:
+  defaults:
+    eventtype: mc
+    tree_primary: events
+
+sources:
+  events:
+    kind: root_tree
+    tree: events
+    stream_type: event_stream
+    branches:
+      - EventWeight
+      - NMuon
+      - Muon_Px
+      - Muon_Py
+      - Muon_Pz
+      - Muon_E
+      - Muon_Charge
+      - Muon_Iso
+      - triggerIsoMu24
+
+analysis:
+  stages:
+    - id: MuonObjectFlags
+      op: hep.define
+      params:
+        variables:
+          - {name: Muon_Pt, expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"}
+          - {name: IsolatedMuon, expr: "(Muon_Iso / Muon_Pt) < 0.10"}
+          - {name: NIsolatedMuon, reduce: {op: count_nonzero, over: IsolatedMuon}}
+          - {name: HasMuonAbove25, reduce: {op: any, over: "Muon_Pt > 25"}}
+
+    - id: DiMuons
+      op: hep.di_object_mass
+      params: {collection: Muon, mask: IsolatedMuon}
+
+    - id: SelectDimuonEvents
+      op: hep.selection.cutflow
+      params:
+        selection:
+          dimuon_candidates:
+            - "NIsolatedMuon >= 2"
+            - "triggerIsoMu24 == 1"
+            - "HasMuonAbove25"
+        weight_expr: EventWeight
+      write:
+        - kind: root_tree
+          path: dimuon_partition_skim.root
+          tree: events
+          keep:
+            - EventWeight
+            - triggerIsoMu24
+            - NMuon
+            - Muon_Pt
+            - Muon_Charge
+            - NIsolatedMuon
+            - HasMuonAbove25
+            - DiMuon_Mass
+
+    - id: DiMuonMass
+      op: hep.hist
+      params:
+        dataset_axis: true
+        storage: weighted
+        axes:
+          - {name: dimu_mass, source: DiMuon_Mass, type: regular, bins: {low: 60, high: 120, nbins: 60}}
+        weight_expr: EventWeight

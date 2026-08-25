@@ -54,6 +54,10 @@ Coming next.
 
 - [01. CMS Higgs 4l](10-complete/cms-higgs-4l/)
 
+## 99. Extras
+
+- [Partitioned ROOT Skim](99-extras/partitioned-root-skim/)
+
 ```{toctree}
 :maxdepth: 2
 :hidden:
@@ -69,4 +73,5 @@ Coming next.
 08-accelerators/README
 09-extend-fasthep/README
 10-complete/README
+99-extras/README
 ```

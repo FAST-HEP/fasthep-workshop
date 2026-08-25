@@ -1,0 +1,11 @@
+data:
+  datasets:
+    - {name: data, eventtype: data, nevents: "120", files: [data/CMS/Zmumu/data.root]}
+    - {name: dy, nevents: "120", files: [data/CMS/Zmumu/dy.root]}
+    - {name: qcd, nevents: "120", files: [data/CMS/Zmumu/qcd.root]}
+    - {name: single_top, nevents: "120", files: [data/CMS/Zmumu/single_top.root]}
+    - {name: ttbar, nevents: "120", files: [data/CMS/Zmumu/ttbar.root]}
+    - {name: wjets, nevents: "120", files: [data/CMS/Zmumu/wjets.root]}
+    - {name: ww, nevents: "120", files: [data/CMS/Zmumu/ww.root]}
+    - {name: wz, nevents: "120", files: [data/CMS/Zmumu/wz.root]}
+    - {name: zz, nevents: "120", files: [data/CMS/Zmumu/zz.root]}
