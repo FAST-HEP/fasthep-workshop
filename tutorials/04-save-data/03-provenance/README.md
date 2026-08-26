@@ -1,8 +1,3 @@
-Great. I’d make `04-save-data/03-provenance` a **read-only inspection tutorial**: no new workflow concepts, just “the previous skim already produced provenance; here is how to inspect it.”
-
-Suggested structure:
-
-````md
 # Provenance
 
 > Part 3 of 3 in **Save Data**
@@ -27,7 +22,7 @@ Use the skim workflow from the previous tutorial:
 ```bash
 pixi run fasthep run tutorials/04-save-data/02-column-selection/workflow.yaml \
   --outdir build/tutorials/04-save-data/03-provenance
-````
+```
 
 ## 2. Inspect the provenance summary
 
