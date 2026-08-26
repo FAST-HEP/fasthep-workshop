@@ -54,6 +54,11 @@ jobs:
           python -m pip install -e . --no-deps
           python -m pip install types-PyYAML
 
+      - name: Download tutorial data
+        run: |
+          mkdir -p data
+          pixi run fasthep download --json tutorials/data/CMS/Zmumu/files.json --destination data
+
       - name: Lint
         run: ruff check src tests
 
