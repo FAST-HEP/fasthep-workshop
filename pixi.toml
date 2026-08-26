@@ -45,6 +45,7 @@ pydata-sphinx-theme = "*"
 sphinx-copybutton = "*"
 sphinx-design = "*"
 sphinxcontrib-mermaid = "*"
+sphinx-autobuild = "*"
 
 [feature.docs.pypi-dependencies]
 fasthep-workshop = { path = ".", editable = true, extras = ["docs"] }
@@ -67,3 +68,4 @@ alpha-ci-local = "act pull_request --workflows .github/workflows/alpha-ci.yml --
 [feature.docs.tasks]
 docs = "sphinx-build -b html docs docs/_build/html"
 docs-clean = "rm -rf docs/_build"
+docs-serve = "WATCHFILES_DEBUG=1 sphinx-autobuild docs docs/_build/html -a"

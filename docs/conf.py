@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 import shutil
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent / "_ext"))
 
 project = "FAST-HEP Workshop"
 author = "FAST-HEP contributors"
@@ -11,6 +14,9 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_design",
     "sphinxcontrib.mermaid",
+    "sphinx.ext.mathjax",
+    "mermaid_styles",
+
 ]
 
 source_suffix = {
@@ -39,11 +45,10 @@ myst_enable_extensions = [
 mermaid_params = [
     "--theme",
     "forest",
-    "--width",
-    "600",
     "--backgroundColor",
     "transparent",
 ]
+mermaid_height = "auto"
 
 
 def sync_tutorial_expected_assets() -> None:
@@ -71,3 +76,24 @@ def sync_tutorial_expected_assets() -> None:
 
 
 sync_tutorial_expected_assets()
+
+exclude_patterns = [
+    "_build",
+    "archive/**",
+]
+mermaid_init_config = {
+    "startOnLoad": True,
+    "theme": "base",
+    "themeVariables": {
+        "background": "#ffffff",
+        "primaryTextColor": "#111111",
+        "lineColor": "#5f6368",
+        "fontSize": "18px",
+    },
+    "flowchart": {
+        "htmlLabels": True,
+        "nodeSpacing": 40,
+        "rankSpacing": 50,
+        "curve": "basis",
+    },
+}

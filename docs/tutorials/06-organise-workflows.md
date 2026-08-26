@@ -6,4 +6,5 @@
 :hidden:
 
 06-organise-workflows/01-data-and-mc
+06-organise-workflows/02-needs
 ```

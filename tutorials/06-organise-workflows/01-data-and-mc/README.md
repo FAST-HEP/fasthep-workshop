@@ -25,6 +25,25 @@ pixi run fasthep run tutorials/06-organise-workflows/01-data-and-mc/workflow.yam
   --outdir build/tutorials/06-organise-workflows/01-data-and-mc
 ```
 
+You should get a graph like this:
+
+```{mermaid}
+flowchart TD
+  read_events["read.events<br/>source<br/>workshop.toy_source"]:::source
+  stage_MuonColumns["stage.MuonColumns<br/>transform<br/>hep.define"]:::transform
+  stage_MuonPt["stage.MuonPt<br/>transform<br/>hep.hist"]:::sink
+  render_MuonPt_0["render.MuonPt.0<br/>sink<br/>hep.render.hist1d"]:::sink
+  stage_MCLeptonColumns["stage.MCLeptonColumns<br/>transform<br/>hep.define"]:::transform
+  stage_MCLeptonPt["stage.MCLeptonPt<br/>transform<br/>hep.hist"]:::sink
+  render_MCLeptonPt_0["render.MCLeptonPt.0<br/>sink<br/>hep.render.hist1d"]:::sink
+  read_events -->|stream -> stream| stage_MuonColumns
+  stage_MuonColumns -->|stream -> stream| stage_MuonPt
+  stage_MuonColumns -->|stream -> stream| stage_MCLeptonColumns
+  stage_MuonPt -->|hist -> target| render_MuonPt_0
+  stage_MCLeptonColumns -->|stream -> stream| stage_MCLeptonPt
+  stage_MCLeptonPt -->|hist -> target| render_MCLeptonPt_0
+```
+
 Expected behavior:
 
 - the data dataset runs only the shared `Muon_Pt` path
