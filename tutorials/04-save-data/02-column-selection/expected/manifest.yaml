@@ -1,0 +1,16 @@
+version: 1
+
+items:
+  # schema snapshot after the selection
+  - from: reports/schema/stage_SelectDimuonEvents/events__data__0.json
+    to: snippets/schema.stream.summary.json
+    mode: schema_summary
+
+  # schema snapshot of the written output
+  - from: reports/schema/write_SelectDimuonEvents_0/events__data__0.json
+    to: snippets/schema.output.summary.json
+    mode: schema_summary
+
+  # writer manifest
+  - from: artifacts/files/dimuon_candidates/manifest.json
+    to: snippets/files.manifest.json

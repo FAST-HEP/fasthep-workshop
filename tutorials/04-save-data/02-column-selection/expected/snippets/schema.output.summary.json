@@ -1,0 +1,13 @@
+{
+  "node_id": "write.SelectDimuonEvents.0",
+  "metadata": {
+    "dataset_name": "data",
+    "file": "data/CMS/Zmumu/data.root",
+    "part": "0_0",
+    "partition_id": "events__data__0",
+    "source": "events",
+    "start": null,
+    "stop": null
+  },
+  "inspected_python_type": "OutputResult"
+}

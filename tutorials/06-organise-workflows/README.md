@@ -6,6 +6,6 @@ some nodes specific to data, simulation, or later analysis categories.
 ```{toctree}
 :maxdepth: 1
 
-01-data-and-mc/README
-02-needs/README
+06-organise-workflows/01-data-and-mc
+06-organise-workflows/02-needs
 ```
