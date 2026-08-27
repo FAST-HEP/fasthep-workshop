@@ -26,12 +26,12 @@ default = ["released"]
 docs = ["docs"]
 
 [feature.released.pypi-dependencies]
-fasthep-flow = {version = ">=2026.08.2"}
-fasthep-carpenter = ">=2026.08.1"
+fasthep-flow = {version = ">=2026.08.3"}
+fasthep-carpenter = ">=2026.08.2"
 fasthep-curator = ">=2026.08.1"
 fasthep-render = ">=2026.08.1"
 fasthep-toolbench = ">=2026.08.2"
-fasthep-cli = ">=2026.08.1"
+fasthep-cli = ">=2026.08.2"
 fasthep-workshop = { path = ".", editable = true }
 uproot-browser = "*"
 types-PyYAML = "*"
