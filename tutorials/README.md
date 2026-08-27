@@ -40,7 +40,11 @@ Coming next.
 
 ## 07. Scale Execution
 
-Coming next.
+- [01. Local Dask](07-scale-execution/01-local-dask/)
+- [02. Dask To HTCondor](07-scale-execution/02-dask-condor/)
+- [03. Forward Data](07-scale-execution/03-forward-data/)
+- [04. Worker Resources](07-scale-execution/04-worker-resources/)
+- [05. Slurm](07-scale-execution/05-slurm/)
 
 ## 08. Accelerators
 

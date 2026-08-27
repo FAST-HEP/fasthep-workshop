@@ -1,0 +1,62 @@
+version: 1.0
+
+use:
+  profiles:
+    - hep_debug
+    - fasthep_workshop:registry
+
+execution:
+  backend: dask
+  strategy: htcondor
+  resources:
+    default:
+      cpus: 1
+      memory: 2GB
+      disk: 2GB
+  config:
+    workers: 10
+    log_directory: debug/dask/htcondor
+
+data:
+  datasets:
+    - {name: dy, eventtype: mc, files: [toy://dy], nevents: 24000, seed: 701, weight: 1.0}
+    - {name: ttbar, eventtype: mc, files: [toy://ttbar], nevents: 24000, seed: 1701, weight: 1.8}
+    - {name: qcd, eventtype: mc, files: [toy://qcd], nevents: 24000, seed: 2701, weight: 0.25}
+
+sources:
+  events:
+    kind: workshop.toy_source
+    stream_type: event_stream
+
+analysis:
+  stages:
+    - id: Kinematics
+      op: hep.define
+      params:
+        variables:
+          - {name: Muon_Pt, expr: "sqrt(Muon_Px ** 2 + Muon_Py ** 2)"}
+          - {name: Jet_Pt, expr: "sqrt(Jet_Px ** 2 + Jet_Py ** 2)"}
+          - {name: LeadingMuonPt, expr: "leading(Muon_Pt)"}
+          - {name: LeadingJetPt, expr: "leading(Jet_Pt)"}
+          - {name: Balance, expr: "MET + LeadingMuonPt - LeadingJetPt"}
+
+    - id: MetHistogram
+      op: hep.hist
+      params:
+        dataset_axis: true
+        storage: weighted
+        axes:
+          - {name: met, source: MET, type: regular, bins: {low: 0, high: 500, nbins: 50}}
+        weight_expr: EventWeight
+
+    - id: MuonHistogram
+      op: hep.hist
+      from: Kinematics
+      needs:
+        - Kinematics
+      params:
+        dataset_axis: true
+        storage: weighted
+        axes:
+          - {name: leading_muon_pt, source: LeadingMuonPt, type: regular, bins: {low: 0, high: 250, nbins: 50}}
+        weight_expr: EventWeight
