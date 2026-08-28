@@ -15,7 +15,13 @@ execution:
       disk: 2GB
   config:
     workers: 10
-    log_directory: debug/dask/htcondor
+    worker_start_timeout: 120
+  environment:
+    type: packed-pixi
+    mode: prefix
+    source: current
+  staging:
+    mode: transfer
 
 data:
   datasets:

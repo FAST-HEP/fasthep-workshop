@@ -40,12 +40,29 @@ pixi run fasthep run tutorials/07-scale-execution/02-dask-condor/workflow.yaml \
 This starts a Dask scheduler for the run, submits one HTCondor worker job, runs
 one partition, then closes the client and cluster.
 
+The worker environment is packed from the Python prefix running FAST-HEP:
+
+```yaml
+execution:
+  environment:
+    type: packed-pixi
+    mode: prefix
+    source: current
+  staging:
+    mode: transfer
+```
+
+FAST-HEP checks that this prefix can import `distributed` and `hepflow`, packs
+it, unpacks it locally, runs `conda-unpack`, and repeats the import check before
+submitting worker jobs. Transfer staging copies only the execution bundles the
+worker needs, not the complete output directory.
+
 If this fails before a worker job appears in `condor_q`, inspect the Python and
 Dask layer. Missing `dask-jobqueue` is reported explicitly by the backend. If a
 job appears but the worker never joins, inspect the worker logs under:
 
 ```text
-build/tutorials/07-scale-execution/02-dask-condor-one-worker/debug/dask/htcondor/
+build/tutorials/07-scale-execution/02-dask-condor-one-worker/execution/dask/htcondor/
 ```
 
 ## 3. Run A Small Partition
@@ -76,6 +93,7 @@ execution:
   strategy: htcondor
   config:
     workers: 10
+    worker_start_timeout: 120
 ```
 
 You can also pass `--workers 10` on the command line. During the run, use
@@ -125,7 +143,7 @@ The comparison should print `True` for each histogram artifact.
 Useful places to look:
 
 - `build/tutorials/07-scale-execution/02-dask-condor/run_summary.yaml`
-- `build/tutorials/07-scale-execution/02-dask-condor/debug/dask/htcondor/`
+- `build/tutorials/07-scale-execution/02-dask-condor/execution/dask/htcondor/`
 - `condor_q "$USER" -wide`
 - `condor_history "$USER" -limit 10`
 
