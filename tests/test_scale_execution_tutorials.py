@@ -1,13 +1,15 @@
 from __future__ import annotations
 
 import json
+import pickle
 from pathlib import Path
 from typing import Any
 
+import numpy as np
 import pytest
 import yaml  # type: ignore[import-untyped]
+from fasthep_distributed._dask._htcondor import normalize_dask_htcondor_config
 from hepflow.api import compile_workflow_file, run_workflow_file
-from hepflow.backends._dask._htcondor import normalize_dask_htcondor_config
 
 WORKSHOP_ROOT = Path(__file__).parents[1]
 LOCAL_DASK = WORKSHOP_ROOT / "tutorials/07-scale-execution/01-local-dask/workflow.yaml"
@@ -110,7 +112,18 @@ def test_local_dask_result_matches_ordinary_local_backend(
 
 
 def _histogram_payloads(root: Path) -> dict[str, Any]:
-    return {
-        path.name: json.loads(path.read_text(encoding="utf-8"))
-        for path in sorted((root / "artifacts" / "histograms").glob("*.json"))
-    }
+    manifest = json.loads(
+        (root / "artifacts" / "histograms" / "manifest.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payloads: dict[str, Any] = {}
+    for item in manifest["histograms"]:
+        with (root / item["path"]).open("rb") as handle:
+            histogram = pickle.load(handle)
+        payloads[item["id"]] = {
+            "axes": [axis.name for axis in histogram.axes],
+            "values": np.asarray(histogram.values(flow=True)).tolist(),
+            "variances": np.asarray(histogram.variances(flow=True)).tolist(),
+        }
+    return payloads

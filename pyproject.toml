@@ -14,6 +14,7 @@ authors = [
 dependencies = [
     "awkward",
     "fasthep-flow",
+    "fasthep-distributed",
     "fasthep-carpenter",
     "fasthep-curator",
     "fasthep-render",
