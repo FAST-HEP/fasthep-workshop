@@ -32,7 +32,7 @@ Coming next.
 
 ## 05. Systematics
 
-- [01. Variations](05-systematics/variations/)
+- [01. Independent variations](05-systematics/01-variations-independent/)
 
 ## 06. Organise Workflows
 
