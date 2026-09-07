@@ -33,6 +33,7 @@ Coming next.
 ## 05. Systematics
 
 - [01. Independent variations](05-systematics/01-variations-independent/)
+- [02. Inline variation matrix](05-systematics/02-variation-matrix-inline/)
 
 ## 06. Organise Workflows
 

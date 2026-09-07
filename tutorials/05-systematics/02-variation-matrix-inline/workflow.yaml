@@ -1,0 +1,71 @@
+version: 1.0
+
+use:
+  profiles: [hep_debug, fasthep_workshop:registry]
+
+data:
+  datasets:
+    - {name: toy, eventtype: mc, files: [toy://dy], nevents: 1000, meta: {seed: 1729}}
+
+sources:
+  events:
+    kind: workshop.toy_source
+    stream_type: event_stream
+
+systematics:
+  include_nominal: true
+  variations:
+    - mode: inline
+      name: '{source}_{direction}'
+      group: '{source}'
+      direction: '{direction}'
+      metadata: {source: '{source}', direction: '{direction}'}
+      matrix:
+        source: [scale, alignment]
+        direction: [up, down]
+      anchor: CalibrateMuon
+      patch:
+        variables:
+          - name: CalibratedMuonPt
+            expr: 'RawMuonPt * (1 + {source} * {direction})'
+      stop_before: [Output]
+      export:
+        'MuonPt_{source}_{direction}': MuonPt
+
+outputs:
+  momenta:
+    tree: events
+    keep: [MuonPt_nominal, MuonPt_scale_up, MuonPt_scale_down,
+           MuonPt_alignment_up, MuonPt_alignment_down]
+
+analysis:
+  stages:
+    - id: BasicVars
+      op: hep.define
+      params:
+        variables:
+          - {name: RawMuonPt, expr: 'sqrt(Muon_Px ** 2 + Muon_Py ** 2)'}
+          - {name: scale, expr: '0.02'}
+          - {name: alignment, expr: '0.05'}
+          - {name: up, expr: '1.0'}
+          - {name: down, expr: '-1.0'}
+
+    - id: CalibrateMuon
+      op: hep.define
+      params:
+        variables:
+          - {name: CalibratedMuonPt, expr: RawMuonPt}
+
+    - id: MuonKinematics
+      op: hep.define
+      params:
+        variables:
+          - {name: MuonPt, expr: 'abs(CalibratedMuonPt)'}
+
+    - id: Output
+      op: hep.define
+      params:
+        variables:
+          - {name: MuonPt_nominal, expr: MuonPt}
+      write:
+        - {kind: root_tree, path: momenta.root, use: momenta}

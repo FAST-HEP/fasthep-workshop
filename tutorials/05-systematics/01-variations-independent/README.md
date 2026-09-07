@@ -65,3 +65,6 @@ hook completes.
 Execution reports are scoped to `reports/<variation>/`; `run_summary.yaml` is
 written when that variation is executed. Histogram and plot products likewise
 use `artifacts/<variation>/`. Compiling all variations does not execute them all.
+
+Next: [02. Inline variation matrix](https://github.com/FAST-HEP/fasthep-workshop/blob/main/tutorials/05-systematics/02-variation-matrix-inline/README.md) puts
+nominal and affected variation branches into one plan and graph.
