@@ -1,0 +1,92 @@
+version: 1.0
+
+# Draft skeleton for a CMS H->tautau (mu-tau) FAST-HEP workflow. Real analysis
+# phases (pairing/categorisation, data-driven backgrounds, ML discriminant,
+# templates) are not ported yet and are stood in for with
+# workshop.placeholder_stage. Replace each placeholder with real FAST-HEP
+# components as the migration progresses; keep the stage order and ids so the
+# workflow keeps documenting the intended shape of the analysis.
+
+use:
+  profiles:
+    - registry
+    - fasthep_carpenter:registry
+    - fasthep_curator:registry
+    - fasthep_render:registry
+    - fasthep_workshop:registry
+
+data:
+  datasets: []
+  defaults:
+    eventtype: mc
+    tree_primary: events
+
+sources:
+  events:
+    kind: workshop.toy_source
+    nevents: 10000
+    seed: 42
+    dataset: higgs_tautau_toy
+    event_type: mc
+    stream_type: event_stream
+
+styles:
+  draft_pt_plot:
+    op: hep.render.hist1d
+    figure: {dpi: 120}
+    axes:
+      x: {name: leading_muon_pt, label: "Leading muon pT [GeV]", limits: [0, 120]}
+      y: {name: events, label: Events}
+    style:
+      experiment: CMS
+
+analysis:
+  stages:
+    - id: PairSelection
+      op: workshop.placeholder_stage
+      params:
+        notes: >
+          Stands in for mu-tau pairing, VBF/boosted/zerojet categorisation,
+          and OS/SS mT region splitting.
+
+    - id: BackgroundEstimation
+      op: workshop.placeholder_stage
+      from: PairSelection
+      params:
+        notes: >
+          Stands in for data-driven W and QCD background estimation.
+
+    - id: Discriminant
+      op: workshop.placeholder_stage
+      from: BackgroundEstimation
+      params:
+        notes: >
+          Stands in for the DNN classifier and mass-regression discriminant.
+
+    - id: Templates
+      op: workshop.placeholder_stage
+      from: Discriminant
+      params:
+        notes: >
+          Stands in for building per-process/category binned templates
+          consumed by statistical inference.
+
+    - id: DraftPt
+      op: hep.define
+      from: Templates
+      params:
+        variables:
+          - {name: leading_muon_pt, expr: "leading(sqrt(Muon_Px**2 + Muon_Py**2))"}
+
+    - id: DraftPtHist
+      op: hep.hist
+      from: DraftPt
+      params:
+        storage: weighted
+        axes:
+          - {name: leading_muon_pt, type: regular, source: leading_muon_pt, bins: {low: 0, high: 120, nbins: 24}}
+        weight_expr: EventWeight
+      render:
+        style: draft_pt_plot
+        when: final
+        out: draft_leading_muon_pt
