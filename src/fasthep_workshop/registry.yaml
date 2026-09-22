@@ -17,6 +17,9 @@ registry:
     workshop.tabular.project:
       spec: fasthep_workshop.transforms.tabular:TABULAR_PROJECT_SPEC
       impl: fasthep_workshop.transforms.tabular:run_tabular_project
+    workshop.placeholder_stage:
+      spec: fasthep_workshop.transforms.placeholder:PLACEHOLDER_STAGE_SPEC
+      impl: fasthep_workshop.transforms.placeholder:run_placeholder_stage
   hooks: {}
   sinks:
     workshop.console_table:
