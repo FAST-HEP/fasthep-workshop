@@ -28,6 +28,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install \
             "fasthep-flow @ git+https://github.com/FAST-HEP/fasthep-flow.git" \
+            "fasthep-distributed @ git+https://github.com/FAST-HEP/fasthep-distributed.git" \
             "fasthep-carpenter @ git+https://github.com/FAST-HEP/fasthep-carpenter.git" \
             "fasthep-curator @ git+https://github.com/FAST-HEP/fasthep-curator.git" \
             "fasthep-render @ git+https://github.com/FAST-HEP/fasthep-render.git" \
