@@ -12,7 +12,16 @@ Add new entries under `## [Unreleased]`, in the category they belong to. At rele
 
 ### Added
 
+- Scale-execution tutorials: the Dask-on-HTCondor tutorial updated with environment packing, a new
+  draft `07-scale-execution` section, and a `fasthep-distributed` tutorial dependency to support
+  them.
+- `variation-matrix-inline` systematics tutorial, with documentation of independent variation
+  graphs.
+- Mermaid diagram support in the documentation build (extension and styles).
+
 ### Changed
+
+- Documentation type-checking now targets Python 3.12.
 
 ### Deprecated
 
@@ -20,4 +29,13 @@ Add new entries under `## [Unreleased]`, in the category they belong to. At rele
 
 ### Fixed
 
+- Documentation headings now consistently start at H1.
+- Missing documentation files and cross-references added.
+
 ### Security
+
+## [2026.08.2] - 2026-08-25
+
+### Added
+
+- `99-extras/partitioned-root-skim` tutorial demonstrating artifacts at partition boundaries.
