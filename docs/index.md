@@ -8,6 +8,7 @@ The FAST-HEP Workshop contains runnable tutorials and examples for the FAST-HEP 
 
 overview
 getting-started
+changelog
 ```
 
 ```{toctree}
