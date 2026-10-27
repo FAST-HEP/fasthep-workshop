@@ -14,7 +14,6 @@ data:
   datasets:
     - name: lz_mc
       files:
-        - data/LZ/mssi/SS_skim_U238-late_AnodeGridWires.root
         - data/LZ/mssi/SS_skim_Th232-late_HVInnerCone.root
 
 sources:
