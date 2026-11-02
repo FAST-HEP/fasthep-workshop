@@ -6,7 +6,7 @@ platforms = ["linux-64"]
 version = "0.1.0"
 
 [dependencies]
-python = ">=3.11"
+python = ">=3.11,<3.15"
 pip = "*"
 python-build = "*"
 hatchling = "*"
@@ -40,7 +40,7 @@ types-PyYAML = "*"
 pytest = "*"
 
 [feature.docs.dependencies]
-python = ">=3.11"
+python = ">=3.11,<3.15"
 sphinx = "*"
 myst-parser = "*"
 pydata-sphinx-theme = "*"
