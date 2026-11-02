@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${ github.workflow }-${ github.ref }
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    # Shared in FAST-HEP/.github. Alpha: a failing run does not block; its `allow-failure` default
+    # is the switch for making CI strict.
+    uses: FAST-HEP/.github/.github/workflows/package-ci.yml@main
+    with:
+      matrix: '[{"pixi-env":"default","name":"released environment"}]'
