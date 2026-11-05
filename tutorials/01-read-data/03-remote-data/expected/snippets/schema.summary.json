@@ -16,5 +16,5 @@
     "ChsMET_phi": "float",
     "ChsMET_pt": "float"
   },
-  "inspected_python_type": "RootTreeSchema"
+  "python_type": "RootTreeSchema"
 }

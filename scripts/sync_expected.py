@@ -160,13 +160,11 @@ def schema_summary(schema: Any, *, limit: int = 5) -> dict[str, Any]:
             raise ValueError("schema_summary requires awkward_type to be a mapping")
         summary["awkward_type"] = _limited_mapping(awkward_type, limit=limit)
 
-    inspected_python_type = schema.get("inspected_python_type")
-    if inspected_python_type is not None:
-        if not isinstance(inspected_python_type, str):
-            raise ValueError(
-                "schema_summary requires inspected_python_type to be a string"
-            )
-        summary["inspected_python_type"] = inspected_python_type
+    python_type = schema.get("python_type")
+    if python_type is not None:
+        if not isinstance(python_type, str):
+            raise ValueError("schema_summary requires python_type to be a string")
+        summary["python_type"] = python_type
 
     return summary
 

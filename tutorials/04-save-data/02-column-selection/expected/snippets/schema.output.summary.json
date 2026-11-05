@@ -9,5 +9,5 @@
     "start": null,
     "stop": null
   },
-  "inspected_python_type": "OutputResult"
+  "python_type": "OutputResult"
 }

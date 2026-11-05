@@ -124,7 +124,7 @@ def test_schema_summary_keeps_compact_schema_fields() -> None:
                 "Muon_pt": "float[]",
                 "run": "uint32_t",
             },
-            "inspected_python_type": "RootTreeSchema",
+            "python_type": "RootTreeSchema",
             "fields": ["run", "Muon_pt"],
         }
     )
@@ -136,7 +136,7 @@ def test_schema_summary_keeps_compact_schema_fields() -> None:
             "Muon_pt": "float[]",
             "run": "uint32_t",
         },
-        "inspected_python_type": "RootTreeSchema",
+        "python_type": "RootTreeSchema",
     }
 
 
@@ -168,9 +168,9 @@ def test_schema_summary_invalid_mapping_field_errors_clearly() -> None:
         sync_expected.schema_summary({"awkward_type": []})
 
 
-def test_schema_summary_invalid_inspected_python_type_errors_clearly() -> None:
-    with pytest.raises(ValueError, match="inspected_python_type to be a string"):
-        sync_expected.schema_summary({"inspected_python_type": {}})
+def test_schema_summary_invalid_python_type_errors_clearly() -> None:
+    with pytest.raises(ValueError, match="python_type to be a string"):
+        sync_expected.schema_summary({"python_type": {}})
 
 
 def test_write_schema_summary_writes_pretty_json(tmp_path: Path) -> None:
@@ -186,7 +186,7 @@ def test_write_schema_summary_writes_pretty_json(tmp_path: Path) -> None:
                     "b": "float",
                     "a": "int",
                 },
-                "inspected_python_type": "RootTreeSchema",
+                "python_type": "RootTreeSchema",
             }
         ),
         encoding="utf-8",
@@ -203,7 +203,7 @@ def test_write_schema_summary_writes_pretty_json(tmp_path: Path) -> None:
             "a": "int",
             "b": "float",
         },
-        "inspected_python_type": "RootTreeSchema",
+        "python_type": "RootTreeSchema",
     }
 
 
