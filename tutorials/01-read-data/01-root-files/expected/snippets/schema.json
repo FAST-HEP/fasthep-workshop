@@ -7,9 +7,6 @@
     "NMuon": "int32_t"
   },
   "entry_count": 1000,
-  "envelope": {
-    "unwrapped": false
-  },
   "fields": [
     "NMuon",
     "Muon_Px",
@@ -17,7 +14,6 @@
     "Muon_Pz",
     "EventWeight"
   ],
-  "inspected_python_type": "RootTreeSchema",
   "kind": "schema_snapshot",
   "metadata": {
     "dataset_name": "data",

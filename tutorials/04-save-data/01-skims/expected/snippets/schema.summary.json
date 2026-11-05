@@ -16,5 +16,5 @@
     "Muon_Pt": "var * float32",
     "Muon_Px": "var * float32"
   },
-  "inspected_python_type": "Array"
+  "python_type": "Array"
 }

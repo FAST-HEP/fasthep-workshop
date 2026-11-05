@@ -16,5 +16,5 @@
     "Jet_ID": "var * bool",
     "Jet_Px": "var * float32"
   },
-  "inspected_python_type": "Array"
+  "python_type": "Array"
 }
