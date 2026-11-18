@@ -1,0 +1,14 @@
+# Zmumu inputs, each split into five partitions by a per-dataset chunk size.
+# chunk_size = ceil(nevents / 5), so every dataset has exactly five partitions
+# whatever its size (data: 469384 events, qcd: 142 events).
+data:
+  datasets:
+    - {name: data, eventtype: data, nevents: "469384", chunk_size: 93877, files: [data/CMS/Zmumu/data.root]}
+    - {name: dy, nevents: "77729", chunk_size: 15546, files: [data/CMS/Zmumu/dy.root]}
+    - {name: qcd, nevents: "142", chunk_size: 29, files: [data/CMS/Zmumu/qcd.root]}
+    - {name: single_top, nevents: "5684", chunk_size: 1137, files: [data/CMS/Zmumu/single_top.root]}
+    - {name: ttbar, nevents: "36941", chunk_size: 7389, files: [data/CMS/Zmumu/ttbar.root]}
+    - {name: wjets, nevents: "109737", chunk_size: 21948, files: [data/CMS/Zmumu/wjets.root]}
+    - {name: ww, nevents: "4580", chunk_size: 916, files: [data/CMS/Zmumu/ww.root]}
+    - {name: wz, nevents: "3367", chunk_size: 674, files: [data/CMS/Zmumu/wz.root]}
+    - {name: zz, nevents: "2421", chunk_size: 485, files: [data/CMS/Zmumu/zz.root]}
